@@ -39,8 +39,8 @@ import java.util.Locale
 @Composable
 fun ReplyDialog(reply: ReplyBus.IncomingReply, onDismiss: () -> Unit, onFixClock: (() -> Unit)? = null) {
     val parsed = remember(reply) { ReplyParser.parse(reply.text) }
-    val time = remember(reply) {
-        SimpleDateFormat("HH.mm", Locale.forLanguageTag("fi-FI")).format(Date(reply.timestamp))
+    val time = remember(reply, fi.heatcall.i18n.I18n.language) {
+        SimpleDateFormat(tr("HH.mm", "HH:mm"), Locale.forLanguageTag("fi-FI")).format(Date(reply.timestamp))
     }
     val accent = when {
         parsed.isError -> Color(0xFFFF5252)

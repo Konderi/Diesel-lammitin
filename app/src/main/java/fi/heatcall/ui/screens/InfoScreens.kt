@@ -57,7 +57,7 @@ private val fi = Locale.forLanguageTag("fi-FI")
 
 @Composable
 fun NewsScreen(log: List<LogEntry>, onClear: () -> Unit, onBack: () -> Unit) {
-    val fmt = remember { SimpleDateFormat("d.M.yyyy HH.mm", fi) }
+    val fmt = SimpleDateFormat(tr("d.M.yyyy HH.mm", "d/M/yyyy HH:mm"), fi)
     SubScreen(tr("Ajankohtaista", "Latest"), onBack) {
         if (log.isEmpty()) {
             Section { BodyText(tr("Ei vielä viestejä. Lähetetyt komennot ja lämmittimen vastaukset näkyvät tässä.", "No messages yet. Sent commands and heater replies are shown here.")) }

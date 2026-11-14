@@ -335,7 +335,7 @@ private fun statusAge(at: Long): String {
         min < 1 -> tr("Päivitetty juuri nyt", "Updated just now")
         min < 60 -> tr("Päivitetty $min min sitten", "Updated $min min ago")
         min < 24 * 60 -> tr("Päivitetty ${min / 60} h sitten", "Updated ${min / 60} h ago")
-        else -> tr("Päivitetty ", "Updated ") + SimpleDateFormat("d.M. HH.mm", Locale.forLanguageTag("fi-FI")).format(Date(at))
+        else -> tr("Päivitetty ", "Updated ") + SimpleDateFormat(tr("d.M. HH.mm", "d/M HH:mm"), Locale.forLanguageTag("fi-FI")).format(Date(at))
     }
 }
 

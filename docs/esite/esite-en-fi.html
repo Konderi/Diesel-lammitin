@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HeatCall – brochure / esite</title>
+<style>
+  @page { size: 794px 1123px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 794px; background: #fff; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #14212e; -webkit-print-color-adjust: exact; }
+  .page { width: 794px; height: 1123px; position: relative; overflow: hidden; background: #f5f8fb; }
+
+  /* Yläosa sovelluksen tyyliin */
+  .hero {
+    height: 300px; padding: 44px 52px 0;
+    background-color: #0f3553;
+    background-image: linear-gradient(160deg, #3a8cc0 0%, #1d5a85 30%, #0f3553 60%, #061423 100%);
+    color: #fff; position: relative;
+  }
+  .hero .row { display: flex; align-items: center; gap: 26px; }
+  .hero img.icon { width: 118px; height: 118px; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+  .hero h1 { font-size: 58px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+  .hero .tag { font-size: 23px; margin-top: 8px; color: #e6edf3; }
+  .hero .compat { font-size: 15px; margin-top: 10px; color: #ffb74d; font-weight: 600; letter-spacing: .2px; }
+  .hero .lead { margin-top: 30px; font-size: 16.5px; line-height: 1.5; color: #dbe6ef; max-width: 640px; }
+
+  .section { padding: 0 52px; }
+  h2 { font-size: 21px; color: #0f3553; margin-bottom: 14px; letter-spacing: -.2px; }
+  h2 .acc { color: #e85d1a; }
+
+  /* Kuvakaappaukset */
+  .shots { position: relative; z-index: 2; display: flex; justify-content: space-between; margin-top: -26px; padding: 0 52px; }
+  .shot { width: 210px; text-align: center; }
+  .shot img { width: 210px; border-radius: 18px; border: 5px solid #101820; box-shadow: 0 10px 26px rgba(15,53,83,.28); display: block; }
+  .shot p { font-size: 12.5px; color: #3a4a5a; margin-top: 9px; line-height: 1.35; }
+
+  /* Ominaisuudet */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 26px; margin-top: 30px; }
+  .f { display: flex; gap: 12px; align-items: flex-start; }
+  .f .dot { flex: 0 0 34px; height: 34px; border-radius: 50%; background: linear-gradient(160deg,#ff8a3d,#d84315); color: #fff; font-weight: 800; font-size: 17px; display: flex; align-items: center; justify-content: center; }
+  .f b { display: block; font-size: 15px; color: #0f3553; margin-bottom: 2px; }
+  .f span { font-size: 13px; line-height: 1.45; color: #3a4a5a; }
+
+  .footer { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; background: #0f3553; color: #c9d6e2; font-size: 11.5px; display: flex; align-items: center; justify-content: space-between; padding: 0 52px; }
+  .footer b { color: #fff; }
+
+  /* Sivu 2 */
+  .top2 { height: 96px; background-color: #0f3553; background-image: linear-gradient(160deg, #3a8cc0 0%, #0f3553 60%, #061423 100%); color: #fff; display: flex; align-items: center; gap: 16px; padding: 0 52px; }
+  .top2 img { width: 52px; height: 52px; border-radius: 50%; }
+  .top2 .t { font-size: 26px; font-weight: 800; }
+  .top2 .s { font-size: 14px; color: #dbe6ef; }
+
+  .steps { display: flex; gap: 16px; margin-top: 4px; }
+  .step { flex: 1; background: #fff; border-radius: 14px; padding: 16px 16px 14px; box-shadow: 0 3px 12px rgba(15,53,83,.10); }
+  .step .n { width: 30px; height: 30px; border-radius: 50%; background: #2c77a8; color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 9px; }
+  .step b { font-size: 14.5px; color: #0f3553; display: block; margin-bottom: 4px; }
+  .step span { font-size: 12.5px; color: #3a4a5a; line-height: 1.45; }
+
+  .two { display: flex; gap: 26px; align-items: flex-start; }
+  .mini { display: flex; gap: 14px; }
+  .mini .shot { width: 138px; }
+  .mini .shot img { width: 138px; border-radius: 14px; border-width: 4px; }
+
+  ul.req { list-style: none; }
+  ul.req li { font-size: 13px; line-height: 1.4; color: #2b3b4b; padding-left: 22px; position: relative; margin-bottom: 6px; }
+  ul.req li::before { content: "✓"; position: absolute; left: 0; color: #2c77a8; font-weight: 800; }
+
+  .cta {
+    margin: 0 52px; border-radius: 18px; padding: 18px 24px; color: #fff;
+    background: linear-gradient(135deg, #ff7a2f 0%, #d84315 100%);
+    box-shadow: 0 10px 28px rgba(216,67,21,.30);
+  }
+  .cta h3 { font-size: 24px; margin-bottom: 8px; }
+  .cta p { font-size: 14px; line-height: 1.5; color: #fff4ec; }
+  .cta .grid { display: flex; gap: 16px; margin-top: 10px; }
+  .cta .grid div { flex: 1; background: rgba(255,255,255,.14); border-radius: 12px; padding: 12px 14px; font-size: 13px; line-height: 1.45; }
+  .cta .grid b { display: block; font-size: 14px; margin-bottom: 3px; }
+  .cta .mail { margin-top: 10px; font-size: 17px; font-weight: 700; }
+  .cta .mail span { background: #fff; color: #d84315; padding: 4px 12px; border-radius: 8px; }
+
+  .note { font-size: 11px; color: #6a7a8a; line-height: 1.45; padding: 0 52px; }
+</style>
+</head>
+<body>
+
+
+<!-- ===================== PAGE 1 (EN) ===================== -->
+<div class="page">
+  <div class="hero">
+    <div class="row">
+      <img class="icon" src="img/icon.png" alt="">
+      <div>
+        <h1>HeatCall</h1>
+        <div class="tag">Control your diesel heater by text message</div>
+        <div class="compat">Android app compatible with Eberspächer EasyStart Call</div>
+      </div>
+    </div>
+    <p class="lead">The manufacturer's own EasyStart Call app was discontinued and no longer works on new Android phones. HeatCall brings back remote control of your heater with a familiar look and new features.</p>
+  </div>
+
+  <div class="shots">
+    <div class="shot"><img src="img/en1.jpg" alt=""><p><b>Start with one tap</b><br>Run time and mode on familiar wheels</p></div>
+    <div class="shot"><img src="img/en2.jpg" alt=""><p><b>Replies in plain language</b><br>The heater's message opens in its own window</p></div>
+    <div class="shot"><img src="img/en3.jpg" alt=""><p><b>Home screen widget</b><br>Status and check without opening the app</p></div>
+  </div>
+
+  <div class="section" style="margin-top:34px">
+    <h2>Features</h2>
+    <div class="features">
+      <div class="f"><div class="dot">1</div><div><b>Start and stop</b><span>Run time 10–120 min or continuous for air heaters, heating or ventilation.</span></div></div>
+      <div class="f"><div class="dot">2</div><div><b>Always know the status</b><span>Check the status from the card or the widget. Error codes are explained.</span></div></div>
+      <div class="f"><div class="dot">3</div><div><b>Timers</b><span>Three weekly timers with departure time, e.g. Mon–Fri at 07:30.</span></div></div>
+      <div class="f"><div class="dot">4</div><div><b>Device clock</b><span>Set it from the phone time with one tap, with a reminder when summer or winter time begins.</span></div></div>
+      <div class="f"><div class="dot">5</div><div><b>No clutter</b><span>Replies are automatically marked as read in your messaging app.</span></div></div>
+      <div class="f"><div class="dot">6</div><div><b>Private</b><span>No internet connection, ads or tracking. Your data stays on your phone.</span></div></div>
+    </div>
+  </div>
+
+  <div class="footer"><span><b>HeatCall</b> · English and Finnish · Android 10+</span><span>heatcall@konderi.fi</span></div>
+</div>
+
+<!-- ===================== PAGE 2 (EN) ===================== -->
+<div class="page">
+  <div class="top2">
+    <img src="img/icon.png" alt="">
+    <div><div class="t">HeatCall</div><div class="s">How it works</div></div>
+  </div>
+
+  <div class="section" style="margin-top:22px">
+    <div class="steps">
+      <div class="step"><div class="n">1</div><b>Enter the heater details</b><span>The phone number of the EasyStart Call SIM card and the four-digit PIN. You can add several cars.</span></div>
+      <div class="step"><div class="n">2</div><b>Choose and press</b><span>Choose the run time and mode and press START. The command is sent by text message in the background.</span></div>
+      <div class="step"><div class="n">3</div><b>Get the reply</b><span>The heater confirms, and HeatCall shows the status in plain language and updates the widget.</span></div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:22px">
+    <div class="two">
+      <div class="mini">
+        <div class="shot"><img src="img/en4.jpg" alt=""><p>Timers</p></div>
+        <div class="shot"><img src="img/en5.jpg" alt=""><p>Device clock</p></div>
+      </div>
+      <div style="flex:1">
+        <h2>What you need</h2>
+        <ul class="req">
+          <li>An Eberspächer heater (Hydronic or Airtronic) with an <b>EasyStart Call</b> unit</li>
+          <li>An active SIM card in the unit</li>
+          <li>An Android phone, Android 10 or newer</li>
+          <li>Every command is a text message that your operator may charge for</li>
+          <li>Start confirmations require the unit's confirmation messages to be on. Status queries are always answered.</li>
+        </ul>
+        <h2 style="margin-top:14px">Tested</h2>
+        <ul class="req">
+          <li>Google Pixel and OPPO (ColorOS), with instructions for Samsung and Xiaomi too</li>
+          <li>Brand-specific guidance for background activity and permission settings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px" class="cta">
+    <h3>Testers wanted for the Google Play release</h3>
+    <p>HeatCall is coming to Google Play. Before release, Google requires a two-week test with at least 12 testers, and I would be grateful if you joined.</p>
+    <div class="grid">
+      <div><b>What you do</b>Install the HeatCall test version from Play Store, keep it on your phone for 14 days and share your experience if you like.</div>
+      <div><b>What you get</b>The app <b style="display:inline">free of charge</b> (store price €4.90) and a say in its development.</div>
+      <div><b>No heater needed</b>You can test without an EasyStart Call too, although feedback from heater owners is the most valuable.</div>
+    </div>
+    <div class="mail">Sign up: <span>heatcall@konderi.fi</span></div>
+    <p style="margin-top:8px;font-size:12.5px">Include the email address of your Google account (the one you use for Play Store), and I will send you the invitation link and code.</p>
+  </div>
+
+  <p class="note" style="margin-top:12px">Privacy: https://konderi.github.io/privacy/heatcall/ — The app does not collect or send any data.<br>
+  HeatCall is an independent app. It is not a product of Eberspächer Climate Control Systems GmbH and is not endorsed by it. Eberspächer and EasyStart are trademarks of their respective owners.</p>
+
+  <div class="footer"><span><b>HeatCall</b> · Control your diesel heater by text message</span><span>heatcall@konderi.fi</span></div>
+</div>
+
+
+
+
+<!-- ===================== SIVU 1 ===================== -->
+<div class="page">
+  <div class="hero">
+    <div class="row">
+      <img class="icon" src="img/icon.png" alt="">
+      <div>
+        <h1>HeatCall</h1>
+        <div class="tag">Diesel-lämmittimen ohjaus tekstiviestillä</div>
+        <div class="compat">Eberspächer EasyStart Call -yhteensopiva Android-sovellus</div>
+      </div>
+    </div>
+    <p class="lead">Valmistajan oma EasyStart Call -sovellus lopetettiin, eikä se toimi uusissa Android-puhelimissa. HeatCall palauttaa lämmittimen kauko-ohjauksen tutulla ulkoasulla ja tuo mukanaan uusia ominaisuuksia.</p>
+  </div>
+
+  <div class="shots">
+    <div class="shot"><img src="img/s1.jpg" alt=""><p><b>Käynnistä yhdellä painalluksella</b><br>Käyntiaika ja tila tutuilla rullilla, useampi auto</p></div>
+    <div class="shot"><img src="img/s2.jpg" alt=""><p><b>Vastaus selkokielellä</b><br>Lämmittimen viesti avautuu omaan ikkunaansa</p></div>
+    <div class="shot"><img src="img/s3.jpg" alt=""><p><b>Kotinäytön widget</b><br>Tila ja tarkistus avaamatta sovellusta</p></div>
+  </div>
+
+  <div class="section" style="margin-top:34px">
+    <h2>Ominaisuudet</h2>
+    <div class="features">
+      <div class="f"><div class="dot">1</div><div><b>Käynnistys ja sammutus</b><span>Käyntiaika 10–120 min tai ilmalämmittimellä kestokäyttö, lämmitys tai tuuletus.</span></div></div>
+      <div class="f"><div class="dot">2</div><div><b>Tila aina tiedossa</b><span>Tarkista tila kortista tai widgetistä. Virhekoodit selitetään.</span></div></div>
+      <div class="f"><div class="dot">3</div><div><b>Ajastimet</b><span>Kolme viikkoajastinta lähtöajalla, esim. ma–pe klo 7.30.</span></div></div>
+      <div class="f"><div class="dot">4</div><div><b>Laitteen kello</b><span>Aseta puhelimen ajasta yhdellä painalluksella, ja saat muistutuksen kesä- ja talviajan vaihtuessa.</span></div></div>
+      <div class="f"><div class="dot">5</div><div><b>Ei turhia ilmoituksia</b><span>Vastaukset merkitään automaattisesti luetuiksi viestisovelluksessa.</span></div></div>
+      <div class="f"><div class="dot">6</div><div><b>Yksityinen</b><span>Ei internet-yhteyttä, mainoksia eikä seurantaa. Tiedot pysyvät puhelimessa.</span></div></div>
+    </div>
+  </div>
+
+  <div class="footer"><span><b>HeatCall</b> · suomi ja englanti · Android 10+</span><span>heatcall@konderi.fi</span></div>
+</div>
+
+<!-- ===================== SIVU 2 ===================== -->
+<div class="page">
+  <div class="top2">
+    <img src="img/icon.png" alt="">
+    <div><div class="t">HeatCall</div><div class="s">Näin se toimii</div></div>
+  </div>
+
+  <div class="section" style="margin-top:22px">
+    <div class="steps">
+      <div class="step"><div class="n">1</div><b>Syötä lämmittimen tiedot</b><span>EasyStart Callin SIM-kortin numero ja nelinumeroinen PIN-koodi. Voit lisätä useamman auton.</span></div>
+      <div class="step"><div class="n">2</div><b>Valitse ja paina</b><span>Valitse käyntiaika ja tila ja paina KÄYNNISTÄ. Komento lähtee tekstiviestinä taustalla.</span></div>
+      <div class="step"><div class="n">3</div><b>Saat vastauksen</b><span>Lämmitin kuittaa, ja HeatCall näyttää tilan selkokielellä ja päivittää widgetin.</span></div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:22px">
+    <div class="two">
+      <div class="mini">
+        <div class="shot"><img src="img/s4.jpg" alt=""><p>Ajastimet</p></div>
+        <div class="shot"><img src="img/s5.jpg" alt=""><p>Laitteen kello</p></div>
+      </div>
+      <div style="flex:1">
+        <h2>Mitä tarvitset</h2>
+        <ul class="req">
+          <li>Eberspächer-lämmitin (Hydronic tai Airtronic) ja <b>EasyStart Call</b> -yksikkö</li>
+          <li>Yksikössä voimassa oleva SIM-kortti</li>
+          <li>Android-puhelin, Android 10 tai uudempi</li>
+          <li>Jokainen komento on tekstiviesti, josta liittymäsi voi veloittaa</li>
+          <li>Kuittaukset käynnistykseen vaativat, että yksikön kuittausilmoitus on päällä. Tilakyselyyn yksikkö vastaa aina.</li>
+        </ul>
+        <h2 style="margin-top:14px">Testattu</h2>
+        <ul class="req">
+          <li>Google Pixel ja OPPO (ColorOS), ohjeet myös Samsungille ja Xiaomille</li>
+          <li>Ohjeet puhelinmerkin mukaan taustatoiminnan ja lupien asetuksiin</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px" class="cta">
+    <h3>Haetaan testaajia Google Play -julkaisuun</h3>
+    <p>HeatCall on tulossa Google Play -kauppaan. Google edellyttää ennen julkaisua kahden viikon testijaksoa vähintään 12 testaajalla, ja toivoisin, että lähtisit mukaan.</p>
+    <div class="grid">
+      <div><b>Mitä teet</b>Asennat HeatCallin Play-kaupan testiversiona, pidät sen puhelimessa 14 päivää ja kerrot halutessasi kokemuksistasi.</div>
+      <div><b>Mitä saat</b>Sovelluksen <b style="display:inline">maksutta</b> (kauppahinta 4,90 €) ja mahdollisuuden vaikuttaa sen kehitykseen.</div>
+      <div><b>Lämmitin ei ole pakollinen</b>Myös ilman EasyStart Callia voi testata. Lämmittimen omistajien palaute on silti arvokkainta.</div>
+    </div>
+    <div class="mail">Ilmoittaudu: <span>heatcall@konderi.fi</span></div>
+    <p style="margin-top:8px;font-size:12.5px">Kerro viestissä Google-tilisi sähköpostiosoite (sama, jolla käytät Play-kauppaa), niin lähetän kutsulinkin ja koodin.</p>
+  </div>
+
+  <p class="note" style="margin-top:12px">Tietosuoja: https://konderi.github.io/privacy/heatcall/ — Sovellus ei kerää eikä lähetä tietoja minnekään.<br>
+  HeatCall on itsenäinen sovellus. Se ei ole Eberspächer Climate Control Systems GmbH:n tuote, eikä valmistaja ole hyväksynyt sitä. Eberspächer ja EasyStart ovat omistajiensa tavaramerkkejä.</p>
+
+  <div class="footer"><span><b>HeatCall</b> · Diesel-lämmittimen ohjaus tekstiviestillä</span><span>heatcall@konderi.fi</span></div>
+</div>
+
+
+</body>
+</html>

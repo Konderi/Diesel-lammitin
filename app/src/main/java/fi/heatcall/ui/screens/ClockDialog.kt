@@ -97,7 +97,7 @@ fun ClockDialog(
                 Text(tr("Puhelimen aika: $phoneTime ($dst)", "Phone time: $phoneTime ($dst)"), color = Color.White, fontSize = 15.sp)
                 BodyText(
                     if (device.clockSetAt > 0) {
-                        tr("Asetettu HeatCallista: ", "Set from HeatCall: ") + SimpleDateFormat("d.M.yyyy HH.mm", fi).format(Date(device.clockSetAt))
+                        tr("Asetettu HeatCallista: ", "Set from HeatCall: ") + SimpleDateFormat(tr("d.M.yyyy HH.mm", "d/M/yyyy HH:mm"), fi).format(Date(device.clockSetAt))
                     } else {
                         tr("Kelloa ei ole asetettu HeatCallista.", "The clock has not been set from HeatCall.")
                     },

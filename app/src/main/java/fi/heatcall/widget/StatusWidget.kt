@@ -205,8 +205,8 @@ class StatusWidget : AppWidgetProvider() {
             val today = Calendar.getInstance()
             val sameDay = then.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
                 then.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
-            val time = SimpleDateFormat("HH.mm", fi).format(Date(at))
-            return if (sameDay) tr("tänään klo $time", "today at $time") else SimpleDateFormat("d.M.", fi).format(Date(at)) + tr(" klo $time", " at $time")
+            val time = SimpleDateFormat(tr("HH.mm", "HH:mm"), fi).format(Date(at))
+            return if (sameDay) tr("tänään klo $time", "today at $time") else SimpleDateFormat(tr("d.M.", "d/M"), fi).format(Date(at)) + tr(" klo $time", " at $time")
         }
 
         private const val COLOR_ON = 0xFFFF7043.toInt()

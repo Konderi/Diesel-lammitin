@@ -170,10 +170,16 @@ fun ChromeStartButton(
         ) {
             Text(
                 label,
+                maxLines = 1,
+                softWrap = false,
                 modifier = Modifier.padding(horizontal = 6.dp),
                 style = TextStyle(
                     color = if (enabled) Color(0xFF3B4650) else Color(0xFF8A949E),
-                    fontSize = if (label.length > 7) 15.sp else 22.sp,
+                    fontSize = when {
+                        label.length > 8 -> 15.sp
+                        label.length > 5 -> 18.sp
+                        else -> 22.sp
+                    },
                     fontWeight = FontWeight.Black,
                     letterSpacing = 0.5.sp,
                     shadow = Shadow(Color.White, Offset(0f, 2f), 1f),

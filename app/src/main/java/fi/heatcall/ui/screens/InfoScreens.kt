@@ -278,6 +278,7 @@ fun HelpScreen(onBack: () -> Unit) {
                 "Kysy tila – lämmitin vastaa aina, vaikka kuittausilmoitus olisi pois päältä.\n" +
                     "Sisälämpötila – vaatii lämpötila-anturin.\n" +
                     "Ajastimet – kolme viikkoajastinta (lähtöaika).\n" +
+                    "Laitteen kello – aseta puhelimen ajasta kesä-/talviajan vaihtuessa ja virtakatkon jälkeen.\n" +
                     "Muokkaa laitetta – numero, PIN, tyyppi ja kuva.",
             )
         }

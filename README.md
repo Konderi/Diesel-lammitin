@@ -6,12 +6,22 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 
 > Sovellus on tehty omaan käyttöön. Se ei ole Eberspächerin tuote, eikä valmistaja tue sitä.
 
-<p>
-  <img src="docs/images/02-paanakyma.png" width="200" alt="Päänäkymä">
-  <img src="docs/images/03-vastaus.png" width="200" alt="Lämmittimen vastaus">
-  <img src="docs/images/06-ajastimet.png" width="200" alt="Ajastimet">
-  <img src="docs/images/08-widget.png" width="200" alt="Kotinäytön widget">
-</p>
+<table>
+<tr>
+<td align="center" width="25%"><img src="docs/images/15-useampi-auto.png" alt="Päänäkymä"><br><sub>Ohjaus: käyntiaika, tila ja useampi auto</sub></td>
+<td align="center" width="25%"><img src="docs/images/03-vastaus.png" alt="Vastaus"><br><sub>Vastaus omassa ikkunassa</sub></td>
+<td align="center" width="25%"><img src="docs/images/08-widget.png" alt="Widget"><br><sub>Kotinäytön widget</sub></td>
+<td align="center" width="25%"><img src="docs/images/06-ajastimet.png" alt="Ajastimet"><br><sub>Ajastimet T1–T3</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/images/16-sammuta.png" alt="Sammutus"><br><sub>Sammutus</sub></td>
+<td align="center"><img src="docs/images/14-kellon-poikkeama.png" alt="Kello"><br><sub>Laitteen kello ja kesä-/talviaika</sub></td>
+<td align="center"><img src="docs/images/18-virheilmoitus.png" alt="Virhe"><br><sub>Virheet suomeksi</sub></td>
+<td align="center"><img src="docs/images/19-ajankohtaista.png" alt="Historia"><br><sub>Viestihistoria</sub></td>
+</tr>
+</table>
+
+**[Katso kaikki ominaisuudet kuvineen → docs/ESITTELY.md](docs/ESITTELY.md)**
 
 ## Ominaisuudet
 
@@ -30,7 +40,7 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 
 ## Pika-aloitus
 
-1. Asenna `HeatCall-1.3.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
+1. Asenna `HeatCall-1.3.1.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
 2. Ensimmäisellä käynnistyskerralla anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
 3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.
@@ -40,6 +50,7 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 
 | Dokumentti | Sisältö |
 |---|---|
+| [Esittely](docs/ESITTELY.md) | Kaikki ominaisuudet kuvakaappauksin |
 | [Käyttöohje](docs/KAYTTOOHJE.md) | Sovelluksen käyttö, widget, ajastimet ja vianetsintä |
 | [Asennus](docs/ASENNUS.md) | APK:n asennus kaapelilla tai ilman, käyttöoikeudet ja päivitykset |
 | [SMS-protokolla](docs/SMS-PROTOKOLLA.md) | EasyStart Callin komennot ja vastausten muodot |

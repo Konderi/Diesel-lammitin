@@ -34,6 +34,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import fi.heatcall.data.Device
 import fi.heatcall.data.LogEntry
 import fi.heatcall.sms.Commands
+import fi.heatcall.sms.DeviceClock
 import fi.heatcall.sms.MarkReadDiagnostics
 import fi.heatcall.sms.MarkReadListener
 import fi.heatcall.sms.ReplyParser
@@ -45,7 +46,6 @@ import fi.heatcall.ui.components.Section
 import fi.heatcall.ui.components.SubScreen
 import fi.heatcall.widget.StatusWidget
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -157,17 +157,7 @@ fun SettingsScreen(
         devices.forEach { d ->
             Section("Laitetoiminnot – ${d.displayName}") {
                 DeviceFunctionButton("Aseta laitteen kello puhelimen ajasta") {
-                    val c = Calendar.getInstance()
-                    val day = when (c.get(Calendar.DAY_OF_WEEK)) {
-                        Calendar.MONDAY -> Commands.Day.MO
-                        Calendar.TUESDAY -> Commands.Day.TU
-                        Calendar.WEDNESDAY -> Commands.Day.WE
-                        Calendar.THURSDAY -> Commands.Day.TH
-                        Calendar.FRIDAY -> Commands.Day.FR
-                        Calendar.SATURDAY -> Commands.Day.SA
-                        else -> Commands.Day.SU
-                    }
-                    onSend(d, Commands.deviceTimeSet(d.pin, day, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)), "Kellon asetus")
+                    onSend(d, DeviceClock.setFromPhone(d.pin), "Kellon asetus")
                 }
                 DeviceFunctionButton("Kysy laitteen kello") {
                     onSend(d, Commands.deviceTimeQuery(d.pin), "Kellon kysely")

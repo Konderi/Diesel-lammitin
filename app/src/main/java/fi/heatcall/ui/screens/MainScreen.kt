@@ -57,6 +57,7 @@ import fi.heatcall.data.Device
 import fi.heatcall.data.HeaterType
 import fi.heatcall.data.Mode
 import fi.heatcall.sms.Commands
+import fi.heatcall.sms.DeviceClock
 import fi.heatcall.sms.ReplyBus
 import fi.heatcall.ui.components.CarbonBackground
 import fi.heatcall.ui.components.ChromeColors
@@ -72,6 +73,7 @@ enum class DeviceAction(val label: String) {
     STATUS("Kysy tila"),
     TEMPERATURE("Sisälämpötila"),
     TIMERS("Ajastimet"),
+    CLOCK("Laitteen kello"),
     EDIT("Muokkaa laitetta"),
     DELETE("Poista laite"),
 }
@@ -246,6 +248,27 @@ fun DeviceCard(
             )
         }
         StatusLine(device, checking, onCheckStatus)
+        if (DeviceClock.needsDstReminder(device.clockSetAt)) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color(0x55FF7043))
+                    .clickable { onAction(DeviceAction.CLOCK) }
+                    .padding(horizontal = 10.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    (if (DeviceClock.lastTransitionWasToWinter() == true) "Talviaika alkoi" else "Kesäaika alkoi") +
+                        " – päivitä lämmittimen kello",
+                    color = Color.White,
+                    fontSize = 13.sp,
+                    modifier = Modifier.weight(1f),
+                )
+                Text("Aseta ›", color = Color(0xFFFFCC80), fontSize = 13.sp, fontWeight = FontWeight.Bold)
+            }
+        }
     }
 }
 

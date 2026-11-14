@@ -52,7 +52,7 @@ Lähde: Eberspächer EasyStart Call -käyttöohje (FI, 08.2014). Toteutus: [`Com
 | Valtuuta numero | `pin:1234 mainphone:set,number:+358401234567` | `MainPhone:ok,number:…` |
 | PIN-koodin vaihto | `pin:1234 config:set,pin:9876` | – |
 
-Laitteen kello ja viikonpäivä pitää asettaa uudelleen jokaisen virtakatkon jälkeen. Myös kesä- ja talviaika vaihdetaan käsin.
+Laitteen kello ja viikonpäivä pitää asettaa uudelleen jokaisen virtakatkon jälkeen. Myös kesä- ja talviaika vaihdetaan käsin, koska laite ei tunne aikavyöhykkeitä. HeatCall (`DeviceClock.kt`) muodostaa asetuskomennon puhelimen paikallisesta ajasta, laskee kellokyselyn vastauksesta laitteen poikkeaman (viikon ympäri) ja muistuttaa kolme viikkoa aikasiirtymän jälkeen.
 
 ## Virheilmoitukset
 

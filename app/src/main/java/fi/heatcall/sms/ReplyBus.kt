@@ -7,7 +7,12 @@ import kotlinx.coroutines.flow.asStateFlow
 /** Sovelluksen sisäinen tila: lähetyksen eteneminen ja näytettävä vastausikkuna. */
 object ReplyBus {
 
-    data class IncomingReply(val deviceName: String, val text: String, val timestamp: Long)
+    data class IncomingReply(
+        val deviceName: String,
+        val text: String,
+        val timestamp: Long,
+        val deviceId: String? = null,
+    )
 
     sealed interface SendState {
         data object Idle : SendState

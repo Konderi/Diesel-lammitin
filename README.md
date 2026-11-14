@@ -22,14 +22,15 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 - **Luetuksi merkintä:** vastausviesti merkitään luetuksi oletusviestisovelluksessa (Google Messages, Samsung Messages ym.).
 - **Ajastimet:** kolme viikkoajastinta (T1–T3) lähtöajalla ja käyntiajalla.
 - **Useampi auto:** jokaisella autolla on oma numero, PIN-koodi, lämmitintyyppi ja kuva.
-- **Laitetoiminnot:** laitteen kellon asetus puhelimen ajasta, sisälämpötila ja oman numeron valtuutus.
+- **Laitteen kello:** asetus puhelimen ajasta tai käsin, kellon poikkeaman tunnistus ja muistutus kesä- ja talviajan vaihtuessa.
+- **Laitetoiminnot:** sisälämpötila ja oman numeron valtuutus.
 - **Viestihistoria:** lähetetyt komennot ja vastaukset. PIN-koodi peitetään historiassa.
 - **Lupaopastus:** sovellus tunnistaa estetyt luvat ja ohjaa sallimaan rajoitetut asetukset (Android 13+ ja ColorOS).
 - **Kieli:** käyttöliittymä on kokonaan suomeksi, ja virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään.
 
 ## Pika-aloitus
 
-1. Asenna `HeatCall-1.2.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
+1. Asenna `HeatCall-1.3.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
 2. Ensimmäisellä käynnistyskerralla anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
 3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.

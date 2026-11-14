@@ -35,7 +35,9 @@ import fi.heatcall.sms.ReplyBus
 import fi.heatcall.sms.SmsReceiver
 import fi.heatcall.sms.SmsSender
 import fi.heatcall.ui.components.ChromeColors
+import fi.heatcall.sms.DeviceClock
 import fi.heatcall.ui.screens.BottomItem
+import fi.heatcall.ui.screens.ClockDialog
 import fi.heatcall.ui.screens.DeviceAction
 import fi.heatcall.ui.screens.DeviceEditScreen
 import fi.heatcall.ui.screens.HelpScreen
@@ -104,6 +106,7 @@ class MainActivity : ComponentActivity() {
                 deviceName = intent.getStringExtra(EXTRA_REPLY_DEVICE) ?: "Lämmitin",
                 text = text,
                 timestamp = intent.getLongExtra(EXTRA_REPLY_TIME, System.currentTimeMillis()),
+                deviceId = intent.getStringExtra(EXTRA_REPLY_DEVICE_ID),
             ),
         )
         intent.removeExtra(EXTRA_REPLY_TEXT)
@@ -130,6 +133,10 @@ class MainActivity : ComponentActivity() {
             return
         }
         SmsSender.send(this, device, command, label)
+        // Kellon asetus: muistetaan aika, jotta kesä-/talviaikamuistutus poistuu.
+        if (command.contains("devicetime:set", ignoreCase = true)) {
+            launchIo { app.repository.update(device.id) { it.copy(clockSetAt = System.currentTimeMillis()) } }
+        }
     }
 
     private fun launchIo(block: suspend () -> Unit) {
@@ -150,6 +157,7 @@ class MainActivity : ComponentActivity() {
     private fun AppRoot(state: AppState) {
         var screen by remember { mutableStateOf<Screen>(Screen.Main) }
         var confirmDelete by remember { mutableStateOf<Device?>(null) }
+        var clockDeviceId by remember { mutableStateOf<String?>(null) }
         var permissionsAsked by rememberSaveable { mutableStateOf(false) }
         val reply by ReplyBus.reply.collectAsStateWithLifecycle()
         val sendState by ReplyBus.send.collectAsStateWithLifecycle()
@@ -217,6 +225,7 @@ class MainActivity : ComponentActivity() {
                         }
                         DeviceAction.TEMPERATURE -> send(d, Commands.temperature(d.pin), "Sisälämpötila")
                         DeviceAction.TIMERS -> screen = Screen.Timers(d.id)
+                        DeviceAction.CLOCK -> clockDeviceId = d.id
                         DeviceAction.EDIT -> screen = Screen.Edit(d.id)
                         DeviceAction.DELETE -> confirmDelete = d
                     }
@@ -306,10 +315,26 @@ class MainActivity : ComponentActivity() {
         }
 
         reply?.let { r ->
-            ReplyDialog(r, onDismiss = {
-                ReplyBus.dismissReply()
-                NotificationManagerCompat.from(this).cancel(SmsReceiver.NOTIFICATION_ID)
-            })
+            val replyDevice = state.devices.firstOrNull { it.id == r.deviceId }
+                ?: state.devices.firstOrNull { it.displayName == r.deviceName }
+            ReplyDialog(
+                r,
+                onDismiss = {
+                    ReplyBus.dismissReply()
+                    NotificationManagerCompat.from(this).cancel(SmsReceiver.NOTIFICATION_ID)
+                },
+                onFixClock = replyDevice?.let { d -> { send(d, DeviceClock.setFromPhone(d.pin), "Kellon asetus") } },
+            )
+        }
+
+        state.devices.firstOrNull { it.id == clockDeviceId }?.let { d ->
+            ClockDialog(
+                device = d,
+                onSetFromPhone = { send(d, DeviceClock.setFromPhone(d.pin), "Kellon asetus") },
+                onQuery = { send(d, Commands.deviceTimeQuery(d.pin), "Kellon kysely") },
+                onSetManual = { day, h, m -> send(d, Commands.deviceTimeSet(d.pin, day, h, m), "Kellon asetus") },
+                onDismiss = { clockDeviceId = null },
+            )
         }
 
         confirmDelete?.let { d ->
@@ -349,6 +374,7 @@ class MainActivity : ComponentActivity() {
         const val EXTRA_REPLY_DEVICE = "reply_device"
         const val EXTRA_REPLY_TEXT = "reply_text"
         const val EXTRA_REPLY_TIME = "reply_time"
+        const val EXTRA_REPLY_DEVICE_ID = "reply_device_id"
         private const val REPLY_TIMEOUT_MS = 3 * 60 * 1000L
     }
 }

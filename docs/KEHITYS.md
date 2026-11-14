@@ -50,6 +50,7 @@ app/src/main/java/fi/heatcall/
 ├── sms/
 │   ├── Commands.kt             SMS-komentojen muodostus ja validointi
 │   ├── ReplyParser.kt          Vastausten tulkinta suomeksi
+│   ├── DeviceClock.kt          Laitteen kello: asetus puhelimen ajasta, poikkeama, kesä-/talviaikamuistutus
 │   ├── SmsSender.kt            Lähetys SmsManagerilla + SentReceiver (lähetyksen tila)
 │   ├── SmsReceiver.kt          SMS_RECEIVED: suodatus numeron mukaan, loki, ilmoitus, vastausikkuna
 │   ├── MarkReadListener.kt     NotificationListenerService: "Merkitse luetuksi" -toiminto
@@ -116,7 +117,7 @@ done
 
 ### Yksikkötestit
 
-[`ProtocolTest.kt`](../app/src/test/java/fi/heatcall/sms/ProtocolTest.kt) kattaa komentojen muodostuksen, numerovertailun ja vastausten tulkinnan.
+[`ProtocolTest.kt`](../app/src/test/java/fi/heatcall/sms/ProtocolTest.kt) kattaa komentojen muodostuksen, numerovertailun ja vastausten tulkinnan. [`DeviceClockTest.kt`](../app/src/test/java/fi/heatcall/sms/DeviceClockTest.kt) kattaa kellon asetuskomennon, poikkeaman laskennan (myös viikon ympäri) ja kesä-/talviaikamuistutuksen.
 
 ### Emulaattori
 

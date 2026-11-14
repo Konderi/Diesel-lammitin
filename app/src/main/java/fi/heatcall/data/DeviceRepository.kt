@@ -51,6 +51,8 @@ data class Device(
     /** Viimeisin lämmittimen ilmoittama tila: true = päällä, false = pois, null = ei tiedossa. */
     val lastKnownOn: Boolean? = null,
     val lastStatusAt: Long = 0L,
+    /** Milloin laitteen kello asetettiin viimeksi HeatCallista (0 = ei tiedossa). */
+    val clockSetAt: Long = 0L,
 ) {
     val displayName: String get() = name.ifBlank { "Lämmitin" }
 
@@ -163,7 +165,8 @@ class DeviceRepository(private val context: Context) {
                     .put("photo", d.photoPath ?: "")
                     .put("timers", timers)
                     .put("on", d.lastKnownOn?.toString() ?: "")
-                    .put("statusAt", d.lastStatusAt),
+                    .put("statusAt", d.lastStatusAt)
+                    .put("clockSetAt", d.clockSetAt),
             )
         }
         return arr.toString()
@@ -201,6 +204,7 @@ class DeviceRepository(private val context: Context) {
                     timers = timers,
                     lastKnownOn = o.optString("on").ifBlank { null }?.toBooleanStrictOrNull(),
                     lastStatusAt = o.optLong("statusAt", 0L),
+                    clockSetAt = o.optLong("clockSetAt", 0L),
                 )
             }
         }.getOrDefault(emptyList())

@@ -52,7 +52,7 @@ class SmsReceiver : BroadcastReceiver() {
                 )
                 if (state.markRepliesRead) MarkReadListener.enqueue(body)
 
-                val reply = ReplyBus.IncomingReply(device.displayName, body, now)
+                val reply = ReplyBus.IncomingReply(device.displayName, body, now, device.id)
                 ReplyBus.showReply(reply)
                 if (!ReplyBus.isForeground) showNotification(context, reply, parsed)
 
@@ -78,7 +78,8 @@ class SmsReceiver : BroadcastReceiver() {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 .putExtra(MainActivity.EXTRA_REPLY_DEVICE, reply.deviceName)
                 .putExtra(MainActivity.EXTRA_REPLY_TEXT, reply.text)
-                .putExtra(MainActivity.EXTRA_REPLY_TIME, reply.timestamp),
+                .putExtra(MainActivity.EXTRA_REPLY_TIME, reply.timestamp)
+                .putExtra(MainActivity.EXTRA_REPLY_DEVICE_ID, reply.deviceId),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
         val notification = NotificationCompat.Builder(context, HeatCallApp.CHANNEL_REPLIES)

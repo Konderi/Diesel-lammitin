@@ -37,7 +37,8 @@ Jokaisella autolla on oma kortti:
 - **Tila-rulla:** **Lämmitys** tai **Tuuletus**. Tuuletus käyttää auton puhallinta ilman lämmitystä. Kaikki lämmittimet eivät tue sitä.
 - **Tilarivi:** viimeisin lämmittimen ilmoittama tila ja milloin se päivittyi.
 - **Tarkista tila:** kysyy lämmittimen tilan heti.
-- **Rataskuvake ▾:** avaa valikon, josta löytyvät Kysy tila, Sisälämpötila, Ajastimet, Muokkaa laitetta ja Poista laite.
+- **Rataskuvake ▾:** avaa valikon, josta löytyvät Kysy tila, Sisälämpötila, Ajastimet, **Laitteen kello**, Muokkaa laitetta ja Poista laite.
+- **Kesä-/talviaikamuistutus:** kolme viikkoa aikasiirtymän jälkeen kortissa näkyy *"Talviaika alkoi – päivitä lämmittimen kello"*, kunnes kello on asetettu.
 
 Pyöritä rullat haluamiisi arvoihin ja paina keskellä olevaa **KÄYNNISTÄ**-painiketta. Valinnat tallentuvat, joten seuraavalla kerralla riittää yksi painallus.
 
@@ -106,11 +107,35 @@ Rataskuvake → **Ajastimet**. Laitteessa on kolme ajastinta (T1–T3).
 
 Kestokäyttö ei ole mahdollinen ajastimella.
 
-> **Tärkeää:** ajastin toimii vain, jos **laitteen kello** on oikeassa ajassa. Kello pitää asettaa uudelleen jokaisen virtakatkon jälkeen (esim. akun vaihto) ja kesä- ja talviajan vaihtuessa. Kellon voi asettaa kohdasta **Info ja asetukset → Laitetoiminnot → Aseta laitteen kello puhelimen ajasta**.
+> **Tärkeää:** ajastin toimii vain, jos **laitteen kello** on oikeassa ajassa. Ks. [Laitteen kello](#7-laitteen-kello).
 
 <br clear="right">
 
-## 7. Info ja asetukset
+## 7. Laitteen kello
+
+<img src="images/13-laitteen-kello.png" width="240" align="right" alt="Laitteen kello">
+
+EasyStart Call tietää vain viikonpäivän ja kellonajan. **Se ei vaihda kesä- ja talviaikaa itse**, joten aikasiirtymän jälkeen ajastimet laukeavat tunnin väärään aikaan. Kello pitää asettaa uudelleen myös jokaisen virtakatkon jälkeen (esim. akun vaihto).
+
+Avaa **rataskuvake → Laitteen kello**, tai napauta kortin muistutusta *"Talviaika alkoi – päivitä lämmittimen kello"*.
+
+| Painike | Toiminto |
+|---|---|
+| **Aseta puhelimen ajasta** | Lähettää puhelimen viikonpäivän ja kellonajan (esim. `devicetime:set,time:SA.16.09`). Puhelimen aika on aina oikeassa kesä- tai talviajassa. |
+| **Kysy laitteen kello** | Kysyy laitteen ajan. Vastausikkuna vertaa sitä puhelimen aikaan. |
+| **Aseta käsin…** | Valitse viikonpäivä ja kellonaika itse. |
+
+<br clear="right">
+
+<img src="images/14-kellon-poikkeama.png" width="240" align="right" alt="Kellon poikkeama">
+
+Kun laite vastaa kellokyselyyn, vastausikkuna näyttää poikkeaman, esim. *"Laitteen kello on 1 h edellä puhelimen ajasta"*, ja painikkeen **Aseta oikea aika**. Alle 10 minuutin ero johtuu tekstiviestin viiveestä, ja silloin kello näytetään oikeana.
+
+Kun kello asetetaan HeatCallista, aika tallentuu ja kesä-/talviaikamuistutus poistuu.
+
+<br clear="right">
+
+## 8. Info ja asetukset
 
 <img src="images/07-asetukset.png" width="240" align="right" alt="Asetukset">
 
@@ -126,7 +151,7 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 
 <br clear="right">
 
-## 8. Alapalkki
+## 9. Alapalkki
 
 | Painike | Sisältö |
 |---|---|
@@ -135,7 +160,7 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 | **Ajankohtaista** | Viestihistoria (150 viimeisintä). PIN-koodi näkyy muodossa `pin:****`. |
 | **Ohjeet** | Lyhyt käyttöohje, virhekoodit ja komennot |
 
-## 9. Virheilmoitukset
+## 10. Virheilmoitukset
 
 | Koodi | Merkitys | Toimenpide |
 |---|---|---|
@@ -148,7 +173,7 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 | `ErC/ErR:DeviceTime:time_not_set` | Laitteen kelloa ei ole asetettu | Aseta laitteen kello |
 | `ErL:DatCom:lost` | Johdotusvika | Huolto |
 
-## 10. Vianetsintä
+## 11. Vianetsintä
 
 | Ongelma | Ratkaisu |
 |---|---|
@@ -159,10 +184,10 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 | Tilakysely toimii, mutta käynnistykseen ei tule vastausta | Kuittausilmoitus on pois päältä (tehdasasetus). Lämmitin todennäköisesti käynnistyi; varmista asia tilakyselyllä. |
 | "Laitteen numero tai PIN puuttuu" | Täydennä tiedot kohdassa Muokkaa laitetta. |
 | Vastaus ei merkitty luetuksi | 1) Tarkista **Info ja asetukset → Käyttöoikeudet**: *Ilmoitusten käyttöoikeus* = OK. Jos Android ilmoittaa "rajoitettu asetus", katso [Asennus](ASENNUS.md#rajoitetut-asetukset). 2) Oppo/Xiaomi: salli taustatoiminta ja automaattinen käynnistys. 3) Lähetä tilakysely ja katso **Info ja asetukset → Vianmääritys: luetuksi merkintä**, ks. alla. |
-| Ajastin ei käynnistä lämmitintä | Aseta laitteen kello. Tarkista ajastimen tila (Tila-painike). |
+| Ajastin ei käynnistä lämmitintä tai käynnistää tunnin väärään aikaan | Laitteen kello on väärässä ajassa, usein kesä-/talviajan vaihdon jälkeen. **Rataskuvake → Laitteen kello → Aseta puhelimen ajasta**, ja tarkista sen jälkeen ajastimen tila. |
 | "Ei verkkoyhteyttä" tai "Lentokonetila on päällä" | Viestiä ei lähetetty puhelimesta. Tarkista puhelimen oma yhteys. |
 
-## 11. Luetuksi merkinnän vianmääritys
+## 12. Luetuksi merkinnän vianmääritys
 
 **Info ja asetukset → Vianmääritys: luetuksi merkintä** näyttää 30 viimeisintä tapahtumaa. Lokiin tallennetaan vain lähettäjä ja ilmoituksen toimintojen nimet, ei viestien sisältöä. **Jaa**-painikkeella lokin voi lähettää eteenpäin.
 

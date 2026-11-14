@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import fi.heatcall.sms.DeviceClock
 import fi.heatcall.sms.ReplyBus
 import fi.heatcall.sms.ReplyParser
 import fi.heatcall.ui.components.BodyText
@@ -35,7 +36,7 @@ import java.util.Locale
 
 /** Lämmittimen vastaus omassa ikkunassaan. */
 @Composable
-fun ReplyDialog(reply: ReplyBus.IncomingReply, onDismiss: () -> Unit) {
+fun ReplyDialog(reply: ReplyBus.IncomingReply, onDismiss: () -> Unit, onFixClock: (() -> Unit)? = null) {
     val parsed = remember(reply) { ReplyParser.parse(reply.text) }
     val time = remember(reply) {
         SimpleDateFormat("HH.mm", Locale.forLanguageTag("fi-FI")).format(Date(reply.timestamp))
@@ -65,6 +66,28 @@ fun ReplyDialog(reply: ReplyBus.IncomingReply, onDismiss: () -> Unit) {
                 Spacer(Modifier.height(12.dp))
                 parsed.lines.forEach { line ->
                     BodyText(line, color = if (parsed.isError && line == parsed.lines.first()) Color(0xFFFF8A80) else Color.White)
+                }
+                // Kellon kysely: verrataan laitteen aikaa puhelimen aikaan vastaushetkellä.
+                val offset = remember(reply) {
+                    DeviceClock.offsetMinutes(
+                        reply.text,
+                        java.time.Instant.ofEpochMilli(reply.timestamp).atZone(java.time.ZoneId.systemDefault()),
+                    )
+                }
+                if (offset != null) {
+                    Spacer(Modifier.height(8.dp))
+                    if (DeviceClock.isWrong(offset)) {
+                        BodyText("Laitteen kello on ${DeviceClock.describeOffset(offset)} puhelimen ajasta.", color = Color(0xFFFFCC80))
+                        if (onFixClock != null) {
+                            Spacer(Modifier.height(8.dp))
+                            PrimaryButton("Aseta oikea aika", onClick = {
+                                onFixClock()
+                                onDismiss()
+                            }, modifier = Modifier.fillMaxWidth())
+                        }
+                    } else {
+                        BodyText("Laitteen kello on oikeassa ajassa ✓", color = Color(0xFFA5D6A7))
+                    }
                 }
                 Spacer(Modifier.height(12.dp))
                 Text(reply.text, color = Color(0x88FFFFFF), fontFamily = FontFamily.Monospace, fontSize = 11.sp)

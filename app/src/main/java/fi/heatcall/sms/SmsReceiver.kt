@@ -45,6 +45,11 @@ class SmsReceiver : BroadcastReceiver() {
                 val now = System.currentTimeMillis()
                 val parsed = ReplyParser.parse(body)
 
+                MarkReadDiagnostics.log(
+                    context,
+                    "Lämmittimen viesti vastaanotettu (${device.displayName})" +
+                        if (state.markRepliesRead) "" else " – luetuksi merkintä pois päältä",
+                )
                 if (state.markRepliesRead) MarkReadListener.enqueue(body)
 
                 val reply = ReplyBus.IncomingReply(device.displayName, body, now)

@@ -77,7 +77,15 @@ Android sallii viestien merkitsemisen luetuksi (SMS-tietokantaan kirjoittamisen)
 2. Viesti tallennetaan lokiin, laitteen tila päivitetään ja vastausikkuna näytetään (tai ilmoitus, jos sovellus on taustalla).
 3. `MarkReadListener` (NotificationListenerService) etsii **oletusviestisovelluksen** (`Telephony.Sms.getDefaultSmsPackage`) ilmoituksen, joka vastaa viestiä (tekstin alku tai lähettäjän numero), ja laukaisee sen toiminnon `SEMANTIC_ACTION_MARK_AS_READ`. Varalla toiminto tunnistetaan otsikosta ("Merkitse luetuksi", "Mark as read" …).
 
-Tämä toimii Google Messagesilla ja Samsung Messagesilla, jotka tarjoavat Merkitse luetuksi -toiminnon ilmoituksessaan. Sovellusta voi vaihtaa ilman muutoksia, koska oletusviestisovellus luetaan aina järjestelmältä.
+Tunnistus on tehty kestämään valmistajien eroja (versio 1.2):
+
+- **Paketti:** oletusviestisovellus tai tunnettu viestisovellus (`KNOWN_SMS_PACKAGES`: Google, Samsung, AOSP, Oppo/ColorOS, OnePlus, Xiaomi).
+- **Viesti:** juuri vastaanotettu viesti, *tai* EasyStart Call -protokollan muoto (`PROTOCOL`-regex, esim. `Heater:`, `T1:`, `ErD:` rivin alussa), *tai* otsikon numero, *tai* MessagingStyle-lähettäjän `tel:`-URI. Tunnistus toimii, vaikka numero olisi tallennettu yhteystietoihin nimellä tai prosessi olisi käynnistynyt uudelleen.
+- **Toiminto:** `SEMANTIC_ACTION_MARK_AS_READ` tai otsikon perusteella (`MARK_READ_LABELS`). Vastaa-, poisto- ja estotoiminnot ohitetaan.
+- **Kuuntelijan katkeaminen:** `requestRebind` katkeamisen jälkeen ja sovelluksen käynnistyessä (ColorOS katkaisee kuuntelijoita taustalla).
+- **Vianmääritys:** `MarkReadDiagnostics` kirjaa jokaisen päätöksen. Loki näkyy Info ja asetukset -näkymässä ja sen voi jakaa.
+
+Emulaattorissa (Google Messages) testattu: lämmittimen vastaus → luettu, protokollamuotoinen viesti tuntemattomasta numerosta → luettu, tavallinen viesti → jää lukemattomaksi.
 
 ### Tila ja tallennus
 

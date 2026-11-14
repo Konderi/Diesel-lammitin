@@ -158,6 +158,20 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 | Lämmitin ei vastaa mihinkään | Tarkista, että autossa on kenttää, EasyStart Callin SIM-kortti on voimassa ja numero on oikein. Kokeile **Tarkista tila**. |
 | Tilakysely toimii, mutta käynnistykseen ei tule vastausta | Kuittausilmoitus on pois päältä (tehdasasetus). Lämmitin todennäköisesti käynnistyi; varmista asia tilakyselyllä. |
 | "Laitteen numero tai PIN puuttuu" | Täydennä tiedot kohdassa Muokkaa laitetta. |
-| Vastaus ei merkitty luetuksi | Anna ilmoitusten käyttöoikeus (Info ja asetukset). Jos Android ilmoittaa "rajoitettu asetus", katso [Asennus](ASENNUS.md#rajoitetut-asetukset). |
+| Vastaus ei merkitty luetuksi | 1) Tarkista **Info ja asetukset → Käyttöoikeudet**: *Ilmoitusten käyttöoikeus* = OK. Jos Android ilmoittaa "rajoitettu asetus", katso [Asennus](ASENNUS.md#rajoitetut-asetukset). 2) Oppo/Xiaomi: salli taustatoiminta ja automaattinen käynnistys. 3) Lähetä tilakysely ja katso **Info ja asetukset → Vianmääritys: luetuksi merkintä**, ks. alla. |
 | Ajastin ei käynnistä lämmitintä | Aseta laitteen kello. Tarkista ajastimen tila (Tila-painike). |
 | "Ei verkkoyhteyttä" tai "Lentokonetila on päällä" | Viestiä ei lähetetty puhelimesta. Tarkista puhelimen oma yhteys. |
+
+## 11. Luetuksi merkinnän vianmääritys
+
+**Info ja asetukset → Vianmääritys: luetuksi merkintä** näyttää 30 viimeisintä tapahtumaa. Lokiin tallennetaan vain lähettäjä ja ilmoituksen toimintojen nimet, ei viestien sisältöä. **Jaa**-painikkeella lokin voi lähettää eteenpäin.
+
+| Lokissa näkyy | Merkitys ja korjaus |
+|---|---|
+| *Kuuntelija: ei yhdistetty* | Ilmoitusten käyttöoikeus puuttuu, tai järjestelmä on pysäyttänyt kuuntelijan. Anna käyttöoikeus ja salli taustatoiminta (Oppo: Akun käyttö → taustatoiminta ja automaattinen käynnistys). |
+| Ei riviä *Lämmittimen viesti vastaanotettu* | HeatCall ei saanut tekstiviestiä. Tarkista tekstiviestilupa ja taustatoiminta. Tarkista myös, että lämmittimen numero on asetuksissa oikein. |
+| *vastaanotettu*, mutta ei *merkitty luetuksi* -riviä | Viestisovelluksen ilmoitusta ei tunnistettu. Lähetä loki kehittäjälle. |
+| *Merkitse luetuksi -toimintoa ei löytynyt. Toiminnot: [...]* | Viestisovellus ei tarjoa ilmoituksessaan Merkitse luetuksi -toimintoa, tai sen nimi on tuntematon. Lähetä loki: hakasulkeissa näkyvien nimien perusteella tunnistus voidaan lisätä. |
+| *merkitty luetuksi (…)* | Toimii. Suluissa lukee, miten viesti tunnistettiin. |
+
+Viesti tunnistetaan kolmella tavalla: juuri vastaanotettu viesti, lämmittimen viestimuoto (`Heater:…`, `T1:…`, `ErD:…` ym.) tai lähettäjän numero. Tunnistus toimii, vaikka lämmittimen numero olisi tallennettu yhteystietoihin nimellä.

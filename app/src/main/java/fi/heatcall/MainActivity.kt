@@ -88,6 +88,7 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         ReplyBus.isForeground = true
+        fi.heatcall.sms.MarkReadListener.rebindIfNeeded(this)
     }
 
     override fun onStop() {

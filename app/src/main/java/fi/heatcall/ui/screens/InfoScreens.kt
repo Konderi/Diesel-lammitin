@@ -34,6 +34,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import fi.heatcall.data.Device
 import fi.heatcall.data.LogEntry
 import fi.heatcall.sms.Commands
+import fi.heatcall.sms.MarkReadDiagnostics
 import fi.heatcall.sms.MarkReadListener
 import fi.heatcall.sms.ReplyParser
 import fi.heatcall.ui.components.BodyText
@@ -178,6 +179,45 @@ fun SettingsScreen(
                     onSend(d, Commands.mainPhoneQuery(d.pin), "Valtuutettu numero")
                 }
                 BodyText("Laitteen kello pitää asettaa uudelleen jokaisen virtakatkon jälkeen ja kesä-/talviajan vaihtuessa.")
+            }
+        }
+
+        Section("Vianmääritys: luetuksi merkintä") {
+            var diag by remember { mutableStateOf(MarkReadDiagnostics.read(context)) }
+            LaunchedEffect(lifecycle) {
+                lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) { diag = MarkReadDiagnostics.read(context) }
+            }
+            BodyText(
+                if (MarkReadListener.isConnected()) "Kuuntelija: yhdistetty ✓" else "Kuuntelija: ei yhdistetty",
+                color = if (MarkReadListener.isConnected()) Color(0xFFA5D6A7) else Color(0xFFFFCC80),
+            )
+            Spacer(Modifier.height(6.dp))
+            BodyText(
+                "Jos vastauksia ei merkitä luetuiksi, lähetä tilakysely ja katso alta, mitä tapahtui. " +
+                    "Lokiin tallennetaan vain lähettäjä ja ilmoituksen toimintojen nimet, ei viestien sisältöä.",
+            )
+            Spacer(Modifier.height(8.dp))
+            if (diag.isEmpty()) {
+                BodyText("Ei tapahtumia.", color = Color(0x99FFFFFF))
+            } else {
+                diag.take(15).forEach {
+                    Text(it, color = Color.White, fontFamily = FontFamily.Monospace, fontSize = 11.sp, lineHeight = 14.sp,
+                        modifier = Modifier.padding(vertical = 2.dp))
+                }
+            }
+            Spacer(Modifier.height(8.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                SecondaryButton("Päivitä", onClick = { diag = MarkReadDiagnostics.read(context) })
+                SecondaryButton("Tyhjennä", onClick = {
+                    MarkReadDiagnostics.clear(context)
+                    diag = emptyList()
+                })
+                SecondaryButton("Jaa", onClick = {
+                    val send = android.content.Intent(android.content.Intent.ACTION_SEND)
+                        .setType("text/plain")
+                        .putExtra(android.content.Intent.EXTRA_TEXT, "HeatCall-vianmääritys\n\n" + diag.joinToString("\n"))
+                    context.startActivity(android.content.Intent.createChooser(send, "Jaa vianmääritysloki"))
+                })
             }
         }
 

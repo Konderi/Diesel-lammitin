@@ -114,6 +114,12 @@ for p in SEND_SMS RECEIVE_SMS; do
 done
 ```
 
+### Valmistajakohtaiset asetukset
+
+`platform/DeviceVendor.kt` tunnistaa valmistajan (`Build.MANUFACTURER` / `BRAND`): Samsung, Google, OPPO (myös OnePlus ja realme), Xiaomi tai muu. Jokaiselle valmistajalle on ohjeen vaiheet ja kohteet (`SettingsTarget`): sovelluksen tiedot, akku ja automaattinen käynnistys. Kullekin kohteelle kokeillaan listaa valmistajan sisäisiä näkymiä (`ComponentName`) järjestyksessä, ja varapolkuna on aina `ACTION_APPLICATION_DETAILS_SETTINGS`. `ActivityNotFoundException` ja `SecurityException` ohitetaan. Käyttöliittymä on `BackgroundGuideDialog` (Info ja asetukset → Käyttöoikeudet → Taustatoiminnan asetukset).
+
+Valmistajien näkymät eivät ole julkista API:a. Ne on koottu valmistajien tunnetuista poluista ja voivat muuttua järjestelmäpäivityksissä. Emulaattorissa (Pixel) on testattu tunnistus ja varapolku. Samsungin, OPPOn ja Xiaomin syvälinkit pitää varmistaa oikeilla laitteilla. `VendorTest.kt` testaa tunnistuksen.
+
 ### Kielet (suomi / englanti)
 
 Sovelluksella on oma kielivalinta, joka ei riipu puhelimen kielestä (`i18n/I18n.kt`):

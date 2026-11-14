@@ -143,7 +143,7 @@ Kun kello asetetaan HeatCallista, aika tallentuu ja kesä-/talviaikamuistutus po
 | Kohta | Toiminto |
 |---|---|
 | Kieli | Suomi / English. Vaihto näkyy heti koko sovelluksessa, ilmoituksissa ja widgetissä. |
-| Käyttöoikeudet | Lupien tila (tekstiviestit, ilmoitukset, ilmoitusten käyttöoikeus, akun optimointi), *Pyydä luvat*, *Akun asetukset* ja *Luvat estetty? Näytä ohje* |
+| Käyttöoikeudet | Lupien tila (tekstiviestit, ilmoitukset, ilmoitusten käyttöoikeus, akun optimointi), *Pyydä luvat*, *Taustatoiminnan asetukset* (ohje puhelimen merkin mukaan: Samsung, Pixel, OPPO/OnePlus/realme, Xiaomi) ja *Luvat estetty? Näytä ohje* |
 | Laitteet | Autojen numero, PIN, tyyppi ja kuva |
 | Vastausviestit | Luetuksi merkintä päälle tai pois, oletusviestisovellus ja ilmoitusten käyttöoikeus |
 | Laitetoiminnot | Aseta laitteen kello puhelimen ajasta, Kysy laitteen kello, Valtuuta tämä puhelin, Kysy valtuutettu numero |

@@ -106,15 +106,6 @@ fun openAppDetails(context: Context) {
     context.startActivity(intent)
 }
 
-fun openBatterySettings(context: Context) {
-    try {
-        context.startActivity(
-            Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-        )
-    } catch (_: ActivityNotFoundException) {
-        openAppDetails(context)
-    }
-}
 
 /** Päänäkymän varoituspalkki, kun tekstiviestilupa puuttuu. */
 @Composable
@@ -140,7 +131,12 @@ fun PermissionBanner(onClick: () -> Unit, modifier: Modifier = Modifier) {
 
 /** Luettelo luvista Info ja asetukset -näkymään. */
 @Composable
-fun PermissionChecklist(status: PermissionStatus, onRequest: () -> Unit, onHelp: () -> Unit) {
+fun PermissionChecklist(
+    status: PermissionStatus,
+    onRequest: () -> Unit,
+    onHelp: () -> Unit,
+    onBackground: () -> Unit,
+) {
     val context = LocalContext.current
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         StatusRow(tr("Tekstiviestit", "Text messages"), tr("Komentojen lähetys ja vastausten vastaanotto", "Sending commands and receiving replies"), status.sms)
@@ -151,9 +147,7 @@ fun PermissionChecklist(status: PermissionStatus, onRequest: () -> Unit, onHelp:
         if (!status.sms || !status.notifications) {
             PrimaryButton(tr("Pyydä luvat", "Request permissions"), onClick = onRequest, modifier = Modifier.fillMaxWidth())
         }
-        if (!status.battery) {
-            SecondaryButton(tr("Akun asetukset", "Battery settings"), onClick = { openBatterySettings(context) }, modifier = Modifier.fillMaxWidth())
-        }
+        SecondaryButton(tr("Taustatoiminnan asetukset", "Background activity settings"), onClick = onBackground, modifier = Modifier.fillMaxWidth())
         SecondaryButton(tr("Luvat estetty? Näytä ohje", "Permissions blocked? Show help"), onClick = onHelp, modifier = Modifier.fillMaxWidth())
     }
 }
@@ -205,7 +199,7 @@ fun PermissionHelpDialog(onDismiss: () -> Unit) {
                 Step(2, tr("Paina oikean yläkulman ⋮ (kolme pistettä).", "Tap ⋮ (three dots) in the top-right corner."))
                 Step(3, tr("Valitse Salli rajoitetut asetukset ja vahvista PIN-koodilla tai sormenjäljellä.", "Choose Allow restricted settings and confirm with your PIN or fingerprint."))
                 Step(4, tr("Avaa Käyttöoikeudet → Tekstiviestit → Salli.", "Open Permissions → SMS → Allow."))
-                Step(5, tr("Oppo/OnePlus/Xiaomi: Akun käyttö → salli taustatoiminta ja automaattinen käynnistys.", "Oppo/OnePlus/Xiaomi: Battery usage → allow background activity and auto-launch."))
+                Step(5, tr("Salli taustatoiminta: Info ja asetukset → Käyttöoikeudet → Taustatoiminnan asetukset (ohje puhelimesi merkin mukaan).", "Allow background activity: Info and settings → Permissions → Background activity settings (instructions for your phone brand)."))
                 Step(6, tr("Palaa HeatCalliin ja anna ilmoitusten käyttöoikeus kohdasta Info ja asetukset.", "Return to HeatCall and grant notification access under Info and settings."))
                 Spacer(Modifier.height(8.dp))
                 BodyText(

@@ -11,6 +11,7 @@ Teknisesti julkaisu on pieni työ. Ratkaiseva kysymys on **Googlen tekstiviestil
 | Asia | Tila / toimenpide |
 |---|---|
 | Play Console -kehittäjätili ja henkilöllisyyden varmennus | Kunnossa |
+| Hinta | 4,90 € – maksullinen sovellus, vaatii maksuprofiilin (ks. [play/JULKAISU.md](play/JULKAISU.md#hinnoittelu-490-)) |
 | Suljettu testaus: uusilla henkilökohtaisilla tileillä vähintään 12 testaajaa 14 päivän ajan | Tarvitaan, jos tili on henkilökohtainen ja luotu marraskuun 2023 jälkeen |
 | **Android App Bundle (AAB)** Play ottaa vastaan vain AAB:n, ei APK:ta. | `./gradlew bundleRelease` |
 | **Upload-avain** + Play App Signing | Nykyinen debug-allekirjoitus ei käy, joten luodaan oma avain (ks. [KEHITYS.md](KEHITYS.md#allekirjoitus)) |

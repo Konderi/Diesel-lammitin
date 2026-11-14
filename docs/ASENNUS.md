@@ -103,11 +103,24 @@ ColorOS-puhelimilla todettiin seuraavat erot. Testilaite: Oppo Find 9X Pro.
 | "Asenna tuntemattomia sovelluksia" -asetusta ei löydy | **Asetukset → Salasana ja suojaus → Järjestelmän suojaus → Asenna tuntemattomia sovelluksia**, **Asetukset → Sovellukset → Sovellusten erikoiskäyttöoikeudet**, tai Asetusten haku "tuntemattom". Lupa annetaan sille sovellukselle (Chrome, Tiedostonhallinta), jolla APK avataan. |
 | **Play Protect** -asetus on harmaana | Play Protectia **ei tarvitse** kytkeä pois. Asennusvaroituksessa riittää *Lisätietoja → Asenna silti*. Kytkin on harmaana esimerkiksi puhelun aikana (Googlen huijaussuojaus). |
 | Tekstiviestilupa estetty, Salli harmaana | Katso [Rajoitetut asetukset](#rajoitetut-asetukset). |
-| Vastaukset tai widget eivät päivity sovelluksen ollessa kiinni | **Sovellustiedot → Akun käyttö**: salli **taustatoiminta** ja **automaattinen käynnistys**. Voit myös poistaa akun optimoinnin (Info ja asetukset → Käyttöoikeudet → Akun asetukset). |
+| Vastaukset tai widget eivät päivity sovelluksen ollessa kiinni | **Info ja asetukset → Käyttöoikeudet → Taustatoiminnan asetukset**. HeatCall tunnistaa puhelimen merkin ja näyttää oikean polun: ColorOS:ssa *Sovellustiedot → Akun käyttö* → salli **taustatoiminta** ja **automaattinen käynnistys**. |
 
 Valikkojen nimet vaihtelevat ColorOS-versioittain. Jos kohtaa ei löydy, käytä Asetusten hakua.
 
-Muissa merkeissä (Samsung, Xiaomi, Pixel) rajoitettujen asetusten korjaus on sama. Xiaomilla taustatoiminta sallitaan kohdasta *Akku → Ei rajoituksia* ja *Automaattinen käynnistys*.
+Muissa merkeissä (Samsung, Xiaomi, Pixel) rajoitettujen asetusten korjaus on sama.
+
+## Taustatoiminta merkeittäin
+
+**Info ja asetukset → Käyttöoikeudet → Taustatoiminnan asetukset** tunnistaa puhelimen valmistajan ja näyttää oikeat vaiheet ja painikkeet. Jos tunnistus osuu väärin, merkin voi vaihtaa ikkunan valinnoista.
+
+| Merkki | Asetus | Painikkeet |
+|---|---|---|
+| Samsung (One UI) | Sovellustiedot → Akku → **Rajoittamaton**. Lisäksi Laitteen ylläpito → Akku → Taustakäytön rajoitukset → **Ei koskaan nukkuvat sovellukset** → HeatCall | Sovelluksen tiedot, akun asetukset |
+| Google Pixel | Sovellustiedot → Sovelluksen akunkäyttö → **Rajoittamaton** | Sovelluksen tiedot |
+| OPPO / OnePlus / realme (ColorOS) | Sovellustiedot → Akun käyttö → **Salli taustatoiminta** ja **Salli automaattinen käynnistys** | Sovelluksen tiedot, automaattinen käynnistys |
+| Xiaomi / Redmi / POCO (HyperOS/MIUI) | **Automaattinen käynnistys** sallittu, Akku → **Ei rajoituksia** | Automaattinen käynnistys, akun asetukset |
+
+Valmistajien omat asetusnäkymät vaihtelevat malleittain. Jos näkymää ei löydy, HeatCall avaa sovelluksen tietosivun ja kertoo siitä.
 
 ## Päivittäminen
 

@@ -8,6 +8,7 @@ Kopioi Play Consoleen kohtaan **Kasvu → Kaupan sivu → Pääkaupan sivu**. Ol
 | Lyhyt kuvaus | 80 merkkiä |
 | Koko kuvaus | 4000 merkkiä |
 
+- **Hinta:** 4,90 € (maksullinen sovellus, ks. [JULKAISU.md](JULKAISU.md#hinnoittelu-490-))
 - **Luokka:** Autot ja ajoneuvot (Auto & Vehicles)
 - **Tunnisteet:** Autot, Etäohjaus
 

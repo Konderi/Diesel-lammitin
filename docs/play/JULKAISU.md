@@ -35,7 +35,7 @@ Jokaista uutta Play-julkaisua varten nosta `versionCode` (ja `versionName`) tied
 
 ## 3. Play Console
 
-1. **Luo sovellus:** nimi *HeatCall*, oletuskieli englanti (en-US), sovellus, ilmainen.
+1. **Luo sovellus:** nimi *HeatCall*, oletuskieli englanti (en-US), sovellus, **maksullinen**. Ks. [Hinnoittelu](#hinnoittelu-490-).
 2. **Sovelluksen sisältö:** täytä lomakkeet tiedoston [LOMAKKEET.md](LOMAKKEET.md) mukaan. Tietosuojaselosteen URL on se julkinen osoite, johon `privacy.html` julkaistiin.
 3. **Kaupan sivu:** tekstit tiedostosta [KAUPPA-TEKSTIT.md](KAUPPA-TEKSTIT.md) ja kuvat hakemistosta `assets/`. Lisää suomi käännökseksi.
 4. **Testaus → Sisäinen testaus:** luo julkaisu, lataa `app-play.aab`, lisää itsesi testaajaksi ja asenna Playn kautta. Testaa tilakysely, käynnistys, vastaus ja luetuksi merkintä.
@@ -43,8 +43,24 @@ Jokaista uutta Play-julkaisua varten nosta `versionCode` (ja `versionName`) tied
 6. **Suljettu testaus** (pakollinen henkilötileille, jotka on luotu marraskuun 2023 jälkeen): vähintään 12 testaajaa 14 päivän ajan. Sen jälkeen voi hakea tuotantoon.
 7. **Tuotanto:** luo julkaisu samasta AAB:sta, maat (esim. Suomi + EU) ja julkaise.
 
+## Hinnoittelu: 4,90 €
+
+**Tärkeää:** ilmaista sovellusta ei voi myöhemmin muuttaa maksulliseksi. Maksullisen voi muuttaa ilmaiseksi. Valitse siis *maksullinen* jo sovellusta luotaessa.
+
+1. **Maksuprofiili:** Play Console → *Asetukset → Maksuprofiili*. Kauppiastili ja pankkitili pitää olla vahvistettu ennen kuin hinnan voi asettaa.
+2. **Hinta:** *Kaupallistaminen → Tuotteet → Sovelluksen hinnoittelu* → aseta hinnaksi **4,90 EUR**.
+   - EU-maissa hinta sisältää arvonlisäveron. Google tilittää veron ja maksaa sinulle summan ilman veroa.
+   - Muihin maihin Google laskee paikallisen hinnan automaattisesti, ja voit muuttaa sitä maakohtaisesti.
+3. **Arvio tulosta (Suomi):** 4,90 € sisältää alv:n 25,5 % → 3,90 €. Googlen palvelumaksu on 15 % ensimmäisestä miljoonasta dollarista vuodessa → noin **3,32 € myyntiä kohden**.
+4. **Testaajat:** maksullisen sovelluksen testaajat joutuvat ostamaan sovelluksen myös testiraiteella. Anna testaajille **promokoodit** (*Kaupallistaminen → Promokoodit*, enintään 500 koodia neljännesvuodessa), jolloin he saavat sovelluksen ilmaiseksi. Tämä koskee myös henkilötilin 12 testaajan suljettua testausta.
+5. **Palautukset:** Google palauttaa rahat automaattisesti, jos ostaja poistaa sovelluksen kahden tunnin sisällä ostosta.
+
+Kaupan kuvaukseen kannattaa lisätä maininta vaatimuksista (EasyStart Call -yksikkö ja SIM-kortti), jotta laitteettomat ostajat eivät osta sovellusta turhaan. Maininta on jo tiedostossa [KAUPPA-TEKSTIT.md](KAUPPA-TEKSTIT.md).
+
 ## 4. Tarkistuslista ennen lähetystä
 
+- [ ] Sovellus luotu maksullisena, maksuprofiili vahvistettu ja hinta 4,90 € asetettu
+- [ ] Promokoodit testaajille
 - [ ] `privacy.html` julkaistu julkiseen osoitteeseen ja `YHTEYSOSOITE` vaihdettu oikeaan sähköpostiin
 - [ ] Upload-avain ja `keystore.properties` varmuuskopioitu
 - [ ] `versionCode` nostettu edellisestä Play-julkaisusta

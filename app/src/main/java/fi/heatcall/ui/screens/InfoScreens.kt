@@ -102,6 +102,8 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val permissions = rememberPermissionStatus()
+    var showBackground by remember { mutableStateOf(false) }
+    if (showBackground) BackgroundGuideDialog(onDismiss = { showBackground = false })
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     var accessGranted by remember { mutableStateOf(MarkReadListener.isAccessGranted(context)) }
 
@@ -116,7 +118,12 @@ fun SettingsScreen(
         Section(tr("Kieli", "Language")) { LanguagePicker() }
 
         Section(tr("Käyttöoikeudet", "Permissions")) {
-            PermissionChecklist(permissions, onRequest = onRequestPermissions, onHelp = onShowPermissionHelp)
+            PermissionChecklist(
+                permissions,
+                onRequest = onRequestPermissions,
+                onHelp = onShowPermissionHelp,
+                onBackground = { showBackground = true },
+            )
         }
 
         Section(tr("Laitteet", "Devices")) {

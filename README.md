@@ -55,7 +55,8 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 | [Asennus](docs/ASENNUS.md) | APK:n asennus kaapelilla tai ilman, käyttöoikeudet ja päivitykset |
 | [SMS-protokolla](docs/SMS-PROTOKOLLA.md) | EasyStart Callin komennot ja vastausten muodot |
 | [Kehittäjälle](docs/KEHITYS.md) | Arkkitehtuuri, buildaus, testaus ja emulaattori |
-| [Play-julkaisu](docs/PLAY-JULKAISU.md) | Mitä julkaisu Google Play -kauppaan vaatisi |
+| [Play-julkaisu](docs/PLAY-JULKAISU.md) | Mitä julkaisu Google Play -kauppaan vaatii |
+| [Play: vaiheet ja materiaalit](docs/play/JULKAISU.md) | AAB, upload-avain, kaupan tekstit, lomakkeet, tietosuojaseloste, kuvat |
 
 ## Buildaus lyhyesti
 

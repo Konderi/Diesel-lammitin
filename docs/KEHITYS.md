@@ -22,6 +22,7 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 ./gradlew testDebugUnitTest     # yksikkötestit
 ./gradlew assembleDebug         # app/build/outputs/apk/debug/app-debug.apk
 ./gradlew assembleRelease       # app/build/outputs/apk/release/app-release.apk
+./gradlew bundlePlay            # app/build/outputs/bundle/play/app-play.aab (Play, R8, upload-avain)
 ```
 
 `local.properties` (`sdk.dir=…`) syntyy Android Studiossa automaattisesti, eikä sitä viedä versionhallintaan.

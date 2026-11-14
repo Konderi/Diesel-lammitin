@@ -1,6 +1,14 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+}
+
+// Play-kaupan upload-avain: keystore.properties (ei versionhallinnassa), ks. docs/play/JULKAISU.md
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
 }
 
 android {
@@ -15,11 +23,31 @@ android {
         versionName = "1.2"
     }
 
+    signingConfigs {
+        if (keystoreProps.getProperty("storeFile") != null) {
+            create("upload") {
+                storeFile = file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
-            // Omaan käyttöön: release allekirjoitetaan debug-avaimella, jotta asennus onnistuu suoraan.
+            // Sivuladattava APK (GitHub-julkaisut): debug-avain, jotta päivitykset asentuvat vanhan päälle.
             signingConfig = signingConfigs.getByName("debug")
+        }
+        // Play-kauppa: ./gradlew bundlePlay → app/build/outputs/bundle/play/app-play.aab
+        create("play") {
+            initWith(getByName("release"))
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.findByName("upload")
+            matchingFallbacks += listOf("release")
         }
     }
 

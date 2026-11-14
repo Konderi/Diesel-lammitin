@@ -78,7 +78,7 @@ Android sallii viestien merkitsemisen luetuksi (SMS-tietokantaan kirjoittamisen)
 2. Viesti tallennetaan lokiin, laitteen tila päivitetään ja vastausikkuna näytetään (tai ilmoitus, jos sovellus on taustalla).
 3. `MarkReadListener` (NotificationListenerService) etsii **oletusviestisovelluksen** (`Telephony.Sms.getDefaultSmsPackage`) ilmoituksen, joka vastaa viestiä (tekstin alku tai lähettäjän numero), ja laukaisee sen toiminnon `SEMANTIC_ACTION_MARK_AS_READ`. Varalla toiminto tunnistetaan otsikosta ("Merkitse luetuksi", "Mark as read" …).
 
-Tunnistus on tehty kestämään valmistajien eroja (versio 1.2):
+Tunnistus on tehty kestämään valmistajien eroja:
 
 - **Paketti:** oletusviestisovellus tai tunnettu viestisovellus (`KNOWN_SMS_PACKAGES`: Google, Samsung, AOSP, Oppo/ColorOS, OnePlus, Xiaomi).
 - **Viesti:** juuri vastaanotettu viesti, *tai* EasyStart Call -protokollan muoto (`PROTOCOL`-regex, esim. `Heater:`, `T1:`, `ErD:` rivin alussa), *tai* otsikon numero, *tai* MessagingStyle-lähettäjän `tel:`-URI. Tunnistus toimii, vaikka numero olisi tallennettu yhteystietoihin nimellä tai prosessi olisi käynnistynyt uudelleen.

@@ -40,7 +40,7 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 
 ## Pika-aloitus
 
-1. Asenna `HeatCall-1.3.1.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
+1. Asenna `HeatCall-1.1.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
 2. Ensimmäisellä käynnistyskerralla anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
 3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.

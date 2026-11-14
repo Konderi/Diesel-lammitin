@@ -31,9 +31,17 @@ object DeviceClock {
         DayOfWeek.SUNDAY -> Commands.Day.SU
     }
 
-    /** Komento, joka asettaa laitteen kellon puhelimen ajasta (sisältää kesä-/talviajan). */
-    fun setFromPhone(pin: String, now: ZonedDateTime = ZonedDateTime.now()): String =
-        Commands.deviceTimeSet(pin, dayOf(now.dayOfWeek), now.hour, now.minute)
+    /**
+     * Komento, joka asettaa laitteen kellon puhelimen ajasta (sisältää kesä-/talviajan).
+     *
+     * Käyttöohje s. 27: `pin:1234␣devicetime:set,time:FR.06.30`. Laite tuntee vain minuutit,
+     * joten aika pyöristetään lähimpään minuuttiin (klo 16.09.50 → 16.10). Muuten laite
+     * jäisi jopa minuutin jälkeen.
+     */
+    fun setFromPhone(pin: String, now: ZonedDateTime = ZonedDateTime.now()): String {
+        val t = now.plusSeconds(30)
+        return Commands.deviceTimeSet(pin, dayOf(t.dayOfWeek), t.hour, t.minute)
+    }
 
     /**
      * Laitteen kellon poikkeama puhelimen ajasta minuutteina (+ = laite edellä).

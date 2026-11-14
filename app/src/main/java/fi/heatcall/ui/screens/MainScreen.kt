@@ -94,6 +94,8 @@ fun MainScreen(
     onStart: (Device) -> Unit,
     onDeviceAction: (Device, DeviceAction) -> Unit,
     onBottom: (BottomItem) -> Unit,
+    smsMissing: Boolean = false,
+    onFixPermissions: () -> Unit = {},
 ) {
     val selected = devices.firstOrNull { it.id == selectedId } ?: devices.firstOrNull()
 
@@ -106,6 +108,10 @@ fun MainScreen(
                     .padding(horizontal = 12.dp, vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                if (smsMissing) {
+                    PermissionBanner(onClick = onFixPermissions)
+                    Spacer(Modifier.height(14.dp))
+                }
                 devices.forEach { device ->
                     DeviceCard(
                         device = device,

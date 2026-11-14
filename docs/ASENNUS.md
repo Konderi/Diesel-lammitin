@@ -9,7 +9,7 @@ Buildin jälkeen APK löytyy kahdesta paikasta:
 | Polku | Kuvaus |
 |---|---|
 | `app/build/outputs/apk/release/app-release.apk` | Gradlen tuottama release-APK |
-| `dist/HeatCall-1.0.apk` | Sama tiedosto jakoa varten nimettynä (ei versionhallinnassa) |
+| `dist/HeatCall-1.1.apk` | Sama tiedosto jakoa varten nimettynä (ei versionhallinnassa) |
 
 Buildaus, ks. [KEHITYS.md](KEHITYS.md#buildaus).
 
@@ -21,7 +21,7 @@ Buildaus, ks. [KEHITYS.md](KEHITYS.md#buildaus).
 4. Joko Android Studiossa: avaa projekti, valitse puhelin ja paina ▶ **Run**, tai komentorivillä:
 
 ```bash
-~/Library/Android/sdk/platform-tools/adb install -r dist/HeatCall-1.0.apk
+~/Library/Android/sdk/platform-tools/adb install -r dist/HeatCall-1.1.apk
 ```
 
 Kaapeliasennuksessa Android ei käsittele sovellusta "tuntemattomasta lähteestä" tulevana, joten [rajoitetut asetukset](#rajoitetut-asetukset) eivät koske sitä.
@@ -45,23 +45,69 @@ APK:n voi siirtää puhelimeen myös ilman kaapelia.
 
 ### Asennus puhelimessa
 
-1. Avaa ladattu `HeatCall-1.0.apk` (esim. Tiedostot → Lataukset).
+1. Avaa ladattu `HeatCall-1.1.apk` (esim. Tiedostot → Lataukset).
 2. Android kysyy luvan asentaa tuntemattomia sovelluksia siitä sovelluksesta, josta tiedosto avattiin (selain, Drive, Tiedostot). Salli lupa.
 3. **Play Protect** voi varoittaa tuntemattomasta kehittäjästä. Valitse **Lisätietoja → Asenna silti**. Varoitus johtuu siitä, että sovellusta ei ole julkaistu Play-kaupassa.
 4. Avaa HeatCall ja tee [ensimmäisen käynnistyksen](KAYTTOOHJE.md#1-ensimmäinen-käynnistys) asetukset.
 
 ## Rajoitetut asetukset
 
-Android 13:sta alkaen tiedostosta tai selaimesta asennettu sovellus ei saa heti pyytää kaikkia arkaluonteisia oikeuksia. HeatCallin kohdalla tämä koskee:
+Android 13:sta alkaen tiedostosta, selaimesta, Drivesta tai GitHubista asennettu sovellus ei saa heti pyytää arkaluonteisia oikeuksia. HeatCallin kohdalla tämä koskee:
 
+- **tekstiviestilupaa**, jota ilman sovellus ei toimi lainkaan
 - **ilmoitusten käyttöoikeutta**, jota luetuksi merkintä tarvitsee
-- uusimmissa Android-versioissa mahdollisesti myös **tekstiviestioikeuksia**
 
-Jos asetus näkyy harmaana tai Android ilmoittaa *"Rajoitettu asetus"*:
+USB-kaapelilla (`adb install` tai Android Studio) asennettuun sovellukseen tämä ei koske.
 
-1. **Asetukset → Sovellukset → HeatCall**
-2. Oikean yläkulman **⋮**-valikko → **Salli rajoitetut asetukset** (vahvista PIN-koodilla tai sormenjäljellä)
-3. Palaa HeatCalliin ja anna oikeus uudelleen
+### Oireet
+
+<p>
+  <img src="images/11-oppo-lupa-kielletty.png" width="220" alt="Sovelluksen lupa kielletty">
+  <img src="images/12-oppo-salli-harmaana.png" width="220" alt="Salli harmaana">
+</p>
+
+- Kun lupaa yrittää antaa, tulee ilmoitus **"Sovelluksen lupa kielletty – Lupa voi vaarantaa henkilökohtaiset tietosi ja taloustietosi"**.
+- Lupasivulla **Lupa: Tekstiviestit** on valittuna *Älä salli*, ja **Salli** näkyy harmaana.
+- HeatCallin päänäkymässä näkyy oranssi varoitus **Tekstiviestilupa puuttuu**.
+
+### Korjaus
+
+1. Sulje ilmoitus. Lupaa pitää yrittää antaa kerran, koska sallimisvalinta ilmestyy vasta sen jälkeen.
+2. Avaa HeatCallin **sovellustiedot** eli sivu, jossa ovat *Poista asennus* ja *Pakota lopetus*:
+   - HeatCallissa: napauta varoitusta tai **Info ja asetukset → Luvat estetty? Näytä ohje → Avaa sovelluksen tiedot**, tai
+   - paina HeatCallin kuvaketta pitkään → **ⓘ Sovelluksen tiedot**, tai
+   - **Asetukset → Sovellukset → (Sovellusten hallinta) → HeatCall**
+3. Paina oikean yläkulman **⋮** → **Salli rajoitetut asetukset** ja vahvista PIN-koodilla tai sormenjäljellä.
+4. **Käyttöoikeudet → Tekstiviestit → Salli**. Salli on nyt valittavissa.
+5. Palaa HeatCalliin. Anna ilmoitusten käyttöoikeus kohdasta **Info ja asetukset → Vastausviestit → Anna käyttöoikeus**.
+
+Huomaa: pelkältä lupasivulta (*Lupa: Tekstiviestit*) ⋮-valikkoa ei löydy. Se on sovelluksen **pääsivulla**.
+
+### Sovelluksen oma opastus
+
+<p>
+  <img src="images/09-lupaohje.png" width="220" alt="Lupaohje">
+  <img src="images/10-kayttooikeudet.png" width="220" alt="Käyttöoikeudet">
+</p>
+
+- Jos tekstiviestilupa evätään, HeatCall avaa automaattisesti ohjeen **Lupien salliminen**, jossa on painike **Avaa sovelluksen tiedot**.
+- **Info ja asetukset → Käyttöoikeudet** näyttää kaikkien lupien tilan (OK / Puuttuu): tekstiviestit, ilmoitukset, ilmoitusten käyttöoikeus ja akun optimointi.
+
+## Oppo / OnePlus / Realme (ColorOS)
+
+ColorOS-puhelimilla todettiin seuraavat erot. Testilaite: Oppo Find 9X Pro.
+
+| Tilanne | Ratkaisu |
+|---|---|
+| Asennusohjelma tekee tietoturvatarkistuksen tai pyytää OPPO-tiliä | Valitse alareunasta **Asenna ilman tarkistusta** tai **Asenna silti**. Kirjautumista ei tarvita. |
+| "Asenna tuntemattomia sovelluksia" -asetusta ei löydy | **Asetukset → Salasana ja suojaus → Järjestelmän suojaus → Asenna tuntemattomia sovelluksia**, **Asetukset → Sovellukset → Sovellusten erikoiskäyttöoikeudet**, tai Asetusten haku "tuntemattom". Lupa annetaan sille sovellukselle (Chrome, Tiedostonhallinta), jolla APK avataan. |
+| **Play Protect** -asetus on harmaana | Play Protectia **ei tarvitse** kytkeä pois. Asennusvaroituksessa riittää *Lisätietoja → Asenna silti*. Kytkin on harmaana esimerkiksi puhelun aikana (Googlen huijaussuojaus). |
+| Tekstiviestilupa estetty, Salli harmaana | Katso [Rajoitetut asetukset](#rajoitetut-asetukset). |
+| Vastaukset tai widget eivät päivity sovelluksen ollessa kiinni | **Sovellustiedot → Akun käyttö**: salli **taustatoiminta** ja **automaattinen käynnistys**. Voit myös poistaa akun optimoinnin (Info ja asetukset → Käyttöoikeudet → Akun asetukset). |
+
+Valikkojen nimet vaihtelevat ColorOS-versioittain. Jos kohtaa ei löydy, käytä Asetusten hakua.
+
+Muissa merkeissä (Samsung, Xiaomi, Pixel) rajoitettujen asetusten korjaus on sama. Xiaomilla taustatoiminta sallitaan kohdasta *Akku → Ei rajoituksia* ja *Automaattinen käynnistys*.
 
 ## Päivittäminen
 

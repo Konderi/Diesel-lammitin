@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -42,6 +41,8 @@ import fi.heatcall.ui.screens.DeviceEditScreen
 import fi.heatcall.ui.screens.HelpScreen
 import fi.heatcall.ui.screens.MainScreen
 import fi.heatcall.ui.screens.NewsScreen
+import fi.heatcall.ui.screens.PermissionHelpDialog
+import fi.heatcall.ui.screens.rememberPermissionStatus
 import fi.heatcall.ui.screens.ReplyDialog
 import fi.heatcall.ui.screens.STATUS_LABEL
 import fi.heatcall.ui.screens.SettingsScreen
@@ -56,10 +57,14 @@ class MainActivity : ComponentActivity() {
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
     ) { result ->
+        // Evätty tai "rajoitettu asetus" (tiedostosta asennettu sovellus) → näytetään ohje.
         if (result[Manifest.permission.SEND_SMS] == false || result[Manifest.permission.RECEIVE_SMS] == false) {
-            Toast.makeText(this, "HeatCall tarvitsee tekstiviestioikeudet lämmittimen ohjaukseen", Toast.LENGTH_LONG).show()
+            showPermissionHelp = true
         }
     }
+
+    /** Ohje rajoitettujen asetusten sallimiseen (PermissionHelpDialog). */
+    private var showPermissionHelp by mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -186,8 +191,12 @@ class MainActivity : ComponentActivity() {
             return
         }
 
+        val permissions = rememberPermissionStatus()
+
         when (val s = screen) {
             Screen.Main -> MainScreen(
+                smsMissing = permissions.smsMissing,
+                onFixPermissions = { showPermissionHelp = true },
                 devices = state.devices,
                 selectedId = state.selected?.id,
                 sendState = sendState,
@@ -284,9 +293,15 @@ class MainActivity : ComponentActivity() {
                 onEditDevice = { d -> screen = Screen.Edit(d.id) },
                 onSend = { d, command, label -> send(d, command, label) },
                 onBack = back,
+                onRequestPermissions = { requestPermissionsIfNeeded() },
+                onShowPermissionHelp = { showPermissionHelp = true },
             )
 
             Screen.Help -> HelpScreen(onBack = back)
+        }
+
+        if (showPermissionHelp) {
+            PermissionHelpDialog(onDismiss = { showPermissionHelp = false })
         }
 
         reply?.let { r ->

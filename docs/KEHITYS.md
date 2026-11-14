@@ -58,7 +58,8 @@ app/src/main/java/fi/heatcall/
 │   └── StatusWidget.kt         Kotinäytön widget (RemoteViews)
 └── ui/
     ├── components/             Tausta, kromipainike, rullavalitsin, alinäkymän runko
-    ├── screens/                Päänäkymä, laitteen muokkaus, ajastimet, info, ohjeet, vastausikkuna
+    ├── screens/                Päänäkymä, laitteen muokkaus, ajastimet, info, ohjeet, vastausikkuna,
+    │                           PermissionGuide (lupien tila ja rajoitettujen asetusten ohje)
     └── theme/                  Tumma Material 3 -teema
 ```
 
@@ -85,6 +86,23 @@ Tämä toimii Google Messagesilla ja Samsung Messagesilla, jotka tarjoavat Merki
 ### Widget
 
 `StatusWidget` on perinteinen `AppWidgetProvider` + `RemoteViews`, joten Glance-riippuvuutta ei tarvita. Tarkista tila -painike lähettää broadcastin, joka lähettää `heater?`-kyselyn ja merkitsee odotuksen alkaneeksi (`SharedPreferences`). `HeatCallApp` piirtää widgetin uudelleen aina, kun valitun auton tila muuttuu. `AlarmManager` herättää widgetin aikakatkaisun jälkeen.
+
+### Luvat ja rajoitetut asetukset
+
+Tiedostosta asennettu sovellus saa Android 13+:ssa tekstiviesti- ja ilmoituskuuntelijaluvat vasta, kun käyttäjä sallii rajoitetut asetukset sovellustiedoista. `PermissionGuide.kt`:
+
+- `readPermissionStatus` / `rememberPermissionStatus`: lupien tila. Tila päivittyy aina, kun käyttäjä palaa järjestelmän asetuksista (`repeatOnLifecycle(RESUMED)`).
+- `MainActivity.permissionLauncher` avaa `PermissionHelpDialog`in automaattisesti, jos tekstiviestilupa evätään.
+- `openAppDetails` avaa `ACTION_APPLICATION_DETAILS_SETTINGS`-sivun, jossa ovat ⋮ → *Salli rajoitetut asetukset*, luvat ja akku.
+
+Emulaattorissa estetyn luvan voi simuloida:
+
+```bash
+for p in SEND_SMS RECEIVE_SMS; do
+  $ADB shell pm revoke fi.heatcall android.permission.$p
+  $ADB shell pm set-permission-flags fi.heatcall android.permission.$p user-fixed
+done
+```
 
 ## Testaus
 

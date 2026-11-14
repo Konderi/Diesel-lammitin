@@ -94,8 +94,11 @@ fun SettingsScreen(
     onEditDevice: (Device) -> Unit,
     onSend: (Device, String, String) -> Unit,
     onBack: () -> Unit,
+    onRequestPermissions: () -> Unit = {},
+    onShowPermissionHelp: () -> Unit = {},
 ) {
     val context = LocalContext.current
+    val permissions = rememberPermissionStatus()
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     var accessGranted by remember { mutableStateOf(MarkReadListener.isAccessGranted(context)) }
 
@@ -107,6 +110,10 @@ fun SettingsScreen(
     }
 
     SubScreen("Info ja asetukset", onBack) {
+        Section("Käyttöoikeudet") {
+            PermissionChecklist(permissions, onRequest = onRequestPermissions, onHelp = onShowPermissionHelp)
+        }
+
         Section("Laitteet") {
             devices.forEach { d ->
                 Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -189,7 +196,10 @@ fun SettingsScreen(
         }
 
         Section("Tietoja") {
-            BodyText("HeatCall 1.0 – Eberspächer EasyStart Call -yksikön tekstiviestiohjaus omaan käyttöön.")
+            val version = remember {
+                runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: ""
+            }
+            BodyText("HeatCall $version – Eberspächer EasyStart Call -yksikön tekstiviestiohjaus omaan käyttöön.")
             BodyText("Jokainen komento on tekstiviesti, josta liittymäsi voi veloittaa.")
         }
         Spacer(Modifier.height(24.dp))

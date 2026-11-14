@@ -21,6 +21,8 @@ Kun tallennat tiedot, Android kysyy luvat:
 - **Tekstiviestien lähetys ja vastaanotto:** pakollinen, koska ilman sitä sovellus ei voi ohjata lämmitintä
 - **Ilmoitukset:** vastaus näytetään ilmoituksena, kun sovellus on taustalla
 
+Jos tekstiviestilupa evätään (esim. Android näyttää *"Sovelluksen lupa kielletty"*), HeatCall avaa automaattisesti ohjeen **Lupien salliminen**. Ks. [Asennus → Rajoitetut asetukset](ASENNUS.md#rajoitetut-asetukset).
+
 Numeroa ja PIN-koodia voi muuttaa myöhemmin: **Info ja asetukset → Laitteet → Muokkaa** tai rataskuvake → **Muokkaa laitetta**.
 
 <br clear="right">
@@ -114,6 +116,7 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 
 | Kohta | Toiminto |
 |---|---|
+| Käyttöoikeudet | Lupien tila (tekstiviestit, ilmoitukset, ilmoitusten käyttöoikeus, akun optimointi), *Pyydä luvat*, *Akun asetukset* ja *Luvat estetty? Näytä ohje* |
 | Laitteet | Autojen numero, PIN, tyyppi ja kuva |
 | Vastausviestit | Luetuksi merkintä päälle tai pois, oletusviestisovellus ja ilmoitusten käyttöoikeus |
 | Laitetoiminnot | Aseta laitteen kello puhelimen ajasta, Kysy laitteen kello, Valtuuta tämä puhelin, Kysy valtuutettu numero |
@@ -149,6 +152,9 @@ Kestokäyttö ei ole mahdollinen ajastimella.
 
 | Ongelma | Ratkaisu |
 |---|---|
+| Päänäkymässä oranssi varoitus **Tekstiviestilupa puuttuu** | Napauta varoitusta ja seuraa ohjetta, ks. [Rajoitetut asetukset](ASENNUS.md#rajoitetut-asetukset). |
+| Lupaikkunassa **Salli** harmaana / *"Sovelluksen lupa kielletty"* | Sovellustiedot → ⋮ → **Salli rajoitetut asetukset**, ks. [Asennus](ASENNUS.md#rajoitetut-asetukset). |
+| Vastaukset tulevat vain, kun sovellus on auki (Oppo, Xiaomi ym.) | Salli taustatoiminta ja automaattinen käynnistys, ks. [ColorOS](ASENNUS.md#oppo--oneplus--realme-coloros). |
 | Lämmitin ei vastaa mihinkään | Tarkista, että autossa on kenttää, EasyStart Callin SIM-kortti on voimassa ja numero on oikein. Kokeile **Tarkista tila**. |
 | Tilakysely toimii, mutta käynnistykseen ei tule vastausta | Kuittausilmoitus on pois päältä (tehdasasetus). Lämmitin todennäköisesti käynnistyi; varmista asia tilakyselyllä. |
 | "Laitteen numero tai PIN puuttuu" | Täydennä tiedot kohdassa Muokkaa laitetta. |

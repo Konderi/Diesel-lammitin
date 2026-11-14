@@ -24,13 +24,14 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 - **Useampi auto:** jokaisella autolla on oma numero, PIN-koodi, lämmitintyyppi ja kuva.
 - **Laitetoiminnot:** laitteen kellon asetus puhelimen ajasta, sisälämpötila ja oman numeron valtuutus.
 - **Viestihistoria:** lähetetyt komennot ja vastaukset. PIN-koodi peitetään historiassa.
+- **Lupaopastus:** sovellus tunnistaa estetyt luvat ja ohjaa sallimaan rajoitetut asetukset (Android 13+ ja ColorOS).
 - **Kieli:** käyttöliittymä on kokonaan suomeksi, ja virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään.
 
 ## Pika-aloitus
 
-1. Asenna `HeatCall-1.0.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
+1. Asenna `HeatCall-1.1.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
 2. Ensimmäisellä käynnistyskerralla anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
-3. Salli tekstiviestit ja ilmoitukset.
+3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.
 5. Paina **Tarkista tila**. Kun lämmitin vastaa, yhteys toimii.
 
@@ -42,6 +43,7 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 | [Asennus](docs/ASENNUS.md) | APK:n asennus kaapelilla tai ilman, käyttöoikeudet ja päivitykset |
 | [SMS-protokolla](docs/SMS-PROTOKOLLA.md) | EasyStart Callin komennot ja vastausten muodot |
 | [Kehittäjälle](docs/KEHITYS.md) | Arkkitehtuuri, buildaus, testaus ja emulaattori |
+| [Play-julkaisu](docs/PLAY-JULKAISU.md) | Mitä julkaisu Google Play -kauppaan vaatisi |
 
 ## Buildaus lyhyesti
 

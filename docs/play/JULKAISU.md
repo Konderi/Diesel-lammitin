@@ -6,6 +6,7 @@ Tämä ohje täydentää muistiota [../PLAY-JULKAISU.md](../PLAY-JULKAISU.md). T
 |---|---|
 | [KAUPPA-TEKSTIT.md](KAUPPA-TEKSTIT.md) | Nimi, lyhyt ja pitkä kuvaus englanniksi ja suomeksi |
 | [LOMAKKEET.md](LOMAKKEET.md) | Data safety, SMS-lupien ilmoitus ja muut lomakkeet |
+| [TESTAAJAT.md](TESTAAJAT.md) | Suljettu testaus (12 testaajaa / 14 päivää), kutsuviesti fi/en |
 | [privacy.html](privacy.html) | Tietosuojaseloste (fi/en). Julkaistu: https://konderi.github.io/privacy/heatcall/ (repo [Konderi/privacy](https://github.com/Konderi/privacy)) |
 | `assets/` | Kuvake, esittelykuvat ja kuvakaappaukset |
 

@@ -47,7 +47,7 @@ Perustelu Googlen määritelmän mukaan: laitteella käsiteltävät tiedot, joit
 | Uutissovellus | Ei |
 | Terveys, rahoitus, VPN | Ei |
 | Hallituksen sovellus | Ei |
-| Tietosuojaseloste | URL, josta `docs/play/privacy.html` löytyy julkisena |
+| Tietosuojaseloste | https://konderi.github.io/privacy/heatcall/ |
 
 ## 4. Ilmoitusten käyttöoikeus (NotificationListenerService)
 

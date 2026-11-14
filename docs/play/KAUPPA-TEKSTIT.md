@@ -8,6 +8,8 @@ Kopioi Play Consoleen kohtaan **Kasvu → Kaupan sivu → Pääkaupan sivu**. Ol
 | Lyhyt kuvaus | 80 merkkiä |
 | Koko kuvaus | 4000 merkkiä |
 
+- **Yhteystiedot:** sähköposti heatcall@konderi.fi
+- **Tietosuojakäytäntö:** https://konderi.github.io/privacy/heatcall/
 - **Hinta:** 4,90 € (maksullinen sovellus, ks. [JULKAISU.md](JULKAISU.md#hinnoittelu-490-))
 - **Luokka:** Autot ja ajoneuvot (Auto & Vehicles)
 - **Tunnisteet:** Autot, Etäohjaus

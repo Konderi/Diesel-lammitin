@@ -1,5 +1,6 @@
 package fi.heatcall.sms
 
+import fi.heatcall.i18n.tr
 import android.Manifest
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -47,8 +48,8 @@ class SmsReceiver : BroadcastReceiver() {
 
                 MarkReadDiagnostics.log(
                     context,
-                    "Lämmittimen viesti vastaanotettu (${device.displayName})" +
-                        if (state.markRepliesRead) "" else " – luetuksi merkintä pois päältä",
+                    tr("Lämmittimen viesti vastaanotettu (${device.displayName})", "Heater message received (${device.displayName})") +
+                        if (state.markRepliesRead) "" else tr(" – luetuksi merkintä pois päältä", " – mark as read is off"),
                 )
                 if (state.markRepliesRead) MarkReadListener.enqueue(body)
 

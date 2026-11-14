@@ -1,5 +1,6 @@
 package fi.heatcall.ui.components
 
+import fi.heatcall.i18n.tr
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -45,7 +46,7 @@ fun SubScreen(
             ) {
                 if (onBack != null) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Takaisin", tint = Color.White)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = tr("Takaisin", "Back"), tint = Color.White)
                     }
                 } else {
                     Spacer(Modifier.width(16.dp))

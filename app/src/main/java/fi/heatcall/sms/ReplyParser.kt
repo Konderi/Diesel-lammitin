@@ -1,5 +1,6 @@
 package fi.heatcall.sms
 
+import fi.heatcall.i18n.tr
 /**
  * Tulkitsee EasyStart Callin vastausviestit suomenkieliseksi tekstiksi.
  *
@@ -25,18 +26,26 @@ object ReplyParser {
     private val errorKey = Regex("^er[a-z]$", RegexOption.IGNORE_CASE)
     private val timerKey = Regex("^t([1-3])$", RegexOption.IGNORE_CASE)
 
-    private val knownErrors: Map<String, String> = mapOf(
-        "erdheatercomlost" to "Yhteys lämmittimeen katkesi",
-        "erdheatercomno_heater_found" to "Lämmitintä ei tunnistettu – kokeile sulakkeen irrotusta ja uutta käynnistystä",
-        "erldatcomlost" to "Johdotusvika – ota yhteys huoltoon",
-        "erhheatermode_not_supported" to "Lämmitin ei tue pyydettyä toimintoa",
-        "erhheatererror" to "Lämmittimessä on häiriö – yritä käynnistää uudelleen",
-        "ercheatererror" to "Lämmittimessä on häiriö",
-        "erctempmissing" to "Lämpötila-anturia ei ole asennettu",
-        "erctempshort_circuit" to "Lämpötila-anturi on viallinen",
-        "ercdevicetimetime_not_set" to "Laitteen kelloa ei ole asetettu",
-        "errdevicetimetime_not_set" to "Laitteen kelloa ei ole asetettu – ajastin ei toimi",
-    )
+    /** Getter, jotta teksti vaihtuu kielen mukana. */
+    private val knownErrors: Map<String, String>
+        get() = mapOf(
+            "erdheatercomlost" to tr("Yhteys lämmittimeen katkesi", "Connection to the heater was lost"),
+            "erdheatercomno_heater_found" to tr(
+                "Lämmitintä ei tunnistettu – kokeile sulakkeen irrotusta ja uutta käynnistystä",
+                "Heater not detected – try removing the fuse and starting again",
+            ),
+            "erldatcomlost" to tr("Johdotusvika – ota yhteys huoltoon", "Wiring fault – contact a service partner"),
+            "erhheatermode_not_supported" to tr("Lämmitin ei tue pyydettyä toimintoa", "The heater does not support this function"),
+            "erhheatererror" to tr("Lämmittimessä on häiriö – yritä käynnistää uudelleen", "Heater fault – try starting again"),
+            "ercheatererror" to tr("Lämmittimessä on häiriö", "Heater fault"),
+            "erctempmissing" to tr("Lämpötila-anturia ei ole asennettu", "No temperature sensor installed"),
+            "erctempshort_circuit" to tr("Lämpötila-anturi on viallinen", "Temperature sensor is faulty"),
+            "ercdevicetimetime_not_set" to tr("Laitteen kelloa ei ole asetettu", "Device clock is not set"),
+            "errdevicetimetime_not_set" to tr(
+                "Laitteen kelloa ei ole asetettu – ajastin ei toimi",
+                "Device clock is not set – the timer will not work",
+            ),
+        )
 
     fun parse(raw: String): Reply {
         val tokens = raw.trim().split(',').map { it.trim() }.filter { it.isNotEmpty() }
@@ -58,34 +67,34 @@ object ReplyParser {
                 k == "heater" -> {
                     context = Context.HEATER
                     heaterOn = value.equals("on", ignoreCase = true)
-                    lines += if (heaterOn) "Lämmitin PÄÄLLÄ" else "Lämmitin POIS"
+                    lines += if (heaterOn) tr("Lämmitin PÄÄLLÄ", "Heater ON") else tr("Lämmitin POIS", "Heater OFF")
                 }
 
                 timerKey.matches(key) -> {
                     context = Context.TIMER
                     val n = timerKey.find(key)!!.groupValues[1]
-                    lines += "Ajastin $n: " + if (value.equals("on", true)) "päällä" else "pois"
+                    lines += tr("Ajastin $n: ", "Timer $n: ") + if (value.equals("on", true)) tr("päällä", "on") else tr("pois", "off")
                 }
 
                 k == "mode" -> lines += indent(context) +
-                    if (value.equals("fan", true)) "Tila: tuuletus" else "Tila: lämmitys"
+                    if (value.equals("fan", true)) tr("Tila: tuuletus", "Mode: ventilation") else tr("Tila: lämmitys", "Mode: heating")
 
                 k == "run" -> lines += indent(context) +
-                    if (value.equals("perm", true)) "Kestokäyttö" else "Käyntiaika $value min"
+                    if (value.equals("perm", true)) tr("Kestokäyttö", "Continuous operation") else tr("Käyntiaika $value min", "Run time $value min")
 
-                k == "sp" -> lines += indent(context) + "Asetuslämpötila $value °C"
+                k == "sp" -> lines += indent(context) + tr("Asetuslämpötila $value °C", "Set temperature $value °C")
 
                 k == "time" -> lines += when (context) {
-                    Context.TIMER -> indent(context) + "Lähtöaika: " + describeTime(value)
-                    else -> "Laitteen kello: " + describeTime(value)
+                    Context.TIMER -> indent(context) + tr("Lähtöaika: ", "Departure time: ") + describeTime(value)
+                    else -> tr("Laitteen kello: ", "Device clock: ") + describeTime(value)
                 }
 
                 k == "temp" -> context = Context.TEMP
-                k == "value" -> lines += "Sisälämpötila $value °C"
+                k == "value" -> lines += tr("Sisälämpötila $value °C", "Interior temperature $value °C")
 
                 k == "devicetime" -> context = Context.DEVICE_TIME
                 k == "mainphone" -> context = Context.MAIN_PHONE
-                k == "number" -> lines += "Valtuutettu numero: $value"
+                k == "number" -> lines += tr("Valtuutettu numero: $value", "Authorised number: $value")
 
                 // "ok" ja muut tunnistamattomat näytetään sellaisenaan, ettei tietoa katoa.
                 else -> if (!value.equals("ok", true)) lines += token
@@ -94,13 +103,13 @@ object ReplyParser {
         }
 
         val title = when {
-            errors.isNotEmpty() -> "Virhe"
-            firstContext == Context.HEATER -> if (heaterOn == true) "Lämmitin päällä" else "Lämmitin pois"
-            firstContext == Context.TIMER -> "Ajastimet"
-            firstContext == Context.TEMP -> "Sisälämpötila"
-            firstContext == Context.DEVICE_TIME -> "Laitteen kello"
-            firstContext == Context.MAIN_PHONE -> "Valtuutettu numero"
-            else -> "Vastaus lämmittimeltä"
+            errors.isNotEmpty() -> tr("Virhe", "Error")
+            firstContext == Context.HEATER -> if (heaterOn == true) tr("Lämmitin päällä", "Heater on") else tr("Lämmitin pois", "Heater off")
+            firstContext == Context.TIMER -> tr("Ajastimet", "Timers")
+            firstContext == Context.TEMP -> tr("Sisälämpötila", "Interior temperature")
+            firstContext == Context.DEVICE_TIME -> tr("Laitteen kello", "Device clock")
+            firstContext == Context.MAIN_PHONE -> tr("Valtuutettu numero", "Authorised number")
+            else -> tr("Vastaus lämmittimeltä", "Reply from the heater")
         }
 
         return Reply(
@@ -115,17 +124,17 @@ object ReplyParser {
         val code = token.substringBefore(':')
         val norm = token.lowercase().replace(":", "")
         val text = knownErrors[norm] ?: knownErrors.entries.firstOrNull { norm.startsWith(it.key) }?.value
-        return if (text != null) "$text ($code)" else "Virheilmoitus: $token"
+        return if (text != null) "$text ($code)" else tr("Virheilmoitus: $token", "Error message: $token")
     }
 
     /** "TU.06.30" → "tiistai klo 06.30", "MO-FR.16.30" → "ma–pe klo 16.30". */
     fun describeTime(value: String): String {
         val parts = value.split('.', ':')
         if (parts.size < 3) return value
-        val day = Commands.Day.fromCode(parts[0])?.label?.lowercase() ?: parts[0]
+        val day = Commands.Day.fromCode(parts[0])?.inSentence ?: parts[0]
         val hh = parts[1].padStart(2, '0')
         val mm = parts[2].padStart(2, '0')
-        return "$day klo $hh.$mm"
+        return tr("$day klo $hh.$mm", "$day at $hh:$mm")
     }
 
     private fun indent(context: Context) = if (context == Context.TIMER) "   " else ""

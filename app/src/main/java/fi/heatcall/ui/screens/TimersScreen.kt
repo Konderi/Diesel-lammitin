@@ -1,5 +1,6 @@
 package fi.heatcall.ui.screens
 
+import fi.heatcall.i18n.tr
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -46,16 +47,16 @@ fun TimersScreen(
     onSend: (command: String, label: String) -> Unit,
     onBack: () -> Unit,
 ) {
-    SubScreen(title = "Ajastimet – ${device.displayName}", onBack = onBack) {
+    SubScreen(title = tr("Ajastimet – ${device.displayName}", "Timers – ${device.displayName}"), onBack = onBack) {
         Section {
             BodyText(
-                "Aika on lähtöaika: lämmitin käynnistyy käyntiajan verran ennen ja sammuu asetettuna aikana. " +
-                    "Laitteen kellon pitää olla oikeassa ajassa (Info ja asetukset → Aseta laitteen kello).",
+                tr("Aika on lähtöaika: lämmitin käynnistyy käyntiajan verran ennen ja sammuu asetettuna aikana. ", "The time is the departure time: the heater starts the run time earlier and switches off at the set time. ") +
+                    tr("Laitteen kellon pitää olla oikeassa ajassa (Info ja asetukset → Aseta laitteen kello).", "The device clock must be correct (gear menu → Device clock)."),
             )
             Spacer(Modifier.height(10.dp))
             PrimaryButton(
-                "Kysy kaikkien ajastinten tila",
-                onClick = { onSend(Commands.allTimersStatus(device.pin), "Ajastinten tila") },
+                tr("Kysy kaikkien ajastinten tila", "Query all timers"),
+                onClick = { onSend(Commands.allTimersStatus(device.pin), tr("Ajastinten tila", "Timer status")) },
                 modifier = Modifier.fillMaxWidth(),
             )
         }
@@ -68,11 +69,11 @@ fun TimersScreen(
                 onProgram = {
                     onSend(
                         Commands.timerProgram(device.pin, n, draft.day, draft.hour, draft.minute, draft.runMinutes),
-                        "Ajastin $n ohjelmointi",
+                        tr("Ajastin $n ohjelmointi", "Timer $n programming"),
                     )
                 },
-                onOff = { onSend(Commands.timerOff(device.pin, n), "Ajastin $n pois") },
-                onQuery = { onSend(Commands.timerStatus(device.pin, n), "Ajastin $n tila") },
+                onOff = { onSend(Commands.timerOff(device.pin, n), tr("Ajastin $n pois", "Timer $n off")) },
+                onQuery = { onSend(Commands.timerStatus(device.pin, n), tr("Ajastin $n tila", "Timer $n status")) },
             )
         }
         Spacer(Modifier.height(24.dp))
@@ -92,7 +93,7 @@ private fun TimerCard(
     var dayMenu by remember { mutableStateOf(false) }
     var timeDialog by remember { mutableStateOf(false) }
 
-    Section("Ajastin $n") {
+    Section(tr("Ajastin $n", "Timer $n")) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Box {
                 SecondaryButton(draft.day.label, onClick = { dayMenu = true })
@@ -108,10 +109,10 @@ private fun TimerCard(
                     }
                 }
             }
-            SecondaryButton("klo %02d.%02d".format(draft.hour, draft.minute), onClick = { timeDialog = true })
+            SecondaryButton(tr("klo %02d.%02d", "%02d:%02d").format(draft.hour, draft.minute), onClick = { timeDialog = true })
         }
         Spacer(Modifier.height(8.dp))
-        Text("Käyntiaika ${draft.runMinutes} min", color = Color.White, fontSize = 14.sp)
+        Text(tr("Käyntiaika ${draft.runMinutes} min", "Run time ${draft.runMinutes} min"), color = Color.White, fontSize = 14.sp)
         Slider(
             value = draft.runMinutes.toFloat(),
             onValueChange = { v -> onChange(draft.copy(runMinutes = ((v / 5).roundToInt() * 5).coerceIn(10, 120))) },
@@ -119,9 +120,9 @@ private fun TimerCard(
             steps = (Commands.RUNTIME_MAX - Commands.RUNTIME_MIN) / 5 - 1,
         )
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-            PrimaryButton("Ohjelmoi ja päälle", onClick = onProgram, modifier = Modifier.weight(1.4f))
-            SecondaryButton("Pois", onClick = onOff, modifier = Modifier.weight(0.8f))
-            SecondaryButton("Tila", onClick = onQuery, modifier = Modifier.weight(0.8f))
+            PrimaryButton(tr("Ohjelmoi ja päälle", "Program and enable"), onClick = onProgram, modifier = Modifier.weight(1.4f))
+            SecondaryButton(tr("Pois", "Off"), onClick = onOff, modifier = Modifier.weight(0.8f))
+            SecondaryButton(tr("Tila", "Status"), onClick = onQuery, modifier = Modifier.weight(0.8f))
         }
     }
 
@@ -129,7 +130,7 @@ private fun TimerCard(
         val state = rememberTimePickerState(initialHour = draft.hour, initialMinute = draft.minute, is24Hour = true)
         AlertDialog(
             onDismissRequest = { timeDialog = false },
-            title = { Text("Lähtöaika") },
+            title = { Text(tr("Lähtöaika", "Departure time")) },
             text = { TimePicker(state = state) },
             confirmButton = {
                 TextButton(onClick = {
@@ -137,7 +138,7 @@ private fun TimerCard(
                     onChange(draft.copy(hour = state.hour, minute = state.minute))
                 }) { Text("OK") }
             },
-            dismissButton = { TextButton(onClick = { timeDialog = false }) { Text("Peruuta") } },
+            dismissButton = { TextButton(onClick = { timeDialog = false }) { Text(tr("Peruuta", "Cancel")) } },
         )
     }
     Spacer(Modifier.width(0.dp))

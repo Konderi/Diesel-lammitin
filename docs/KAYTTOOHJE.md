@@ -10,6 +10,7 @@ Sovellus kysyy ensimmäisellä käynnistyskerralla:
 
 | Kenttä | Selitys |
 |---|---|
+| **Kieli / Language** | Suomi tai English. Oletus on puhelimen kieli. Kielen voi vaihtaa myöhemmin kohdasta **Info ja asetukset → Kieli**. |
 | **Lämmittimen puhelinnumero** | EasyStart Callin SIM-kortin numero, esim. `+358 40 123 4567` tai `040 123 4567` |
 | **PIN-koodi** | EasyStart Callin nelinumeroinen PIN (tehdasasetus `1234`) |
 | **Nimi** | Auton nimi, joka näkyy kortissa ja widgetissä |
@@ -141,6 +142,7 @@ Kun kello asetetaan HeatCallista, aika tallentuu ja kesä-/talviaikamuistutus po
 
 | Kohta | Toiminto |
 |---|---|
+| Kieli | Suomi / English. Vaihto näkyy heti koko sovelluksessa, ilmoituksissa ja widgetissä. |
 | Käyttöoikeudet | Lupien tila (tekstiviestit, ilmoitukset, ilmoitusten käyttöoikeus, akun optimointi), *Pyydä luvat*, *Akun asetukset* ja *Luvat estetty? Näytä ohje* |
 | Laitteet | Autojen numero, PIN, tyyppi ja kuva |
 | Vastausviestit | Luetuksi merkintä päälle tai pois, oletusviestisovellus ja ilmoitusten käyttöoikeus |

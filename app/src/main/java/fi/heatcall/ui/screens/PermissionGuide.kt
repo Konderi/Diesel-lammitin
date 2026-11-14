@@ -1,5 +1,6 @@
 package fi.heatcall.ui.screens
 
+import fi.heatcall.i18n.tr
 import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -131,8 +132,8 @@ fun PermissionBanner(onClick: () -> Unit, modifier: Modifier = Modifier) {
         Icon(Icons.Filled.Warning, contentDescription = null, tint = Color(0xFFFFB74D))
         Spacer(Modifier.width(10.dp))
         Column(Modifier.weight(1f)) {
-            Text("Tekstiviestilupa puuttuu", color = Color.White, fontWeight = FontWeight.Bold)
-            Text("HeatCall ei voi ohjata lämmitintä. Napauta ohjeet.", color = Color(0xFFFFE0B2), fontSize = 13.sp)
+            Text(tr("Tekstiviestilupa puuttuu", "SMS permission missing"), color = Color.White, fontWeight = FontWeight.Bold)
+            Text(tr("HeatCall ei voi ohjata lämmitintä. Napauta ohjeet.", "HeatCall cannot control the heater. Tap for instructions."), color = Color(0xFFFFE0B2), fontSize = 13.sp)
         }
     }
 }
@@ -142,18 +143,18 @@ fun PermissionBanner(onClick: () -> Unit, modifier: Modifier = Modifier) {
 fun PermissionChecklist(status: PermissionStatus, onRequest: () -> Unit, onHelp: () -> Unit) {
     val context = LocalContext.current
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        StatusRow("Tekstiviestit", "Komentojen lähetys ja vastausten vastaanotto", status.sms)
-        StatusRow("Ilmoitukset", "Vastaus ilmoituksena, kun sovellus on taustalla", status.notifications)
-        StatusRow("Ilmoitusten käyttöoikeus", "Vastausten merkitseminen luetuiksi", status.markRead)
-        StatusRow("Ei akun optimointia", "Vastaukset tulevat perille myös sovelluksen ollessa kiinni", status.battery)
+        StatusRow(tr("Tekstiviestit", "Text messages"), tr("Komentojen lähetys ja vastausten vastaanotto", "Sending commands and receiving replies"), status.sms)
+        StatusRow(tr("Ilmoitukset", "Notifications"), tr("Vastaus ilmoituksena, kun sovellus on taustalla", "Reply as a notification when the app is in the background"), status.notifications)
+        StatusRow(tr("Ilmoitusten käyttöoikeus", "Notification access"), tr("Vastausten merkitseminen luetuiksi", "Marking replies as read"), status.markRead)
+        StatusRow(tr("Ei akun optimointia", "No battery optimisation"), tr("Vastaukset tulevat perille myös sovelluksen ollessa kiinni", "Replies arrive even when the app is closed"), status.battery)
         Spacer(Modifier.height(4.dp))
         if (!status.sms || !status.notifications) {
-            PrimaryButton("Pyydä luvat", onClick = onRequest, modifier = Modifier.fillMaxWidth())
+            PrimaryButton(tr("Pyydä luvat", "Request permissions"), onClick = onRequest, modifier = Modifier.fillMaxWidth())
         }
         if (!status.battery) {
-            SecondaryButton("Akun asetukset", onClick = { openBatterySettings(context) }, modifier = Modifier.fillMaxWidth())
+            SecondaryButton(tr("Akun asetukset", "Battery settings"), onClick = { openBatterySettings(context) }, modifier = Modifier.fillMaxWidth())
         }
-        SecondaryButton("Luvat estetty? Näytä ohje", onClick = onHelp, modifier = Modifier.fillMaxWidth())
+        SecondaryButton(tr("Luvat estetty? Näytä ohje", "Permissions blocked? Show help"), onClick = onHelp, modifier = Modifier.fillMaxWidth())
     }
 }
 
@@ -171,7 +172,7 @@ private fun StatusRow(title: String, desc: String, ok: Boolean) {
             Text(title, color = Color.White, fontSize = 15.sp)
             Text(desc, color = Color(0xFFB8C4D3), fontSize = 12.sp)
         }
-        Text(if (ok) "OK" else "Puuttuu", color = if (ok) Color(0xFFA5D6A7) else Color(0xFFFFCC80), fontSize = 13.sp)
+        Text(if (ok) "OK" else tr("Puuttuu", "Missing"), color = if (ok) Color(0xFFA5D6A7) else Color(0xFFFFCC80), fontSize = 13.sp)
     }
 }
 
@@ -192,34 +193,34 @@ fun PermissionHelpDialog(onDismiss: () -> Unit) {
                     .verticalScroll(rememberScrollState())
                     .padding(18.dp),
             ) {
-                Text("Lupien salliminen", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(tr("Lupien salliminen", "Allowing permissions"), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(8.dp))
                 BodyText(
-                    "Kun HeatCall on asennettu tiedostosta (selain, Drive, GitHub), Android estää aluksi " +
-                        "tekstiviestiluvan ja ilmoitusten käyttöoikeuden. Lupaikkunassa Salli näkyy silloin harmaana " +
-                        "tai tulee ilmoitus \"Sovelluksen lupa kielletty\".",
+                    tr("Kun HeatCall on asennettu tiedostosta (selain, Drive, GitHub), Android estää aluksi ", "When HeatCall is installed from a file (browser, Drive, GitHub), Android initially blocks ") +
+                        tr("tekstiviestiluvan ja ilmoitusten käyttöoikeuden. Lupaikkunassa Salli näkyy silloin harmaana ", "the SMS permission and notification access. Allow is then greyed out in the permission screen ") +
+                        tr("tai tulee ilmoitus \"Sovelluksen lupa kielletty\".", "or a \"Restricted setting\" message appears."),
                 )
                 Spacer(Modifier.height(12.dp))
-                Step(1, "Paina alta Avaa sovelluksen tiedot.")
-                Step(2, "Paina oikean yläkulman ⋮ (kolme pistettä).")
-                Step(3, "Valitse Salli rajoitetut asetukset ja vahvista PIN-koodilla tai sormenjäljellä.")
-                Step(4, "Avaa Käyttöoikeudet → Tekstiviestit → Salli.")
-                Step(5, "Oppo/OnePlus/Xiaomi: Akun käyttö → salli taustatoiminta ja automaattinen käynnistys.")
-                Step(6, "Palaa HeatCalliin ja anna ilmoitusten käyttöoikeus kohdasta Info ja asetukset.")
+                Step(1, tr("Paina alta Avaa sovelluksen tiedot.", "Tap Open app info below."))
+                Step(2, tr("Paina oikean yläkulman ⋮ (kolme pistettä).", "Tap ⋮ (three dots) in the top-right corner."))
+                Step(3, tr("Valitse Salli rajoitetut asetukset ja vahvista PIN-koodilla tai sormenjäljellä.", "Choose Allow restricted settings and confirm with your PIN or fingerprint."))
+                Step(4, tr("Avaa Käyttöoikeudet → Tekstiviestit → Salli.", "Open Permissions → SMS → Allow."))
+                Step(5, tr("Oppo/OnePlus/Xiaomi: Akun käyttö → salli taustatoiminta ja automaattinen käynnistys.", "Oppo/OnePlus/Xiaomi: Battery usage → allow background activity and auto-launch."))
+                Step(6, tr("Palaa HeatCalliin ja anna ilmoitusten käyttöoikeus kohdasta Info ja asetukset.", "Return to HeatCall and grant notification access under Info and settings."))
                 Spacer(Modifier.height(8.dp))
                 BodyText(
-                    "Jos ⋮-valikossa ei ole valintaa, yritä ensin antaa tekstiviestilupa kerran (se estetään), " +
-                        "ja avaa sovelluksen tiedot vasta sen jälkeen. Play Protectia ei tarvitse kytkeä pois.",
+                    tr("Jos ⋮-valikossa ei ole valintaa, yritä ensin antaa tekstiviestilupa kerran (se estetään), ", "If the ⋮ menu has no such option, first try to grant the SMS permission once (it will be blocked), ") +
+                        tr("ja avaa sovelluksen tiedot vasta sen jälkeen. Play Protectia ei tarvitse kytkeä pois.", "and only then open app info. You do not need to turn off Play Protect."),
                     color = Color(0xFFB8C4D3),
                 )
                 Spacer(Modifier.height(16.dp))
                 PrimaryButton(
-                    "Avaa sovelluksen tiedot",
+                    tr("Avaa sovelluksen tiedot", "Open app info"),
                     onClick = { openAppDetails(context) },
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Spacer(Modifier.height(6.dp))
-                SecondaryButton("Sulje", onClick = onDismiss, modifier = Modifier.fillMaxWidth())
+                SecondaryButton(tr("Sulje", "Close"), onClick = onDismiss, modifier = Modifier.fillMaxWidth())
             }
         }
     }

@@ -1,5 +1,9 @@
 package fi.heatcall.sms
 
+import fi.heatcall.i18n.AppLanguage
+import fi.heatcall.i18n.I18n
+import fi.heatcall.i18n.tr
+
 /**
  * EasyStart Call -tekstiviestikomennot (käyttöohje 08.2014, s. 17–27).
  *
@@ -13,17 +17,23 @@ object Commands {
     const val RUNTIME_DEFAULT = 30
 
     /** Viikonpäivät ja -alueet laitteen omilla englanninkielisillä lyhenteillä. */
-    enum class Day(val code: String, val label: String) {
-        MO("MO", "Maanantai"),
-        TU("TU", "Tiistai"),
-        WE("WE", "Keskiviikko"),
-        TH("TH", "Torstai"),
-        FR("FR", "Perjantai"),
-        SA("SA", "Lauantai"),
-        SU("SU", "Sunnuntai"),
-        MO_FR("MO-FR", "Ma–pe"),
-        SA_SU("SA-SU", "La–su"),
-        MO_SU("MO-SU", "Joka päivä");
+    enum class Day(val code: String, private val fi: String, private val en: String) {
+        MO("MO", "Maanantai", "Monday"),
+        TU("TU", "Tiistai", "Tuesday"),
+        WE("WE", "Keskiviikko", "Wednesday"),
+        TH("TH", "Torstai", "Thursday"),
+        FR("FR", "Perjantai", "Friday"),
+        SA("SA", "Lauantai", "Saturday"),
+        SU("SU", "Sunnuntai", "Sunday"),
+        MO_FR("MO-FR", "Ma–pe", "Mon–Fri"),
+        SA_SU("SA-SU", "La–su", "Sat–Sun"),
+        MO_SU("MO-SU", "Joka päivä", "Every day");
+
+        /** Nimi valitulla kielellä. */
+        val label: String get() = tr(fi, en)
+
+        /** Nimi lauseen keskellä: suomeksi pienellä, englanniksi isolla. */
+        val inSentence: String get() = if (I18n.language == AppLanguage.FI) label.lowercase() else label
 
         companion object {
             fun fromCode(code: String): Day? = entries.firstOrNull { it.code.equals(code, ignoreCase = true) }

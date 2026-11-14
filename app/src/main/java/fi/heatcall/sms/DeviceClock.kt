@@ -1,5 +1,6 @@
 package fi.heatcall.sms
 
+import fi.heatcall.i18n.tr
 import java.time.DayOfWeek
 import java.time.Duration
 import java.time.Instant
@@ -70,11 +71,11 @@ object DeviceClock {
         val h = a / 60
         val m = a % 60
         val amount = when {
-            h == 0 -> "$m min"
+            h == 0 -> tr("$m min", "$m min")
             m == 0 -> "$h h"
-            else -> "$h h $m min"
+            else -> tr("$h h $m min", "$h h $m min")
         }
-        return amount + if (offsetMinutes > 0) " edellä" else " jäljessä"
+        return amount + if (offsetMinutes > 0) tr(" edellä", " ahead") else tr(" jäljessä", " behind")
     }
 
     /** Viimeisin kesä-/talviaikasiirtymä puhelimen aikavyöhykkeellä. */

@@ -4,6 +4,9 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import fi.heatcall.data.AppState
+import fi.heatcall.i18n.AppLanguage
+import fi.heatcall.i18n.I18n
+import fi.heatcall.i18n.tr
 import fi.heatcall.data.DeviceRepository
 import fi.heatcall.widget.StatusWidget
 import kotlinx.coroutines.CoroutineScope
@@ -30,6 +33,7 @@ class HeatCallApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        I18n.init(this)
         repository = DeviceRepository(this)
         appScope.launch {
             repository.state.collect { state ->
@@ -47,14 +51,22 @@ class HeatCallApp : Application() {
         createChannels()
     }
 
+    /** Vaihtaa sovelluksen kielen ja päivittää ilmoituskanavan nimen ja widgetin. */
+    fun setLanguage(lang: AppLanguage) {
+        I18n.set(this, lang)
+        createChannels()
+        StatusWidget.renderAll(this, cachedState)
+    }
+
     private fun createChannels() {
         val nm = getSystemService(NotificationManager::class.java)
+        // createNotificationChannel päivittää olemassa olevan kanavan nimen.
         nm.createNotificationChannel(
             NotificationChannel(
                 CHANNEL_REPLIES,
-                getString(R.string.channel_replies),
+                tr("Lämmittimen vastaukset", "Heater replies"),
                 NotificationManager.IMPORTANCE_HIGH,
-            ).apply { description = getString(R.string.channel_replies_desc) },
+            ).apply { description = tr("Ilmoitus, kun lämmitin vastaa komentoon", "Notification when the heater replies to a command") },
         )
     }
 

@@ -113,6 +113,16 @@ for p in SEND_SMS RECEIVE_SMS; do
 done
 ```
 
+### Kielet (suomi / englanti)
+
+Sovelluksella on oma kielivalinta, joka ei riipu puhelimen kielestä (`i18n/I18n.kt`):
+
+- Tekstit kirjoitetaan koodiin parina: `tr("Suomeksi", "In English")`. `I18n.language` on Compose-tila, joten näkymät, ilmoitukset ja widget vaihtavat kieltä heti ilman uudelleenkäynnistystä.
+- Valinta tallennetaan SharedPreferencesiin. Jos käyttäjä ei ole valinnut kieltä, käytetään puhelimen kieltä: suomi, jos puhelin on suomeksi, muuten englanti.
+- Enumien nimet (`Commands.Day`, `HeaterType`, `Mode`, `DeviceAction`, `BottomItem`) ovat gettereitä (`label`), jotta kieli ei jää kiinni luontihetkeen.
+- Järjestelmän näyttämät tekstit (ilmoitusten kuuntelijan nimi, widgetin kuvaus ja esikatselu) ovat resursseissa `values/` (englanti) ja `values-fi/`, ja ne seuraavat puhelimen kieltä.
+- SMS-komennot ovat kielestä riippumattomia. `EnglishTest.kt` varmistaa tämän ja englanninkieliset tulkinnat.
+
 ## Testaus
 
 ### Yksikkötestit

@@ -1,5 +1,6 @@
 package fi.heatcall.ui.screens
 
+import fi.heatcall.i18n.tr
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -76,8 +77,9 @@ fun ClockDialog(
     var timeDialog by remember { mutableStateOf(false) }
 
     val zone = ZoneId.systemDefault()
-    val dst = if (zone.rules.isDaylightSavings(now.toInstant())) "kesäaika" else "talviaika"
-    val phoneTime = "${DeviceClock.dayOf(now.dayOfWeek).label.lowercase()} klo %02d.%02d".format(now.hour, now.minute)
+    val dst = if (zone.rules.isDaylightSavings(now.toInstant())) tr("kesäaika", "summer time") else tr("talviaika", "winter time")
+    val today = DeviceClock.dayOf(now.dayOfWeek)
+    val phoneTime = tr("${today.inSentence} klo %02d.%02d", "${today.label} %02d:%02d").format(now.hour, now.minute)
 
     Dialog(onDismissRequest = onDismiss) {
         Box(Modifier.clip(RoundedCornerShape(14.dp))) {
@@ -89,15 +91,15 @@ fun ClockDialog(
                     .verticalScroll(rememberScrollState())
                     .padding(18.dp),
             ) {
-                Text("Laitteen kello", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(tr("Laitteen kello", "Device clock"), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Text(device.displayName, color = Color(0xCCFFFFFF), fontSize = 13.sp)
                 Spacer(Modifier.height(12.dp))
-                Text("Puhelimen aika: $phoneTime ($dst)", color = Color.White, fontSize = 15.sp)
+                Text(tr("Puhelimen aika: $phoneTime ($dst)", "Phone time: $phoneTime ($dst)"), color = Color.White, fontSize = 15.sp)
                 BodyText(
                     if (device.clockSetAt > 0) {
-                        "Asetettu HeatCallista: " + SimpleDateFormat("d.M.yyyy HH.mm", fi).format(Date(device.clockSetAt))
+                        tr("Asetettu HeatCallista: ", "Set from HeatCall: ") + SimpleDateFormat("d.M.yyyy HH.mm", fi).format(Date(device.clockSetAt))
                     } else {
-                        "Kelloa ei ole asetettu HeatCallista."
+                        tr("Kelloa ei ole asetettu HeatCallista.", "The clock has not been set from HeatCall.")
                     },
                     color = Color(0xFFB8C4D3),
                 )
@@ -105,21 +107,21 @@ fun ClockDialog(
                     Spacer(Modifier.height(6.dp))
                     BodyText(
                         if (DeviceClock.lastTransitionWasToWinter() == true) {
-                            "Talviaika alkoi äskettäin. Lämmittimen kello on todennäköisesti tunnin edellä."
+                            tr("Talviaika alkoi äskettäin. Lämmittimen kello on todennäköisesti tunnin edellä.", "Winter time began recently. The heater clock is probably one hour ahead.")
                         } else {
-                            "Kesäaika alkoi äskettäin. Lämmittimen kello on todennäköisesti tunnin jäljessä."
+                            tr("Kesäaika alkoi äskettäin. Lämmittimen kello on todennäköisesti tunnin jäljessä.", "Summer time began recently. The heater clock is probably one hour behind.")
                         },
                         color = Color(0xFFFFCC80),
                     )
                 }
                 Spacer(Modifier.height(10.dp))
                 BodyText(
-                    "EasyStart Call ei vaihda kesä- ja talviaikaa itse. Aseta kello aikasiirtymän ja jokaisen " +
-                        "virtakatkon jälkeen, muuten ajastimet käynnistävät lämmittimen väärään aikaan.",
+                    tr("EasyStart Call ei vaihda kesä- ja talviaikaa itse. Aseta kello aikasiirtymän ja jokaisen ", "EasyStart Call does not switch between summer and winter time by itself. Set the clock after each time change and every ") +
+                        tr("virtakatkon jälkeen, muuten ajastimet käynnistävät lämmittimen väärään aikaan.", "power interruption, otherwise the timers will start the heater at the wrong time."),
                 )
                 Spacer(Modifier.height(14.dp))
                 PrimaryButton(
-                    "Aseta puhelimen ajasta",
+                    tr("Aseta puhelimen ajasta", "Set from phone time"),
                     onClick = {
                         onSetFromPhone()
                         onDismiss()
@@ -128,7 +130,7 @@ fun ClockDialog(
                 )
                 Spacer(Modifier.height(6.dp))
                 SecondaryButton(
-                    "Kysy laitteen kello",
+                    tr("Kysy laitteen kello", "Query device clock"),
                     onClick = {
                         onQuery()
                         onDismiss()
@@ -137,10 +139,10 @@ fun ClockDialog(
                 )
                 Spacer(Modifier.height(6.dp))
                 if (!manual) {
-                    SecondaryButton("Aseta käsin…", onClick = { manual = true }, modifier = Modifier.fillMaxWidth())
+                    SecondaryButton(tr("Aseta käsin…", "Set manually…"), onClick = { manual = true }, modifier = Modifier.fillMaxWidth())
                 } else {
                     Spacer(Modifier.height(4.dp))
-                    Text("Aseta käsin", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text(tr("Aseta käsin", "Set manually"), color = Color.White, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Box {
@@ -154,11 +156,11 @@ fun ClockDialog(
                                 }
                             }
                         }
-                        SecondaryButton("klo %02d.%02d".format(hour, minute), onClick = { timeDialog = true })
+                        SecondaryButton(tr("klo %02d.%02d", "%02d:%02d").format(hour, minute), onClick = { timeDialog = true })
                     }
                     Spacer(Modifier.height(6.dp))
                     PrimaryButton(
-                        "Lähetä kellonaika",
+                        tr("Lähetä kellonaika", "Send time"),
                         onClick = {
                             onSetManual(day, hour, minute)
                             onDismiss()
@@ -167,7 +169,7 @@ fun ClockDialog(
                     )
                 }
                 Spacer(Modifier.height(6.dp))
-                SecondaryButton("Sulje", onClick = onDismiss, modifier = Modifier.fillMaxWidth())
+                SecondaryButton(tr("Sulje", "Close"), onClick = onDismiss, modifier = Modifier.fillMaxWidth())
             }
         }
     }
@@ -176,7 +178,7 @@ fun ClockDialog(
         val state = rememberTimePickerState(initialHour = hour, initialMinute = minute, is24Hour = true)
         AlertDialog(
             onDismissRequest = { timeDialog = false },
-            title = { Text("Kellonaika") },
+            title = { Text(tr("Kellonaika", "Time")) },
             text = { TimePicker(state = state) },
             confirmButton = {
                 TextButton(onClick = {
@@ -185,7 +187,7 @@ fun ClockDialog(
                     timeDialog = false
                 }) { Text("OK") }
             },
-            dismissButton = { TextButton(onClick = { timeDialog = false }) { Text("Peruuta") } },
+            dismissButton = { TextButton(onClick = { timeDialog = false }) { Text(tr("Peruuta", "Cancel")) } },
         )
     }
 }

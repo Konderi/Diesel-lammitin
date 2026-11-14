@@ -1,5 +1,6 @@
 package fi.heatcall.ui.screens
 
+import fi.heatcall.i18n.tr
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,7 +57,7 @@ fun ReplyDialog(reply: ReplyBus.IncomingReply, onDismiss: () -> Unit, onFixClock
                     .glassPanel()
                     .padding(18.dp),
             ) {
-                Text("${reply.deviceName} · vastaus klo $time", color = Color(0xCCFFFFFF), fontSize = 13.sp)
+                Text(tr("${reply.deviceName} · vastaus klo $time", "${reply.deviceName} · reply at $time"), color = Color(0xCCFFFFFF), fontSize = 13.sp)
                 Spacer(Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(Modifier.size(14.dp).clip(CircleShape).background(accent))
@@ -77,16 +78,16 @@ fun ReplyDialog(reply: ReplyBus.IncomingReply, onDismiss: () -> Unit, onFixClock
                 if (offset != null) {
                     Spacer(Modifier.height(8.dp))
                     if (DeviceClock.isWrong(offset)) {
-                        BodyText("Laitteen kello on ${DeviceClock.describeOffset(offset)} puhelimen ajasta.", color = Color(0xFFFFCC80))
+                        BodyText(tr("Laitteen kello on ${DeviceClock.describeOffset(offset)} puhelimen ajasta.", "The device clock is ${DeviceClock.describeOffset(offset)} the phone time."), color = Color(0xFFFFCC80))
                         if (onFixClock != null) {
                             Spacer(Modifier.height(8.dp))
-                            PrimaryButton("Aseta oikea aika", onClick = {
+                            PrimaryButton(tr("Aseta oikea aika", "Set correct time"), onClick = {
                                 onFixClock()
                                 onDismiss()
                             }, modifier = Modifier.fillMaxWidth())
                         }
                     } else {
-                        BodyText("Laitteen kello on oikeassa ajassa ✓", color = Color(0xFFA5D6A7))
+                        BodyText(tr("Laitteen kello on oikeassa ajassa ✓", "The device clock is correct ✓"), color = Color(0xFFA5D6A7))
                     }
                 }
                 Spacer(Modifier.height(12.dp))

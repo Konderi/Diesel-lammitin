@@ -36,12 +36,12 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 - **Laitetoiminnot:** sisälämpötila ja oman numeron valtuutus.
 - **Viestihistoria:** lähetetyt komennot ja vastaukset. PIN-koodi peitetään historiassa.
 - **Lupaopastus:** sovellus tunnistaa estetyt luvat ja ohjaa sallimaan rajoitetut asetukset (Android 13+ ja ColorOS).
-- **Kieli:** käyttöliittymä on kokonaan suomeksi, ja virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään.
+- **Kieli:** suomi tai englanti. Kieli valitaan ensimmäisellä käynnistyskerralla tai myöhemmin asetuksista, ja virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään valitulla kielellä.
 
 ## Pika-aloitus
 
-1. Asenna `HeatCall-1.1.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
-2. Ensimmäisellä käynnistyskerralla anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
+1. Asenna `HeatCall-1.2.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
+2. Valitse kieli (Suomi / English) ja anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
 3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.
 5. Paina **Tarkista tila**. Kun lämmitin vastaa, yhteys toimii.

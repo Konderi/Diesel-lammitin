@@ -1,5 +1,6 @@
 package fi.heatcall.sms
 
+import fi.heatcall.i18n.tr
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -25,7 +26,7 @@ object SmsSender {
      */
     fun send(context: Context, device: Device, command: String, label: String) {
         if (device.phone.isBlank() || !Commands.isValidPin(device.pin)) {
-            ReplyBus.setSendState(ReplyBus.SendState.Failed("Laitteen numero tai PIN puuttuu"))
+            ReplyBus.setSendState(ReplyBus.SendState.Failed(tr("Laitteen numero tai PIN puuttuu", "Device number or PIN is missing")))
             return
         }
         ReplyBus.setSendState(ReplyBus.SendState.Sending(label, device.displayName))
@@ -48,7 +49,7 @@ object SmsSender {
             }
             sms.sendTextMessage(device.phone, null, command, sentIntent, null)
         } catch (e: Exception) {
-            ReplyBus.setSendState(ReplyBus.SendState.Failed(e.message ?: "Lähetys epäonnistui"))
+            ReplyBus.setSendState(ReplyBus.SendState.Failed(e.message ?: tr("Lähetys epäonnistui", "Sending failed")))
             return
         }
 
@@ -74,9 +75,9 @@ object SmsSender {
                 ReplyBus.setSendState(ReplyBus.SendState.WaitingReply(label, System.currentTimeMillis()))
             } else {
                 val reason = when (resultCode) {
-                    SmsManager.RESULT_ERROR_NO_SERVICE -> "Ei verkkoyhteyttä"
-                    SmsManager.RESULT_ERROR_RADIO_OFF -> "Lentokonetila on päällä"
-                    else -> "Viestin lähetys epäonnistui (koodi $resultCode)"
+                    SmsManager.RESULT_ERROR_NO_SERVICE -> tr("Ei verkkoyhteyttä", "No network")
+                    SmsManager.RESULT_ERROR_RADIO_OFF -> tr("Lentokonetila on päällä", "Airplane mode is on")
+                    else -> tr("Viestin lähetys epäonnistui (koodi $resultCode)", "Sending the message failed (code $resultCode)")
                 }
                 ReplyBus.setSendState(ReplyBus.SendState.Failed(reason))
                 StatusWidget.markFailed(context, reason)

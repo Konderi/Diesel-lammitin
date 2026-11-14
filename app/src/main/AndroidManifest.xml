@@ -24,6 +24,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.HeatCall"
+        android:localeConfig="@xml/locales_config"
         tools:targetApi="36">
 
         <activity

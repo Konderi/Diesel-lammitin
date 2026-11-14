@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="listener_label">HeatCall – vastausten luetuksi merkintä</string>
+    <string name="widget_description">Lämmittimen tila ja Tarkista tila -painike</string>
+    <string name="widget_status_unknown">Tila ei tiedossa</string>
+    <string name="widget_check">Tarkista tila</string>
+</resources>

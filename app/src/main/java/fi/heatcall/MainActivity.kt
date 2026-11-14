@@ -1,5 +1,6 @@
 package fi.heatcall
 
+import fi.heatcall.i18n.tr
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
         val text = intent?.getStringExtra(EXTRA_REPLY_TEXT) ?: return
         ReplyBus.showReply(
             ReplyBus.IncomingReply(
-                deviceName = intent.getStringExtra(EXTRA_REPLY_DEVICE) ?: "Lämmitin",
+                deviceName = intent.getStringExtra(EXTRA_REPLY_DEVICE) ?: tr("Lämmitin", "Heater"),
                 text = text,
                 timestamp = intent.getLongExtra(EXTRA_REPLY_TIME, System.currentTimeMillis()),
                 deviceId = intent.getStringExtra(EXTRA_REPLY_DEVICE_ID),
@@ -169,7 +170,7 @@ class MainActivity : ComponentActivity() {
             kotlinx.coroutines.delay(REPLY_TIMEOUT_MS)
             if (ReplyBus.send.value == waiting) {
                 ReplyBus.setSendState(
-                    ReplyBus.SendState.Failed("Lämmitin ei vastannut 3 minuutissa. Tarkista, että autossa on kenttää."),
+                    ReplyBus.SendState.Failed(tr("Lämmitin ei vastannut 3 minuutissa. Tarkista, että autossa on kenttää.", "No reply from the heater within 3 minutes. Check that the vehicle has mobile coverage.")),
                 )
             }
         }
@@ -223,7 +224,7 @@ class MainActivity : ComponentActivity() {
                             launchIo { app.repository.select(d.id) }
                             send(d, Commands.heaterStatus(d.pin), STATUS_LABEL)
                         }
-                        DeviceAction.TEMPERATURE -> send(d, Commands.temperature(d.pin), "Sisälämpötila")
+                        DeviceAction.TEMPERATURE -> send(d, Commands.temperature(d.pin), tr("Sisälämpötila", "Interior temperature"))
                         DeviceAction.TIMERS -> screen = Screen.Timers(d.id)
                         DeviceAction.CLOCK -> clockDeviceId = d.id
                         DeviceAction.EDIT -> screen = Screen.Edit(d.id)
@@ -323,16 +324,16 @@ class MainActivity : ComponentActivity() {
                     ReplyBus.dismissReply()
                     NotificationManagerCompat.from(this).cancel(SmsReceiver.NOTIFICATION_ID)
                 },
-                onFixClock = replyDevice?.let { d -> { send(d, DeviceClock.setFromPhone(d.pin), "Kellon asetus") } },
+                onFixClock = replyDevice?.let { d -> { send(d, DeviceClock.setFromPhone(d.pin), tr("Kellon asetus", "Clock setting")) } },
             )
         }
 
         state.devices.firstOrNull { it.id == clockDeviceId }?.let { d ->
             ClockDialog(
                 device = d,
-                onSetFromPhone = { send(d, DeviceClock.setFromPhone(d.pin), "Kellon asetus") },
-                onQuery = { send(d, Commands.deviceTimeQuery(d.pin), "Kellon kysely") },
-                onSetManual = { day, h, m -> send(d, Commands.deviceTimeSet(d.pin, day, h, m), "Kellon asetus") },
+                onSetFromPhone = { send(d, DeviceClock.setFromPhone(d.pin), tr("Kellon asetus", "Clock setting")) },
+                onQuery = { send(d, Commands.deviceTimeQuery(d.pin), tr("Kellon kysely", "Clock query")) },
+                onSetManual = { day, h, m -> send(d, Commands.deviceTimeSet(d.pin, day, h, m), tr("Kellon asetus", "Clock setting")) },
                 onDismiss = { clockDeviceId = null },
             )
         }
@@ -340,15 +341,15 @@ class MainActivity : ComponentActivity() {
         confirmDelete?.let { d ->
             AlertDialog(
                 onDismissRequest = { confirmDelete = null },
-                title = { Text("Poistetaanko ${d.displayName}?") },
-                text = { Text("Laitteen tiedot ja ajastinluonnokset poistetaan tästä sovelluksesta. Itse lämmittimeen ei tehdä muutoksia.") },
+                title = { Text(tr("Poistetaanko ${d.displayName}?", "Delete ${d.displayName}?")) },
+                text = { Text(tr("Laitteen tiedot ja ajastinluonnokset poistetaan tästä sovelluksesta. Itse lämmittimeen ei tehdä muutoksia.", "The device details and timer drafts are removed from this app. Nothing is changed on the heater itself.")) },
                 confirmButton = {
                     TextButton(onClick = {
                         confirmDelete = null
                         launchIo { app.repository.delete(d.id) }
-                    }) { Text("Poista") }
+                    }) { Text(tr("Poista", "Delete")) }
                 },
-                dismissButton = { TextButton(onClick = { confirmDelete = null }) { Text("Peruuta") } },
+                dismissButton = { TextButton(onClick = { confirmDelete = null }) { Text(tr("Peruuta", "Cancel")) } },
             )
         }
     }
@@ -356,16 +357,16 @@ class MainActivity : ComponentActivity() {
     private fun startOrStop(d: Device) {
         launchIo { app.repository.select(d.id) }
         when (d.run) {
-            Device.RUN_OFF -> send(d, Commands.heaterOff(d.pin), "Sammutus")
+            Device.RUN_OFF -> send(d, Commands.heaterOff(d.pin), tr("Sammutus", "Switch off"))
             Device.RUN_PERM -> send(
                 d,
                 Commands.heaterOn(d.pin, Commands.RUNTIME_DEFAULT, fan = d.mode == Mode.FAN, permanent = true),
-                "Käynnistys (kestokäyttö)",
+                tr("Käynnistys (kestokäyttö)", "Start (continuous)"),
             )
             else -> send(
                 d,
                 Commands.heaterOn(d.pin, d.run, fan = d.mode == Mode.FAN),
-                if (d.mode == Mode.FAN) "Tuuletus ${d.run} min" else "Lämmitys ${d.run} min",
+                if (d.mode == Mode.FAN) tr("Tuuletus ${d.run} min", "Ventilation ${d.run} min") else tr("Lämmitys ${d.run} min", "Heating ${d.run} min"),
             )
         }
     }

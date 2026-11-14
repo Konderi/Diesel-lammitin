@@ -1,5 +1,6 @@
 package fi.heatcall.widget
 
+import fi.heatcall.i18n.tr
 import android.Manifest
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -62,10 +63,10 @@ class StatusWidget : AppWidgetProvider() {
         val device = state.selected
         val prefs = prefs(context)
         when {
-            device == null -> prefs.edit { putString(KEY_ERROR, "Lisää laite sovelluksessa") }
+            device == null -> prefs.edit { putString(KEY_ERROR, tr("Lisää laite sovelluksessa", "Add a device in the app")) }
             ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED ->
-                prefs.edit { putString(KEY_ERROR, "Avaa sovellus ja salli tekstiviestit") }
+                prefs.edit { putString(KEY_ERROR, tr("Avaa sovellus ja salli tekstiviestit", "Open the app and allow text messages")) }
             else -> {
                 prefs.edit {
                     putLong(KEY_CHECKING_SINCE, System.currentTimeMillis())
@@ -156,8 +157,8 @@ class StatusWidget : AppWidgetProvider() {
 
             if (device == null) {
                 v.setTextViewText(R.id.widget_title, "HeatCall")
-                v.setTextViewText(R.id.widget_status, "Ei laitteita")
-                v.setTextViewText(R.id.widget_sub, "Lisää lämmitin sovelluksessa")
+                v.setTextViewText(R.id.widget_status, tr("Ei laitteita", "No devices"))
+                v.setTextViewText(R.id.widget_sub, tr("Lisää lämmitin sovelluksessa", "Add a heater in the app"))
                 v.setInt(R.id.widget_dot, "setColorFilter", COLOR_UNKNOWN)
                 setChecking(v, false)
                 return v
@@ -171,20 +172,20 @@ class StatusWidget : AppWidgetProvider() {
 
             v.setTextViewText(R.id.widget_title, device.displayName)
             val (text, color) = when (device.lastKnownOn) {
-                true -> "Lämmitin päällä" to COLOR_ON
-                false -> "Lämmitin pois" to COLOR_OFF
-                null -> "Tila ei tiedossa" to COLOR_UNKNOWN
+                true -> tr("Lämmitin päällä", "Heater on") to COLOR_ON
+                false -> tr("Lämmitin pois", "Heater off") to COLOR_OFF
+                null -> tr("Tila ei tiedossa", "Status unknown") to COLOR_UNKNOWN
             }
             v.setTextViewText(R.id.widget_status, text)
             v.setInt(R.id.widget_dot, "setColorFilter", color)
             v.setTextViewText(
                 R.id.widget_sub,
                 when {
-                    checking -> "Tarkistetaan…"
-                    timedOut -> "Ei vastausta – yritä uudelleen"
+                    checking -> tr("Tarkistetaan…", "Checking…")
+                    timedOut -> tr("Ei vastausta – yritä uudelleen", "No reply – try again")
                     error != null -> error
-                    device.lastStatusAt > 0 -> "Päivitetty " + formatTime(device.lastStatusAt)
-                    else -> "Paina Tarkista tila"
+                    device.lastStatusAt > 0 -> tr("Päivitetty ", "Updated ") + formatTime(device.lastStatusAt)
+                    else -> tr("Paina Tarkista tila", "Press Check status")
                 },
             )
             setChecking(v, checking)
@@ -194,7 +195,7 @@ class StatusWidget : AppWidgetProvider() {
         private fun setChecking(v: RemoteViews, checking: Boolean) {
             v.setViewVisibility(R.id.widget_progress, if (checking) View.VISIBLE else View.GONE)
             v.setViewVisibility(R.id.widget_refresh_icon, if (checking) View.GONE else View.VISIBLE)
-            v.setTextViewText(R.id.widget_check_text, if (checking) "Odotetaan vastausta" else "Tarkista tila")
+            v.setTextViewText(R.id.widget_check_text, if (checking) tr("Odotetaan vastausta", "Waiting for reply") else tr("Tarkista tila", "Check status"))
         }
 
         /** "tänään klo 15.09" tai "14.11. klo 15.09". */
@@ -205,7 +206,7 @@ class StatusWidget : AppWidgetProvider() {
             val sameDay = then.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
                 then.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
             val time = SimpleDateFormat("HH.mm", fi).format(Date(at))
-            return if (sameDay) "tänään klo $time" else SimpleDateFormat("d.M.", fi).format(Date(at)) + " klo $time"
+            return if (sameDay) tr("tänään klo $time", "today at $time") else SimpleDateFormat("d.M.", fi).format(Date(at)) + tr(" klo $time", " at $time")
         }
 
         private const val COLOR_ON = 0xFFFF7043.toInt()

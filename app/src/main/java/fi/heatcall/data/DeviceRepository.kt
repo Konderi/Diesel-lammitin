@@ -1,5 +1,6 @@
 package fi.heatcall.data
 
+import fi.heatcall.i18n.tr
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -18,14 +19,20 @@ import java.util.UUID
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "heatcall")
 
-enum class HeaterType(val label: String) {
-    WATER("Vesilämmitin"),
-    AIR("Ilmalämmitin"),
+enum class HeaterType(private val fi: String, private val en: String) {
+    WATER("Vesilämmitin", "Coolant heater"),
+    AIR("Ilmalämmitin", "Air heater"),
+    ;
+
+    val label: String get() = tr(fi, en)
 }
 
-enum class Mode(val label: String) {
-    HEAT("Lämmitys"),
-    FAN("Tuuletus"),
+enum class Mode(private val fi: String, private val en: String) {
+    HEAT("Lämmitys", "Heating"),
+    FAN("Tuuletus", "Ventilation"),
+    ;
+
+    val label: String get() = tr(fi, en)
 }
 
 /** Ajastimen luonnos, jotta lomake muistaa viimeksi lähetetyt arvot. */
@@ -54,7 +61,7 @@ data class Device(
     /** Milloin laitteen kello asetettiin viimeksi HeatCallista (0 = ei tiedossa). */
     val clockSetAt: Long = 0L,
 ) {
-    val displayName: String get() = name.ifBlank { "Lämmitin" }
+    val displayName: String get() = name.ifBlank { tr("Lämmitin", "Heater") }
 
     companion object {
         const val RUN_OFF = 0

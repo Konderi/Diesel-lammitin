@@ -1,5 +1,6 @@
 package fi.heatcall.ui.screens
 
+import fi.heatcall.i18n.tr
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -35,6 +36,7 @@ import fi.heatcall.data.Device
 import fi.heatcall.data.HeaterType
 import fi.heatcall.sms.Commands
 import fi.heatcall.ui.components.BodyText
+import fi.heatcall.ui.components.LanguagePicker
 import fi.heatcall.ui.components.PrimaryButton
 import fi.heatcall.ui.components.SecondaryButton
 import fi.heatcall.ui.components.Section
@@ -57,7 +59,7 @@ fun DeviceEditScreen(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val base = remember { initial ?: Device(name = if (firstRun) "Oma auto" else "") }
+    val base = remember { initial ?: Device(name = if (firstRun) tr("Oma auto", "My car") else "") }
 
     var name by remember { mutableStateOf(base.name) }
     var phone by remember { mutableStateOf(base.phone) }
@@ -85,46 +87,47 @@ fun DeviceEditScreen(
 
     SubScreen(
         title = when {
-            firstRun -> "Tervetuloa HeatCalliin"
-            initial == null -> "Lisää laite"
-            else -> "Muokkaa laitetta"
+            firstRun -> tr("Tervetuloa HeatCalliin", "Welcome to HeatCall")
+            initial == null -> tr("Lisää laite", "Add device")
+            else -> tr("Muokkaa laitetta", "Edit device")
         },
         onBack = onBack,
     ) {
         if (firstRun) {
+            Section("Kieli / Language") { LanguagePicker() }
             Section {
                 BodyText(
-                    "HeatCall ohjaa Eberspächer-lämmitintä EasyStart Call -yksikön kautta tekstiviesteillä.\n\n" +
-                        "Anna aluksi lämmittimen SIM-kortin puhelinnumero ja laitteen nelinumeroinen PIN-koodi " +
-                        "(tehdasasetus 1234). Voit muuttaa näitä myöhemmin kohdasta Info ja asetukset.",
+                    tr("HeatCall ohjaa Eberspächer-lämmitintä EasyStart Call -yksikön kautta tekstiviesteillä.\n\n", "HeatCall controls an Eberspächer heater by text message through the EasyStart Call unit.\n\n") +
+                        tr("Anna aluksi lämmittimen SIM-kortin puhelinnumero ja laitteen nelinumeroinen PIN-koodi ", "First enter the phone number of the heater's SIM card and the unit's four-digit PIN ") +
+                        tr("(tehdasasetus 1234). Voit muuttaa näitä myöhemmin kohdasta Info ja asetukset.", "(factory default 1234). You can change these later under Info and settings."),
                 )
             }
         }
 
-        Section("Lämmittimen tiedot") {
+        Section(tr("Lämmittimen tiedot", "Heater details")) {
             OutlinedTextField(
                 value = phone,
                 onValueChange = { phone = it },
-                label = { Text("Lämmittimen puhelinnumero") },
+                label = { Text(tr("Lämmittimen puhelinnumero", "Heater phone number")) },
                 placeholder = { Text("+358 40 123 4567") },
                 singleLine = true,
                 isError = tried && !phoneOk,
-                supportingText = { if (tried && !phoneOk) Text("Tarkista numero, esim. +358401234567") },
+                supportingText = { if (tried && !phoneOk) Text(tr("Tarkista numero, esim. +358401234567", "Check the number, e.g. +358401234567")) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 modifier = Modifier.fillMaxWidth(),
             )
             OutlinedTextField(
                 value = pin,
                 onValueChange = { v -> pin = v.filter { it.isDigit() }.take(4) },
-                label = { Text("PIN-koodi (4 numeroa)") },
+                label = { Text(tr("PIN-koodi (4 numeroa)", "PIN code (4 digits)")) },
                 singleLine = true,
                 isError = tried && !pinOk,
-                supportingText = { if (tried && !pinOk) Text("PIN on tasan neljä numeroa") },
+                supportingText = { if (tried && !pinOk) Text(tr("PIN on tasan neljä numeroa", "The PIN is exactly four digits")) },
                 visualTransformation = if (showPin) VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                 trailingIcon = {
                     androidx.compose.material3.TextButton(onClick = { showPin = !showPin }) {
-                        Text(if (showPin) "Piilota" else "Näytä")
+                        Text(if (showPin) tr("Piilota", "Hide") else tr("Näytä", "Show"))
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -132,13 +135,13 @@ fun DeviceEditScreen(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it.take(24) },
-                label = { Text("Nimi (esim. auton merkki)") },
+                label = { Text(tr("Nimi (esim. auton merkki)", "Name (e.g. car make)")) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
         }
 
-        Section("Lämmittimen tyyppi") {
+        Section(tr("Lämmittimen tyyppi", "Heater type")) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 HeaterType.entries.forEach { t ->
                     FilterChip(
@@ -152,31 +155,31 @@ fun DeviceEditScreen(
             Spacer(Modifier.height(6.dp))
             BodyText(
                 if (type == HeaterType.WATER) {
-                    "Vesilämmitin: käyntiaika 10–120 minuuttia."
+                    tr("Vesilämmitin: käyntiaika 10–120 minuuttia.", "Coolant heater: run time 10–120 minutes.")
                 } else {
-                    "Ilmalämmitin: lisäksi kestokäyttö (∞)."
+                    tr("Ilmalämmitin: lisäksi kestokäyttö (∞).", "Air heater: also continuous operation (∞).")
                 },
             )
         }
 
-        Section("Auton kuva") {
+        Section(tr("Auton kuva", "Car photo")) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 androidx.compose.runtime.key(photoVersion) {
                     VehiclePhoto(photoPath, Modifier.size(width = 120.dp, height = 90.dp))
                 }
                 androidx.compose.foundation.layout.Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    SecondaryButton("Valitse kuva", onClick = {
+                    SecondaryButton(tr("Valitse kuva", "Choose photo"), onClick = {
                         picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                     })
                     if (photoPath != null) {
-                        SecondaryButton("Poista kuva", onClick = { photoPath = null })
+                        SecondaryButton(tr("Poista kuva", "Remove photo"), onClick = { photoPath = null })
                     }
                 }
             }
         }
 
         PrimaryButton(
-            text = if (firstRun) "Tallenna ja aloita" else "Tallenna",
+            text = if (firstRun) tr("Tallenna ja aloita", "Save and start") else tr("Tallenna", "Save"),
             onClick = {
                 tried = true
                 if (phoneOk && pinOk) {

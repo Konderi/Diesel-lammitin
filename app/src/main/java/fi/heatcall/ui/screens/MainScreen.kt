@@ -1,5 +1,6 @@
 package fi.heatcall.ui.screens
 
+import fi.heatcall.i18n.tr
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -69,20 +70,26 @@ import java.util.Date
 import java.util.Locale
 
 /** Toiminnot, jotka laitekortin rataskuvakkeen valikko tarjoaa. */
-enum class DeviceAction(val label: String) {
-    STATUS("Kysy tila"),
-    TEMPERATURE("Sisälämpötila"),
-    TIMERS("Ajastimet"),
-    CLOCK("Laitteen kello"),
-    EDIT("Muokkaa laitetta"),
-    DELETE("Poista laite"),
+enum class DeviceAction(private val fi: String, private val en: String) {
+    STATUS("Kysy tila", "Check status"),
+    TEMPERATURE("Sisälämpötila", "Interior temperature"),
+    TIMERS("Ajastimet", "Timers"),
+    CLOCK("Laitteen kello", "Device clock"),
+    EDIT("Muokkaa laitetta", "Edit device"),
+    DELETE("Poista laite", "Delete device"),
+    ;
+
+    val label: String get() = tr(fi, en)
 }
 
-enum class BottomItem(val label: String, val icon: ImageVector) {
-    SETTINGS("Info ja\nasetukset", Icons.Filled.Settings),
-    ADD("Lisää\nlaite", Icons.Filled.AddCircle),
-    NEWS("Ajan-\nkohtaista", Icons.Filled.Notifications),
-    HELP("Ohjeet", Icons.Filled.Info),
+enum class BottomItem(private val fi: String, private val en: String, val icon: ImageVector) {
+    SETTINGS("Info ja\nasetukset", "Info and\nsettings", Icons.Filled.Settings),
+    ADD("Lisää\nlaite", "Add\ndevice", Icons.Filled.AddCircle),
+    NEWS("Ajan-\nkohtaista", "Latest", Icons.Filled.Notifications),
+    HELP("Ohjeet", "Help", Icons.Filled.Info),
+    ;
+
+    val label: String get() = tr(fi, en)
 }
 
 @Composable
@@ -130,7 +137,7 @@ fun MainScreen(
                 Spacer(Modifier.height(18.dp))
 
                 if (selected != null) {
-                    val label = if (selected.run == Device.RUN_OFF) "SAMMUTA" else "KÄYNNISTÄ"
+                    val label = if (selected.run == Device.RUN_OFF) tr("SAMMUTA", "STOP") else tr("KÄYNNISTÄ", "START")
                     val glow = if (selected.run == Device.RUN_OFF) Color(0xFFFF7043) else ChromeColors.Glow
                     ChromeStartButton(
                         label = label,
@@ -157,14 +164,14 @@ private fun isStatusCheck(state: ReplyBus.SendState): Boolean = when (state) {
 }
 
 /** Tilakyselyn tunniste lähetystilassa; MainActivity käyttää samaa tekstiä. */
-const val STATUS_LABEL = "Tilakysely"
+val STATUS_LABEL: String get() = tr("Tilakysely", "Status query")
 
 @Composable
 private fun SendStatusText(state: ReplyBus.SendState) {
     val (text, color) = when (state) {
         ReplyBus.SendState.Idle -> "" to Color.Transparent
-        is ReplyBus.SendState.Sending -> "Lähetetään: ${state.label}…" to ChromeColors.Label
-        is ReplyBus.SendState.WaitingReply -> "Viesti lähetetty – odotetaan vastausta lämmittimeltä" to Color(0xFFB3E5FC)
+        is ReplyBus.SendState.Sending -> tr("Lähetetään: ${state.label}…", "Sending: ${state.label}…") to ChromeColors.Label
+        is ReplyBus.SendState.WaitingReply -> tr("Viesti lähetetty – odotetaan vastausta lämmittimeltä", "Message sent – waiting for the heater's reply") to Color(0xFFB3E5FC)
         is ReplyBus.SendState.Failed -> state.reason to Color(0xFFFF8A80)
     }
     if (text.isNotEmpty()) {
@@ -219,8 +226,8 @@ fun DeviceCard(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1.1f),
             )
-            Text("Minuutit", color = ChromeColors.Label, fontSize = 15.sp, modifier = Modifier.weight(0.8f), textAlign = TextAlign.Center)
-            Text("Tila", color = ChromeColors.Label, fontSize = 15.sp, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+            Text(tr("Minuutit", "Minutes"), color = ChromeColors.Label, fontSize = 15.sp, modifier = Modifier.weight(0.8f), textAlign = TextAlign.Center)
+            Text(tr("Tila", "Mode"), color = ChromeColors.Label, fontSize = 15.sp, modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
             GearMenu(onAction)
         }
         Spacer(Modifier.height(6.dp))
@@ -232,7 +239,7 @@ fun DeviceCard(
                 onSelected = onRunChanged,
                 label = { v ->
                     when (v) {
-                        Device.RUN_OFF -> "Pois"
+                        Device.RUN_OFF -> tr("Pois", "Off")
                         Device.RUN_PERM -> "∞"
                         else -> v.toString()
                     }
@@ -260,13 +267,13 @@ fun DeviceCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    (if (DeviceClock.lastTransitionWasToWinter() == true) "Talviaika alkoi" else "Kesäaika alkoi") +
-                        " – päivitä lämmittimen kello",
+                    (if (DeviceClock.lastTransitionWasToWinter() == true) tr("Talviaika alkoi", "Winter time began") else tr("Kesäaika alkoi", "Summer time began")) +
+                        tr(" – päivitä lämmittimen kello", " – update the heater clock"),
                     color = Color.White,
                     fontSize = 13.sp,
                     modifier = Modifier.weight(1f),
                 )
-                Text("Aseta ›", color = Color(0xFFFFCC80), fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                Text(tr("Aseta ›", "Set ›"), color = Color(0xFFFFCC80), fontSize = 13.sp, fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -277,9 +284,9 @@ fun DeviceCard(
 private fun StatusLine(device: Device, checking: Boolean, onCheck: () -> Unit) {
     val on = device.lastKnownOn
     val (text, dot) = when (on) {
-        true -> "Lämmitin päällä" to Color(0xFFFF7043)
-        false -> "Lämmitin pois" to Color(0xFF78909C)
-        null -> "Tila ei tiedossa" to Color(0x55FFFFFF)
+        true -> tr("Lämmitin päällä", "Heater on") to Color(0xFFFF7043)
+        false -> tr("Lämmitin pois", "Heater off") to Color(0xFF78909C)
+        null -> tr("Tila ei tiedossa", "Status unknown") to Color(0x55FFFFFF)
     }
     Row(
         Modifier.fillMaxWidth().padding(top = 8.dp),
@@ -295,7 +302,7 @@ private fun StatusLine(device: Device, checking: Boolean, onCheck: () -> Unit) {
         Column(Modifier.weight(1f)) {
             Text(text, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
             Text(
-                if (checking) "Tarkistetaan…" else statusAge(device.lastStatusAt),
+                if (checking) tr("Tarkistetaan…", "Checking…") else statusAge(device.lastStatusAt),
                 color = ChromeColors.Label,
                 fontSize = 12.sp,
             )
@@ -315,20 +322,20 @@ private fun StatusLine(device: Device, checking: Boolean, onCheck: () -> Unit) {
                 Icon(Icons.Filled.Refresh, contentDescription = null, tint = Color.White, modifier = Modifier.size(18.dp))
             }
             Spacer(Modifier.width(6.dp))
-            Text("Tarkista tila", color = Color.White, fontSize = 13.sp)
+            Text(tr("Tarkista tila", "Check status"), color = Color.White, fontSize = 13.sp)
         }
     }
 }
 
 /** "juuri nyt", "12 min sitten", "3 h sitten" tai päivämäärä. */
 private fun statusAge(at: Long): String {
-    if (at <= 0L) return "Paina Tarkista tila"
+    if (at <= 0L) return tr("Paina Tarkista tila", "Press Check status")
     val min = (System.currentTimeMillis() - at) / 60_000
     return when {
-        min < 1 -> "Päivitetty juuri nyt"
-        min < 60 -> "Päivitetty $min min sitten"
-        min < 24 * 60 -> "Päivitetty ${min / 60} h sitten"
-        else -> "Päivitetty " + SimpleDateFormat("d.M. HH.mm", Locale.forLanguageTag("fi-FI")).format(Date(at))
+        min < 1 -> tr("Päivitetty juuri nyt", "Updated just now")
+        min < 60 -> tr("Päivitetty $min min sitten", "Updated $min min ago")
+        min < 24 * 60 -> tr("Päivitetty ${min / 60} h sitten", "Updated ${min / 60} h ago")
+        else -> tr("Päivitetty ", "Updated ") + SimpleDateFormat("d.M. HH.mm", Locale.forLanguageTag("fi-FI")).format(Date(at))
     }
 }
 
@@ -340,7 +347,7 @@ private fun GearMenu(onAction: (DeviceAction) -> Unit) {
             Modifier.clickable { open = true }.padding(start = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(Icons.Filled.Settings, contentDescription = "Laitteen valikko", tint = Color.White, modifier = Modifier.size(26.dp))
+            Icon(Icons.Filled.Settings, contentDescription = tr("Laitteen valikko", "Device menu"), tint = Color.White, modifier = Modifier.size(26.dp))
             Icon(Icons.Filled.ArrowDropDown, contentDescription = null, tint = Color.White, modifier = Modifier.size(22.dp))
         }
         DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
@@ -368,7 +375,7 @@ fun VehiclePhoto(path: String?, modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center,
     ) {
         if (bitmap != null) {
-            Image(bitmap, contentDescription = "Auton kuva", contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize())
+            Image(bitmap, contentDescription = tr("Auton kuva", "Car photo"), contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize())
         } else {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(Icons.Filled.AddCircle, contentDescription = null, tint = Color(0xFFB0BAC4), modifier = Modifier.size(34.dp))

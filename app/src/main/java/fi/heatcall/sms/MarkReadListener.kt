@@ -1,5 +1,6 @@
 package fi.heatcall.sms
 
+import fi.heatcall.i18n.tr
 import android.app.Notification
 import android.app.Person
 import android.content.ComponentName
@@ -35,13 +36,13 @@ class MarkReadListener : NotificationListenerService() {
 
     override fun onListenerConnected() {
         connected = this
-        MarkReadDiagnostics.log(this, "Kuuntelija yhdistetty")
+        MarkReadDiagnostics.log(this, tr("Kuuntelija yhdistetty", "Listener connected"))
         scanActive()
     }
 
     override fun onListenerDisconnected() {
         if (connected === this) connected = null
-        MarkReadDiagnostics.log(this, "Kuuntelija katkesi – pyydetään uudelleenyhdistystä")
+        MarkReadDiagnostics.log(this, tr("Kuuntelija katkesi – pyydetään uudelleenyhdistystä", "Listener disconnected – requesting reconnection"))
         // Jotkin valmistajat (esim. ColorOS) katkaisevat kuuntelijan taustalla.
         runCatching { NotificationListenerService.requestRebind(ComponentName(this, MarkReadListener::class.java)) }
     }
@@ -84,10 +85,10 @@ class MarkReadListener : NotificationListenerService() {
         val fromHeaterTitle = state.deviceForSender(title) != null
         val fromHeaterUri = senderUris(n.extras).any { state.deviceForSender(it) != null }
         val reason = when {
-            matchesPending -> "vastaanotettu viesti"
-            isProtocol -> "lämmittimen viestimuoto"
-            fromHeaterTitle -> "lähettäjän numero"
-            fromHeaterUri -> "lähettäjän tel-osoite"
+            matchesPending -> tr("vastaanotettu viesti", "received message")
+            isProtocol -> tr("lämmittimen viestimuoto", "heater message format")
+            fromHeaterTitle -> tr("lähettäjän numero", "sender number")
+            fromHeaterUri -> tr("lähettäjän tel-osoite", "sender tel address")
             else -> null
         }
         if (reason == null) return
@@ -96,7 +97,7 @@ class MarkReadListener : NotificationListenerService() {
         val labels = actions.joinToString(", ") { "\"${it.title}\"" + if (it.semanticAction != 0) "#${it.semanticAction}" else "" }
         val action = findMarkReadAction(actions)
         if (action == null) {
-            MarkReadDiagnostics.log(this, "$pkg: tunnistettu ($reason), mutta Merkitse luetuksi -toimintoa ei löytynyt. Toiminnot: [$labels]")
+            MarkReadDiagnostics.log(this, tr("$pkg: tunnistettu ($reason), mutta Merkitse luetuksi -toimintoa ei löytynyt. Toiminnot: [$labels]", "$pkg: matched ($reason), but no Mark as read action was found. Actions: [$labels]"))
             Log.i(TAG, "Ei Merkitse luetuksi -toimintoa ($pkg): $labels")
             return
         }
@@ -105,10 +106,10 @@ class MarkReadListener : NotificationListenerService() {
             synchronized(pending) {
                 pending.removeAll { p -> text.contains(fingerprint(p.body), ignoreCase = true) }
             }
-            MarkReadDiagnostics.log(this, "$pkg: merkitty luetuksi ($reason) toiminnolla \"${action.title}\"")
+            MarkReadDiagnostics.log(this, tr("$pkg: merkitty luetuksi ($reason) toiminnolla \"${action.title}\"", "$pkg: marked as read ($reason) with action \"${action.title}\""))
             Log.i(TAG, "Lämmittimen viesti merkitty luetuksi ($pkg)")
         } catch (e: Exception) {
-            MarkReadDiagnostics.log(this, "$pkg: toiminnon \"${action.title}\" suoritus epäonnistui: ${e.javaClass.simpleName}")
+            MarkReadDiagnostics.log(this, tr("$pkg: toiminnon \"${action.title}\" suoritus epäonnistui: ${e.javaClass.simpleName}", "$pkg: action \"${action.title}\" failed: ${e.javaClass.simpleName}"))
             Log.w(TAG, "Luetuksi merkintä epäonnistui", e)
         }
     }

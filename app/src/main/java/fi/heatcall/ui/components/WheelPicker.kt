@@ -34,8 +34,7 @@ import kotlinx.coroutines.flow.filter
 import kotlin.math.abs
 
 /**
- * Pystysuuntainen rullavalitsin, jonka ulkoasu on kuin alkuperäisen sovelluksen
- * mustat "rummut": kolme riviä näkyvissä, ja keskimmäinen on valittuna.
+ * Pystysuuntainen rullavalitsin: kolme riviä näkyvissä, ja keskimmäinen on valittuna.
  */
 @Composable
 fun <T> WheelPicker(

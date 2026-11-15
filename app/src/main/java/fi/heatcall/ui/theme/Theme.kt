@@ -33,7 +33,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun HeatCallTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        // Alkuperäisen sovelluksen tapaan aina tumma ulkoasu.
+        // Aina tumma ulkoasu.
         colorScheme = DarkColors,
         content = content,
     )

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-/** Värit, joilla jäljitellään alkuperäisen sovelluksen sinistä hiilikuitu- ja kromiulkoasua. */
+/** Sovelluksen värit: sininen tausta ja metallinhohtoiset painikkeet. */
 object ChromeColors {
     val Deep = Color(0xFF061423)
     val Mid = Color(0xFF0F3553)

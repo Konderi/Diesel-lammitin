@@ -2,7 +2,7 @@
 
 **Suomi** · [English](en/FEATURES.md)
 
-HeatCall ohjaa Eberspächer-seisontalämmitintä EasyStart Call -yksikön kautta tekstiviesteillä. Ulkoasu on tehty valmistajan lopetetun sovelluksen mukaiseksi: sininen hiilikuitutausta, mustat rullavalitsimet ja kromattu käynnistyspainike. Sovellus on suomeksi ja englanniksi.
+HeatCall ohjaa Eberspächer-seisontalämmitintä EasyStart Call -yksikön kautta tekstiviesteillä. Ulkoasu on tumma ja selkeä: sininen tausta, rullavalitsimet ja iso käynnistyspainike. Sovellus on suomeksi ja englanniksi.
 
 Kuvakaappaukset on otettu Android 17 -emulaattorissa simuloiduilla lämmittimen vastauksilla. Niissä näkyvät puhelinnumerot ovat testinumeroita.
 

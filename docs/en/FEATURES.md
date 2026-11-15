@@ -2,7 +2,7 @@
 
 [Suomi](../ESITTELY.md) · **English**
 
-HeatCall controls an Eberspächer parking heater by text message through the EasyStart Call unit. The look follows the manufacturer's discontinued app: a blue carbon-fibre background, black scroll wheels and a chrome start button. The app is available in Finnish and English.
+HeatCall controls an Eberspächer parking heater by text message through the EasyStart Call unit. It has a clear, dark look: a blue background, scroll wheels and a large start button. The app is available in Finnish and English.
 
 The screenshots were taken on an Android 17 emulator with simulated heater replies. The phone numbers in them are test numbers.
 

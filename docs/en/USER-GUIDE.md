@@ -164,5 +164,5 @@ The bottom bar has **Info and settings**, **Add** (new car or heater), **Latest*
 - [Features](FEATURES.md): all features with screenshots
 - [SMS protocol](SMS-PROTOCOL.md): EasyStart Call commands and reply formats
 - [Development](DEVELOPMENT.md): architecture, building and testing
-- Privacy policy: https://konderi.github.io/privacy/heatcall/
+- Privacy policy: https://konderi.github.io/HeatCall/privacy/
 - Feedback and questions: heatcall@konderi.fi

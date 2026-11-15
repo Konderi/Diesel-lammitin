@@ -13,7 +13,7 @@ Kopioi Play Consoleen kohtaan **Kasvu → Kaupan sivu → Pääkaupan sivu**. Ol
 | Koko kuvaus / Full description | 4000 merkkiä / characters |
 
 - **Yhteystiedot / Contact details:** sähköposti / email heatcall@konderi.fi
-- **Tietosuojakäytäntö / Privacy policy:** https://konderi.github.io/privacy/heatcall/
+- **Tietosuojakäytäntö / Privacy policy:** https://konderi.github.io/HeatCall/privacy/
 - **Hinta / Price:** ilmainen, ei mainoksia eikä sovelluksen sisäisiä ostoja / free, no ads and no in-app purchases (ks. / see [JULKAISU.md](JULKAISU.md#hinnoittelu-ilmainen), [RELEASE-STEPS.md](../en/play/RELEASE-STEPS.md#pricing-free))
 - **Lähdekoodi / Source code:** https://github.com/Konderi/HeatCall
 - **Luokka / Category:** Autot ja ajoneuvot (Auto & Vehicles)

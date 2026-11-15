@@ -19,7 +19,7 @@ Tekninen valmistelu on tehty. Ratkaiseva kysymys on **Googlen tekstiviestilupia 
 | **Upload-avain** + Play App Signing | Valmis: `play`-build allekirjoitetaan upload-avaimella (ks. [KEHITYS.md](KEHITYS.md#allekirjoitus)) |
 | `applicationId` | `fi.heatcall`. Tunnusta ei voi vaihtaa julkaisun jälkeen. |
 | targetSdk | 36 täyttää nykyiset vaatimukset |
-| Tietosuojaseloste (julkinen URL) | Julkaistu: https://konderi.github.io/privacy/heatcall/ |
+| Tietosuojaseloste (julkinen URL) | Julkaistu: https://konderi.github.io/HeatCall/privacy/ |
 | Tietoturvalomake (Data safety) | Tekstiviestit ja puhelinnumero käsitellään vain laitteella, eikä niitä lähetetä minnekään |
 | Ikäluokitus, kaupan kuvaus, kuvake 512 px, mainoskuva 1024×500 px, kuvakaappaukset | Valmis: kuvake, esittelykuvat ja kuvakaappaukset (en, fi) hakemistossa `docs/play/assets/`, tekstit tiedostossa [play/KAUPPA-TEKSTIT.md](play/KAUPPA-TEKSTIT.md) |
 | Tavaramerkit | "Yhteensopiva Eberspächer EasyStart Callin kanssa" on sallittu. Eberspächerin logoa ei saa käyttää, eikä sovellus saa näyttää valmistajan viralliselta sovellukselta. |

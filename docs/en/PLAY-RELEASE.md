@@ -19,7 +19,7 @@ The technical preparation is done. The deciding question is **Google's policy on
 | **Upload key** + Play App Signing | Done: the `play` build is signed with the upload key (see [DEVELOPMENT.md](DEVELOPMENT.md#signing)) |
 | `applicationId` | `fi.heatcall`. The ID cannot be changed after publishing. |
 | targetSdk | 36 meets the current requirements |
-| Privacy policy (public URL) | Published: https://konderi.github.io/privacy/heatcall/ |
+| Privacy policy (public URL) | Published: https://konderi.github.io/HeatCall/privacy/ |
 | Data safety form | Text messages and the phone number are processed only on the device and are not sent anywhere |
 | Content rating, store description, 512 px icon, 1024×500 px feature graphic, screenshots | Done: icon, feature graphics and screenshots (en, fi) in `docs/play/assets/`, texts in [KAUPPA-TEKSTIT.md](../play/KAUPPA-TEKSTIT.md) |
 | Trademarks | "Compatible with Eberspächer EasyStart Call" is allowed. The Eberspächer logo must not be used, and the app must not look like the manufacturer's official app. |

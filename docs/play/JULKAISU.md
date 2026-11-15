@@ -9,7 +9,7 @@ Tämä ohje täydentää muistiota [../PLAY-JULKAISU.md](../PLAY-JULKAISU.md). T
 | [KAUPPA-TEKSTIT.md](KAUPPA-TEKSTIT.md) | Nimi, lyhyt ja pitkä kuvaus englanniksi ja suomeksi |
 | [LOMAKKEET.md](LOMAKKEET.md) | Data safety, SMS-lupien ilmoitus ja muut lomakkeet |
 | [TESTAAJAT.md](TESTAAJAT.md) | Suljettu testaus (12 testaajaa / 14 päivää), kutsuviesti fi/en |
-| [privacy.html](privacy.html) | Tietosuojaseloste (fi/en). Julkaistu: https://konderi.github.io/privacy/heatcall/ (repo [Konderi/privacy](https://github.com/Konderi/privacy)) |
+| [../privacy/index.html](../privacy/index.html) | Tietosuojaseloste (fi/en). Julkaistu GitHub Pagesissa tästä reposta (`main` → `/docs`): https://konderi.github.io/HeatCall/privacy/ |
 | `assets/` | Kuvake, esittelykuvat ja kuvakaappaukset |
 
 ## 1. Upload-avain
@@ -39,7 +39,7 @@ Jokaista uutta Play-julkaisua varten nosta `versionCode` (ja `versionName`) tied
 ## 3. Play Console
 
 1. **Luo sovellus:** nimi *HeatCall*, oletuskieli englanti (en-US), sovellus, **ilmainen**. Ks. [Hinnoittelu](#hinnoittelu-ilmainen).
-2. **Sovelluksen sisältö:** täytä lomakkeet tiedoston [LOMAKKEET.md](LOMAKKEET.md) mukaan. Tietosuojaselosteen URL: **https://konderi.github.io/privacy/heatcall/**
+2. **Sovelluksen sisältö:** täytä lomakkeet tiedoston [LOMAKKEET.md](LOMAKKEET.md) mukaan. Tietosuojaselosteen URL: **https://konderi.github.io/HeatCall/privacy/**
 3. **Kaupan sivu:** tekstit tiedostosta [KAUPPA-TEKSTIT.md](KAUPPA-TEKSTIT.md) ja kuvat hakemistosta `assets/`. Lisää suomi käännökseksi.
 4. **Testaus → Sisäinen testaus:** luo julkaisu, lataa `app-play.aab`, lisää itsesi testaajaksi ja asenna Playn kautta. Testaa tilakysely, käynnistys, vastaus ja luetuksi merkintä.
 5. **Tekstiviestilupien ilmoitus:** lähetetään ensimmäisen SMS-lupia käyttävän julkaisun yhteydessä. Arviointi kestää yleensä muutamasta päivästä viikkoihin. Jos hakemus hylätään, katso varasuunnitelma tiedostosta [../PLAY-JULKAISU.md](../PLAY-JULKAISU.md#3-varasuunnitelma-jos-poikkeusta-ei-myönnetä).
@@ -61,7 +61,7 @@ Kaupan kuvauksessa mainitaan vaatimukset (EasyStart Call -yksikkö ja SIM-kortti
 
 - [ ] Sovellus luotu ilmaisena
 - [ ] Lähdekoodirepo julkinen: https://github.com/Konderi/HeatCall
-- [x] Tietosuojaseloste julkaistu: https://konderi.github.io/privacy/heatcall/ (yhteysosoite heatcall@konderi.fi)
+- [x] Tietosuojaseloste julkaistu: https://konderi.github.io/HeatCall/privacy/ (yhteysosoite heatcall@konderi.fi)
 - [ ] Alias heatcall@konderi.fi toimii (lähetä testiviesti)
 - [ ] Upload-avain ja `keystore.properties` varmuuskopioitu
 - [ ] `versionCode` nostettu edellisestä Play-julkaisusta

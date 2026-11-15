@@ -49,7 +49,7 @@ Perustelu Googlen määritelmän mukaan: laitteella käsiteltävät tiedot, joit
 | Uutissovellus | Ei |
 | Terveys, rahoitus, VPN | Ei |
 | Hallituksen sovellus | Ei |
-| Tietosuojaseloste | https://konderi.github.io/privacy/heatcall/ |
+| Tietosuojaseloste | https://konderi.github.io/HeatCall/privacy/ |
 
 ## 4. Ilmoitusten käyttöoikeus (NotificationListenerService)
 

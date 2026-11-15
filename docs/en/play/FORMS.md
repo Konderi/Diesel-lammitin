@@ -49,7 +49,7 @@ Justification under Google's definition: data processed on the device that is no
 | News app | No |
 | Health, financial, VPN | No |
 | Government app | No |
-| Privacy policy | https://konderi.github.io/privacy/heatcall/ |
+| Privacy policy | https://konderi.github.io/HeatCall/privacy/ |
 
 ## 4. Notification access (NotificationListenerService)
 

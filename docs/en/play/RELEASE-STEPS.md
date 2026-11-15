@@ -9,7 +9,7 @@ This guide complements the memo [../PLAY-RELEASE.md](../PLAY-RELEASE.md). Relate
 | [KAUPPA-TEKSTIT.md](../../play/KAUPPA-TEKSTIT.md) | Name, short and full description in English and Finnish |
 | [FORMS.md](FORMS.md) | Data safety, SMS permissions declaration and other forms |
 | [TESTAAJAT.md](../../play/TESTAAJAT.md) | Closed testing (12 testers / 14 days), invitation message fi/en |
-| [privacy.html](../../play/privacy.html) | Privacy policy (fi/en). Published: https://konderi.github.io/privacy/heatcall/ (repo [Konderi/privacy](https://github.com/Konderi/privacy)) |
+| [privacy/index.html](../../privacy/index.html) | Privacy policy (fi/en). Published with GitHub Pages from this repo (`main` → `/docs`): https://konderi.github.io/HeatCall/privacy/ |
 | [`assets/`](../../play/assets/) | Icon, feature graphics and screenshots |
 
 ## 1. Upload key
@@ -39,7 +39,7 @@ For each new Play release, increase `versionCode` (and `versionName`) in `app/bu
 ## 3. Play Console
 
 1. **Create app:** name *HeatCall*, default language English (en-US), app, **free**. See [Pricing](#pricing-free).
-2. **App content:** fill in the forms as described in [FORMS.md](FORMS.md). Privacy policy URL: **https://konderi.github.io/privacy/heatcall/**
+2. **App content:** fill in the forms as described in [FORMS.md](FORMS.md). Privacy policy URL: **https://konderi.github.io/HeatCall/privacy/**
 3. **Store listing:** texts from [KAUPPA-TEKSTIT.md](../../play/KAUPPA-TEKSTIT.md) and images from the [`assets/`](../../play/assets/) directory. Add Finnish as a translation.
 4. **Testing → Internal testing:** create a release, upload `app-play.aab`, add yourself as a tester and install through Play. Test the status query, start, reply and marking as read.
 5. **SMS permissions declaration:** submitted with the first release that uses SMS permissions. Review usually takes from a few days to a few weeks. If the declaration is rejected, see the fallback plan in [../PLAY-RELEASE.md](../PLAY-RELEASE.md#3-fallback-plan-if-the-exemption-is-not-granted).
@@ -61,7 +61,7 @@ The store description mentions the requirements (EasyStart Call unit and SIM car
 
 - [ ] App created as free
 - [ ] Source code repo public: https://github.com/Konderi/HeatCall
-- [x] Privacy policy published: https://konderi.github.io/privacy/heatcall/ (contact address heatcall@konderi.fi)
+- [x] Privacy policy published: https://konderi.github.io/HeatCall/privacy/ (contact address heatcall@konderi.fi)
 - [ ] Alias heatcall@konderi.fi works (send a test message)
 - [ ] Upload key and `keystore.properties` backed up
 - [ ] `versionCode` increased from the previous Play release

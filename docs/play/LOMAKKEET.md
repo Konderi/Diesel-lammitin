@@ -1,5 +1,7 @@
 # Play Consolen lomakkeet: valmiit vastaukset
 
+**Suomi** · [English](../en/play/FORMS.md)
+
 ## 1. Data safety (Tietoturva)
 
 **Sovelluksen sisältö → Data safety**

@@ -1,5 +1,7 @@
 # HeatCall – kehittäjän dokumentaatio
 
+**Suomi** · [English](en/DEVELOPMENT.md)
+
 ## Ympäristö
 
 | Työkalu | Versio |

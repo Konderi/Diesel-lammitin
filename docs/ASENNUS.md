@@ -1,5 +1,7 @@
 # HeatCall – asennus
 
+**Suomi** · [English](en/INSTALLATION.md)
+
 HeatCall ei ole Google Play -kaupassa, joten se asennetaan APK-tiedostosta (niin sanottu sivulataus). Sovellus toimii Android 10:ssä ja uudemmissa.
 
 ## APK-tiedosto

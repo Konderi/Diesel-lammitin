@@ -15,6 +15,26 @@ Commands are sent as text messages in the background. The heater's reply opens i
 
 **[User guide in English → docs/en/USER-GUIDE.md](docs/en/USER-GUIDE.md)** · [Download APK](https://github.com/Konderi/Diesel-lammitin/releases) · Requires Android 10+
 
+### Documentation
+
+Every document is available in English and Finnish.
+
+| Document | English | Suomi |
+|---|---|---|
+| Features with screenshots | [FEATURES.md](docs/en/FEATURES.md) | [ESITTELY.md](docs/ESITTELY.md) |
+| User guide: usage, widget, timers, troubleshooting | [USER-GUIDE.md](docs/en/USER-GUIDE.md) | [KAYTTOOHJE.md](docs/KAYTTOOHJE.md) |
+| Installation: APK, permissions, updates | [INSTALLATION.md](docs/en/INSTALLATION.md) | [ASENNUS.md](docs/ASENNUS.md) |
+| EasyStart Call SMS commands and replies | [SMS-PROTOCOL.md](docs/en/SMS-PROTOCOL.md) | [SMS-PROTOKOLLA.md](docs/SMS-PROTOKOLLA.md) |
+| Development: architecture, building, testing | [DEVELOPMENT.md](docs/en/DEVELOPMENT.md) | [KEHITYS.md](docs/KEHITYS.md) |
+| Google Play release | [PLAY-RELEASE.md](docs/en/PLAY-RELEASE.md) | [PLAY-JULKAISU.md](docs/PLAY-JULKAISU.md) |
+| Play: steps, forms, store texts, testers | [RELEASE-STEPS.md](docs/en/play/RELEASE-STEPS.md) · [FORMS.md](docs/en/play/FORMS.md) | [JULKAISU.md](docs/play/JULKAISU.md) · [LOMAKKEET.md](docs/play/LOMAKKEET.md) |
+| Store listing texts and tester invitation (both languages in one file) | [KAUPPA-TEKSTIT.md](docs/play/KAUPPA-TEKSTIT.md) · [TESTAAJAT.md](docs/play/TESTAAJAT.md) | ← |
+| Brochure (PDF) | [HeatCall-brochure-en-fi.pdf](docs/esite/HeatCall-brochure-en-fi.pdf) | [HeatCall-esite.pdf](docs/esite/HeatCall-esite.pdf) |
+
+### Building
+
+Requires Android Studio, which includes the JDK and Android SDK: `./gradlew testDebugUnitTest assembleRelease`. See [DEVELOPMENT.md](docs/en/DEVELOPMENT.md).
+
 > HeatCall is an independent app. It is not a product of Eberspächer Climate Control Systems GmbH and is not endorsed by it.
 
 ---
@@ -39,7 +59,7 @@ HeatCall on ilmainen ja avointa lähdekoodia ([MIT-lisenssi](LICENSE)).
 <tr>
 <td align="center"><img src="docs/images/16-sammuta.png" alt="Sammutus"><br><sub>Sammutus</sub></td>
 <td align="center"><img src="docs/images/14-kellon-poikkeama.png" alt="Kello"><br><sub>Laitteen kello ja kesä-/talviaika</sub></td>
-<td align="center"><img src="docs/images/18-virheilmoitus.png" alt="Virhe"><br><sub>Virheet suomeksi</sub></td>
+<td align="center"><img src="docs/images/18-virheilmoitus.png" alt="Virhe"><br><sub>Virheet selitettyinä</sub></td>
 <td align="center"><img src="docs/images/19-ajankohtaista.png" alt="Historia"><br><sub>Viestihistoria</sub></td>
 </tr>
 </table>
@@ -71,16 +91,14 @@ HeatCall on ilmainen ja avointa lähdekoodia ([MIT-lisenssi](LICENSE)).
 
 ## Dokumentaatio
 
-| Dokumentti | Sisältö |
-|---|---|
-| [User guide (English)](docs/en/USER-GUIDE.md) | Englanninkielinen käyttö- ja asennusohje |
-| [Esittely](docs/ESITTELY.md) | Kaikki ominaisuudet kuvakaappauksin |
-| [Käyttöohje](docs/KAYTTOOHJE.md) | Sovelluksen käyttö, widget, ajastimet ja vianetsintä |
-| [Asennus](docs/ASENNUS.md) | APK:n asennus kaapelilla tai ilman, käyttöoikeudet ja päivitykset |
-| [SMS-protokolla](docs/SMS-PROTOKOLLA.md) | EasyStart Callin komennot ja vastausten muodot |
-| [Kehittäjälle](docs/KEHITYS.md) | Arkkitehtuuri, buildaus, testaus ja emulaattori |
-| [Play-julkaisu](docs/PLAY-JULKAISU.md) | Mitä julkaisu Google Play -kauppaan vaatii |
-| [Play: vaiheet ja materiaalit](docs/play/JULKAISU.md) | AAB, upload-avain, kaupan tekstit, lomakkeet, tietosuojaseloste, kuvat |
+Kaikki dokumentit ovat suomeksi ja englanniksi, ks. [taulukko yllä](#documentation). Tärkeimmät:
+
+- [Esittely](docs/ESITTELY.md): kaikki ominaisuudet kuvakaappauksin
+- [Käyttöohje](docs/KAYTTOOHJE.md): sovelluksen käyttö, widget, ajastimet ja vianetsintä
+- [Asennus](docs/ASENNUS.md): APK:n asennus kaapelilla tai ilman, käyttöoikeudet ja päivitykset
+- [SMS-protokolla](docs/SMS-PROTOKOLLA.md): EasyStart Callin komennot ja vastausten muodot
+- [Kehittäjälle](docs/KEHITYS.md): arkkitehtuuri, buildaus, testaus ja emulaattori
+- [Play-julkaisu](docs/PLAY-JULKAISU.md) ja [vaiheet ja materiaalit](docs/play/JULKAISU.md)
 
 ## Buildaus lyhyesti
 

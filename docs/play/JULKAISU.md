@@ -1,5 +1,7 @@
 # Julkaisu Google Play -kauppaan: vaiheet
 
+**Suomi** · [English](../en/play/RELEASE-STEPS.md)
+
 Tämä ohje täydentää muistiota [../PLAY-JULKAISU.md](../PLAY-JULKAISU.md). Tässä hakemistossa:
 
 | Tiedosto | Sisältö |

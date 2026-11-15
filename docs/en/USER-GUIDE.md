@@ -1,4 +1,6 @@
-# HeatCall – User guide (English)
+# HeatCall – User guide
+
+[Suomi](../KAYTTOOHJE.md) · **English**
 
 HeatCall controls an Eberspächer parking heater (Hydronic or Airtronic) by text message through the **EasyStart Call** GSM remote control. It replaces the manufacturer's original app, which is no longer supported and does not work on recent Android versions.
 
@@ -19,42 +21,10 @@ Tested on Google Pixel and OPPO (ColorOS). The app includes background-activity 
 
 ## Installation
 
-### Google Play
+- **Google Play:** HeatCall is coming to Google Play. The closed test is running now. To join, email **heatcall@konderi.fi** with the address of your Google account (the one you use for Play Store).
+- **APK:** download the latest `.apk` from [Releases](https://github.com/Konderi/Diesel-lammitin/releases) on your phone, open it and allow installing from an unknown source. If Play Protect warns you, choose **More details → Install anyway**.
 
-HeatCall is coming to Google Play. The closed test is running now. If you want to join, email **heatcall@konderi.fi** with the address of your Google account (the one you use for Play Store).
-
-### APK from GitHub
-
-1. Download the latest `.apk` from [Releases](https://github.com/Konderi/Diesel-lammitin/releases) on your phone.
-2. Open the file. Android asks for permission to install unknown apps from the app you opened it with (browser, Files, Drive). Allow it.
-3. **Play Protect** may warn about an unknown developer. Choose **More details → Install anyway**.
-4. Open HeatCall and continue with [First start](#1-first-start).
-
-Gmail blocks `.apk` attachments, so share the file through a cloud drive, GitHub or Quick Share instead of email.
-
-### Restricted settings (Android 13+)
-
-Android 13 and newer restrict sensitive permissions for apps installed from a file, browser or cloud drive. For HeatCall this affects the **SMS permission** (required) and **notification access** (needed for mark as read). Apps installed from Google Play or with a USB cable (`adb install`) are not affected.
-
-**Symptoms:** the message *"App permission denied"* appears, **Allow** is greyed out on the SMS permission page, or HeatCall shows an orange **SMS permission missing** warning.
-
-**Fix:**
-
-1. Close the message. You need to try granting the permission once before the option appears.
-2. Open HeatCall's **App info** page (the one with *Uninstall* and *Force stop*): tap the warning in HeatCall, or long-press the HeatCall icon → **ⓘ App info**.
-3. Tap **⋮** in the top-right corner → **Allow restricted settings** and confirm with your PIN or fingerprint.
-4. **Permissions → SMS → Allow**.
-5. Back in HeatCall, grant notification access in **Info and settings → Reply messages → Grant access**.
-
-The **⋮** menu is on the app's main info page, not on the individual permission page.
-
-### Updating
-
-Install the new APK over the old one. Your devices, timers and history are kept. An update only installs if it is signed with the same key as the installed version. The Play version uses a different key from the GitHub APK, so uninstall the GitHub version before installing from Play.
-
-### Building from source
-
-See [README](../../README.md#buildaus-lyhyesti) (Android Studio, `./gradlew assembleRelease`). Developer documentation is currently in Finnish: [KEHITYS.md](../KEHITYS.md).
+If Android blocks the SMS permission (*"App permission denied"* or **Allow** greyed out), see [Installation → Restricted settings](INSTALLATION.md#restricted-settings-android-13). Full instructions, including installing with a USB cable, background activity settings by phone brand and updating, are in [INSTALLATION.md](INSTALLATION.md). Building from source: [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ## 1. First start
 
@@ -69,7 +39,7 @@ On first start HeatCall asks for:
 | **Heater type** | *Coolant heater* (Hydronic) or *Air heater* (Airtronic). Continuous mode (∞) is only available for air heaters. |
 | **Car photo** | Optional photo from your gallery |
 
-When you save, Android asks for the **SMS** permission (required) and **notifications** (replies when the app is in the background). If the SMS permission is blocked, HeatCall opens the **Allowing permissions** guide, see [Restricted settings](#restricted-settings-android-13).
+When you save, Android asks for the **SMS** permission (required) and **notifications** (replies when the app is in the background). If the SMS permission is blocked, HeatCall opens the **Allowing permissions** guide, see [Restricted settings](INSTALLATION.md#restricted-settings-android-13).
 
 You can change the number and PIN later in **Info and settings → Devices → Edit** or gear menu → **Edit device**.
 
@@ -180,7 +150,7 @@ The bottom bar has **Info and settings**, **Add** (new car or heater), **Latest*
 
 | Problem | Solution |
 |---|---|
-| Orange **SMS permission missing** warning, or **Allow** greyed out | See [Restricted settings](#restricted-settings-android-13). |
+| Orange **SMS permission missing** warning, or **Allow** greyed out | See [Restricted settings](INSTALLATION.md#restricted-settings-android-13). |
 | Replies only arrive while the app is open (OPPO, Xiaomi …) | **Info and settings → Permissions → Background activity settings**. On ColorOS: *App info → Battery usage* → allow **background activity** and **auto launch**. On Samsung set battery to **Unrestricted**. |
 | The heater does not reply at all | Check that the car has coverage, the EasyStart Call SIM is active and the number is correct. Try **Check status**. |
 | Status query works but start gets no reply | Confirmation messages are off (factory default). The heater most likely started. Confirm with a status query. |
@@ -190,6 +160,8 @@ The bottom bar has **Info and settings**, **Add** (new car or heater), **Latest*
 
 ## More
 
-- [SMS protocol](../SMS-PROTOKOLLA.md) (Finnish): EasyStart Call commands and reply formats
+- [Features](FEATURES.md): all features with screenshots
+- [SMS protocol](SMS-PROTOCOL.md): EasyStart Call commands and reply formats
+- [Development](DEVELOPMENT.md): architecture, building and testing
 - Privacy policy: https://konderi.github.io/privacy/heatcall/
 - Feedback and questions: heatcall@konderi.fi

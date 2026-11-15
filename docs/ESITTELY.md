@@ -1,6 +1,8 @@
 # HeatCall – esittely
 
-HeatCall ohjaa Eberspächer-seisontalämmitintä EasyStart Call -yksikön kautta tekstiviesteillä. Ulkoasu on tehty valmistajan lopetetun sovelluksen mukaiseksi: sininen hiilikuitutausta, mustat rullavalitsimet ja kromattu käynnistyspainike. Kaikki tekstit ovat suomeksi.
+**Suomi** · [English](en/FEATURES.md)
+
+HeatCall ohjaa Eberspächer-seisontalämmitintä EasyStart Call -yksikön kautta tekstiviesteillä. Ulkoasu on tehty valmistajan lopetetun sovelluksen mukaiseksi: sininen hiilikuitutausta, mustat rullavalitsimet ja kromattu käynnistyspainike. Sovellus on suomeksi ja englanniksi.
 
 Kuvakaappaukset on otettu Android 17 -emulaattorissa simuloiduilla lämmittimen vastauksilla. Niissä näkyvät puhelinnumerot ovat testinumeroita.
 
@@ -31,7 +33,7 @@ Kuvakaappaukset on otettu Android 17 -emulaattorissa simuloiduilla lämmittimen 
 </tr>
 <tr>
 <td><b>Tarkista tila</b><br>Kortin painike lähettää tilakyselyn. Tilarivi näyttää viimeisimmän tilan ja milloin se päivittyi.</td>
-<td><b>Vastausikkuna</b><br>Lämmittimen vastaus avautuu omaan ikkunaansa suomeksi tulkittuna, ja sama viesti merkitään luetuksi viestisovelluksessa.</td>
+<td><b>Vastausikkuna</b><br>Lämmittimen vastaus avautuu omaan ikkunaansa selkokielellä tulkittuna, ja sama viesti merkitään luetuksi viestisovelluksessa.</td>
 <td><b>Ilmalämmitin</b><br>Kestokäyttö ja asetuslämpötila tulkitaan ja näytetään selkokielellä.</td>
 </tr>
 <tr>
@@ -40,7 +42,7 @@ Kuvakaappaukset on otettu Android 17 -emulaattorissa simuloiduilla lämmittimen 
 <td width="33%"><img src="images/19-ajankohtaista.png" alt="Ajankohtaista"></td>
 </tr>
 <tr>
-<td><b>Virheilmoitukset</b><br>Virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään suomeksi.</td>
+<td><b>Virheilmoitukset</b><br>Virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään sovelluksen kielellä.</td>
 <td><b>Kotinäytön widget ja ilmoitus</b><br>Widgetistä näkee tilan ja voi tarkistaa sen avaamatta sovellusta. Kun sovellus on taustalla, vastaus tulee ilmoituksena.</td>
 <td><b>Ajankohtaista</b><br>Viestihistoria: lähetetyt komennot (PIN-koodi peitettynä) ja tulkitut vastaukset.</td>
 </tr>

@@ -1,5 +1,7 @@
 # Julkaisu Google Play -kauppaan
 
+**Suomi** · [English](en/PLAY-RELEASE.md)
+
 Tämä on muistio siitä, mitä Play-julkaisu vaatisi. HeatCall toimii sivuladattuna (ks. [ASENNUS.md](ASENNUS.md)), joten julkaisu ei ole välttämätön.
 
 ## Päätelmä

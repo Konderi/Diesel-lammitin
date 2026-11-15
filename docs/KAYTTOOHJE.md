@@ -1,5 +1,7 @@
 # HeatCall – käyttöohje
 
+**Suomi** · [English](en/USER-GUIDE.md)
+
 HeatCall ohjaa Eberspächer-seisontalämmitintä tekstiviesteillä EasyStart Call -yksikön kautta. Jokainen komento on tekstiviesti, josta liittymäsi voi veloittaa.
 
 ## 1. Ensimmäinen käynnistys
@@ -51,7 +53,7 @@ Jos autoja on useampi, valitse ohjattava auto koskettamalla sen korttia. Valittu
 
 <img src="images/03-vastaus.png" width="240" align="right" alt="Vastausikkuna">
 
-Kun lämmitin vastaa, vastaus avautuu omaan ikkunaansa suomeksi tulkittuna. Alkuperäinen viesti näkyy ikkunan alareunassa.
+Kun lämmitin vastaa, vastaus avautuu omaan ikkunaansa selkokielellä tulkittuna. Alkuperäinen viesti näkyy ikkunan alareunassa.
 
 - Jos sovellus on auki, ikkuna aukeaa heti.
 - Jos sovellus on taustalla, saat HeatCall-ilmoituksen, josta ikkuna aukeaa.

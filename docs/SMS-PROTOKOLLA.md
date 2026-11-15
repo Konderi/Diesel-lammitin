@@ -1,5 +1,7 @@
 # EasyStart Call – SMS-protokolla
 
+**Suomi** · [English](en/SMS-PROTOCOL.md)
+
 Lähde: Eberspächer EasyStart Call -käyttöohje (FI, 08.2014). Toteutus: [`Commands.kt`](../app/src/main/java/fi/heatcall/sms/Commands.kt) ja [`ReplyParser.kt`](../app/src/main/java/fi/heatcall/sms/ReplyParser.kt).
 
 ## Yleistä
@@ -72,4 +74,4 @@ Virheilmoitukset lähetetään vain, jos `ErrorFeedback:on` on asetettu asennuks
 
 ## Vastausten tulkinta HeatCallissa
 
-`ReplyParser` pilkkoo vastauksen pilkuista `avain:arvo`-pareiksi ja muodostaa niistä suomenkielisen otsikon ja rivit. Tunnistamattomat osat näytetään sellaisenaan, joten tietoa ei katoa. Lämmittimen tila (`Heater:on/off`) tallennetaan laitteen viimeisimmäksi tunnetuksi tilaksi, joka näkyy kortissa ja widgetissä.
+`ReplyParser` pilkkoo vastauksen pilkuista `avain:arvo`-pareiksi ja muodostaa niistä sovelluksen kielellä (suomi tai englanti) otsikon ja rivit. Tunnistamattomat osat näytetään sellaisenaan, joten tietoa ei katoa. Lämmittimen tila (`Heater:on/off`) tallennetaan laitteen viimeisimmäksi tunnetuksi tilaksi, joka näkyy kortissa ja widgetissä.

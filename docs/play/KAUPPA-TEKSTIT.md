@@ -1,19 +1,23 @@
-# Play-kaupan tekstit
+# Play-kaupan tekstit / Play Store listing texts
+
+Suomi + English
 
 Kopioi Play Consoleen kohtaan **Kasvu → Kaupan sivu → Pääkaupan sivu**. Oletuskieleksi kannattaa valita englanti (en-US) ja lisätä suomi käännökseksi.
 
-| Kenttä | Raja |
-|---|---|
-| Sovelluksen nimi | 30 merkkiä |
-| Lyhyt kuvaus | 80 merkkiä |
-| Koko kuvaus | 4000 merkkiä |
+*English: Copy into Play Console under **Grow → Store presence → Main store listing**. Choose English (en-US) as the default language and add Finnish as a translation.*
 
-- **Yhteystiedot:** sähköposti heatcall@konderi.fi
-- **Tietosuojakäytäntö:** https://konderi.github.io/privacy/heatcall/
-- **Hinta:** ilmainen, ei mainoksia eikä sovelluksen sisäisiä ostoja (ks. [JULKAISU.md](JULKAISU.md#hinnoittelu-ilmainen))
-- **Lähdekoodi:** https://github.com/Konderi/Diesel-lammitin
-- **Luokka:** Autot ja ajoneuvot (Auto & Vehicles)
-- **Tunnisteet:** Autot, Etäohjaus
+| Kenttä / Field | Raja / Limit |
+|---|---|
+| Sovelluksen nimi / App name | 30 merkkiä / characters |
+| Lyhyt kuvaus / Short description | 80 merkkiä / characters |
+| Koko kuvaus / Full description | 4000 merkkiä / characters |
+
+- **Yhteystiedot / Contact details:** sähköposti / email heatcall@konderi.fi
+- **Tietosuojakäytäntö / Privacy policy:** https://konderi.github.io/privacy/heatcall/
+- **Hinta / Price:** ilmainen, ei mainoksia eikä sovelluksen sisäisiä ostoja / free, no ads and no in-app purchases (ks. / see [JULKAISU.md](JULKAISU.md#hinnoittelu-ilmainen), [RELEASE-STEPS.md](../en/play/RELEASE-STEPS.md#pricing-free))
+- **Lähdekoodi / Source code:** https://github.com/Konderi/Diesel-lammitin
+- **Luokka / Category:** Autot ja ajoneuvot (Auto & Vehicles)
+- **Tunnisteet / Tags:** Autot, Etäohjaus (Cars, Remote control)
 
 ---
 
@@ -105,10 +109,10 @@ HeatCall on itsenäinen sovellus. Se ei ole Eberspächer Climate Control Systems
 
 ---
 
-## Kuvat
+## Kuvat / Graphics
 
-| Tiedosto | Käyttö Play Consolessa |
+| Tiedosto / File | Käyttö Play Consolessa / Use in Play Console |
 |---|---|
-| `assets/icon-512.png` | Sovelluskuvake 512×512 |
-| `assets/feature-graphic-en.png`, `assets/feature-graphic-fi.png` | Esittelykuva 1024×500 |
-| `assets/screenshots-en/1–5.png`, `assets/screenshots-fi/1–5.png` | Puhelimen kuvakaappaukset 1080×2160 |
+| `assets/icon-512.png` | Sovelluskuvake / App icon 512×512 |
+| `assets/feature-graphic-en.png`, `assets/feature-graphic-fi.png` | Esittelykuva / Feature graphic 1024×500 |
+| `assets/screenshots-en/1–5.png`, `assets/screenshots-fi/1–5.png` | Puhelimen kuvakaappaukset / Phone screenshots 1080×2160 |

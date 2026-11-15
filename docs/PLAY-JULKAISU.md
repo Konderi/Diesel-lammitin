@@ -11,13 +11,13 @@ Teknisesti julkaisu on pieni työ. Ratkaiseva kysymys on **Googlen tekstiviestil
 | Asia | Tila / toimenpide |
 |---|---|
 | Play Console -kehittäjätili ja henkilöllisyyden varmennus | Kunnossa |
-| Hinta | 4,90 € – maksullinen sovellus, vaatii maksuprofiilin (ks. [play/JULKAISU.md](play/JULKAISU.md#hinnoittelu-490-)) |
+| Hinta | Ilmainen ja avointa lähdekoodia, ei maksuprofiilia (ks. [play/JULKAISU.md](play/JULKAISU.md#hinnoittelu-ilmainen)) |
 | Suljettu testaus: uusilla henkilökohtaisilla tileillä vähintään 12 testaajaa 14 päivän ajan | Tarvitaan, jos tili on henkilökohtainen ja luotu marraskuun 2023 jälkeen |
 | **Android App Bundle (AAB)** Play ottaa vastaan vain AAB:n, ei APK:ta. | `./gradlew bundleRelease` |
 | **Upload-avain** + Play App Signing | Nykyinen debug-allekirjoitus ei käy, joten luodaan oma avain (ks. [KEHITYS.md](KEHITYS.md#allekirjoitus)) |
 | `applicationId` | `fi.heatcall`. Tunnusta ei voi vaihtaa julkaisun jälkeen. |
 | targetSdk | 36 täyttää nykyiset vaatimukset |
-| Tietosuojaseloste (julkinen URL) | Tarvitaan, esim. GitHub Pages tai muu julkinen sivu. Tämä repo on yksityinen. |
+| Tietosuojaseloste (julkinen URL) | Julkaistu: https://konderi.github.io/privacy/heatcall/ |
 | Tietoturvalomake (Data safety) | Tekstiviestit ja puhelinnumero käsitellään vain laitteella, eikä niitä lähetetä minnekään |
 | Ikäluokitus, kaupan kuvaus, kuvake 512 px, mainoskuva 1024×500 px, kuvakaappaukset | Kuvakaappaukset löytyvät hakemistosta `docs/images` |
 | Tavaramerkit | "Yhteensopiva Eberspächer EasyStart Callin kanssa" on sallittu. Eberspächerin logoa ei saa käyttää, eikä sovellus saa näyttää valmistajan viralliselta sovellukselta. |

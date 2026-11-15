@@ -13,3 +13,10 @@ cd docs/esite
 swift render_pdf.swift "$PWD/esite-en-fi.html" "$PWD/HeatCall-brochure-en-fi.pdf" 4
 swift render_pdf.swift "$PWD/esite.html" "$PWD/HeatCall-esite.pdf" 2
 ```
+
+Windows (Chrome headless), tuottaa saman A4-asettelun:
+
+```bash
+chrome --headless=new --no-pdf-header-footer --print-to-pdf=HeatCall-brochure-en-fi.pdf esite-en-fi.html
+chrome --headless=new --no-pdf-header-footer --print-to-pdf=HeatCall-esite.pdf esite.html
+```

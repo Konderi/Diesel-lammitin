@@ -10,7 +10,8 @@ Kopioi Play Consoleen kohtaan **Kasvu → Kaupan sivu → Pääkaupan sivu**. Ol
 
 - **Yhteystiedot:** sähköposti heatcall@konderi.fi
 - **Tietosuojakäytäntö:** https://konderi.github.io/privacy/heatcall/
-- **Hinta:** 4,90 € (maksullinen sovellus, ks. [JULKAISU.md](JULKAISU.md#hinnoittelu-490-))
+- **Hinta:** ilmainen, ei mainoksia eikä sovelluksen sisäisiä ostoja (ks. [JULKAISU.md](JULKAISU.md#hinnoittelu-ilmainen))
+- **Lähdekoodi:** https://github.com/Konderi/Diesel-lammitin
 - **Luokka:** Autot ja ajoneuvot (Auto & Vehicles)
 - **Tunnisteet:** Autot, Etäohjaus
 
@@ -46,6 +47,7 @@ TIMERS AND CLOCK
 PRIVATE BY DESIGN
 • No internet permission, no ads, no analytics. All data stays on your phone.
 • Commands are sent only to the heater number you enter.
+• Free and open source: github.com/Konderi/Diesel-lammitin
 
 LANGUAGES
 English and Finnish – choose on first start or later in settings.
@@ -89,6 +91,7 @@ AJASTIMET JA KELLO
 YKSITYISYYS
 • Ei internet-oikeutta, ei mainoksia eikä analytiikkaa. Kaikki tiedot pysyvät puhelimessa.
 • Komennot lähetetään vain antamaasi lämmittimen numeroon.
+• Ilmainen ja avointa lähdekoodia: github.com/Konderi/Diesel-lammitin
 
 KIELET
 Suomi ja englanti – valitse ensimmäisellä käynnistyskerralla tai myöhemmin asetuksista.

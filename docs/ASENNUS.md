@@ -39,7 +39,7 @@ APK:n voi siirtää puhelimeen myös ilman kaapelia.
 | Tapa | Ohje |
 |---|---|
 | **Google Drive / iCloud Drive / OneDrive** | Lataa APK pilveen Macilta ja avaa se puhelimessa pilvipalvelun sovelluksesta tai selaimesta. |
-| **GitHub Release** | Liitä APK repositorion Releaseen. Avaa julkaisu puhelimen selaimessa (kirjautuneena, jos repo on yksityinen) ja lataa APK. |
+| **GitHub Release** | Liitä APK repositorion Releaseen. Avaa julkaisu puhelimen selaimessa ja lataa APK. |
 | **Quick Share / Lähijako** | Jaa tiedosto suoraan toisesta Android-laitteesta tai Windows-koneesta. |
 | **Langaton virheenkorjaus** | Android 11+: Kehittäjäasetukset → Langaton virheenkorjaus → Muodosta pari koodilla. Sen jälkeen `adb pair` ja `adb connect`, minkä jälkeen asennus toimii kuten kaapelilla. |
 

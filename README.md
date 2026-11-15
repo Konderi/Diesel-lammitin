@@ -1,10 +1,33 @@
-# HeatCall – Diesel-lämmittimen SMS-ohjaus
+# HeatCall – Diesel heater SMS control
+
+**English** · [Suomeksi ↓](#suomeksi)
+
+HeatCall is an Android app for controlling an Eberspächer parking heater (Hydronic or Airtronic) through the **EasyStart Call** GSM remote control. It replaces the manufacturer's original app, which is no longer supported and does not work on recent Android versions.
+
+Commands are sent as text messages in the background. The heater's reply opens in plain language in the app, and the same message is marked as read in your messaging app. HeatCall is **free and open source** ([MIT License](LICENSE)), with no ads, no analytics and no internet permission.
+
+- Start and stop with run time (10–120 min, or continuous for air heaters) and mode (heating or ventilation)
+- Status check in the app and on a home screen widget
+- Three weekly timers with departure time
+- Device clock setting with a reminder when summer or winter time begins
+- Several cars, message history, and error codes explained
+- English and Finnish
+
+**[User guide in English → docs/en/USER-GUIDE.md](docs/en/USER-GUIDE.md)** · [Download APK](https://github.com/Konderi/Diesel-lammitin/releases) · Requires Android 10+
+
+> HeatCall is an independent app. It is not a product of Eberspächer Climate Control Systems GmbH and is not endorsed by it.
+
+---
+
+## Suomeksi
 
 HeatCall on Android-sovellus Eberspächer-seisontalämmittimen ohjaamiseen **EasyStart Call** -puhelinkauko-ohjaimen kautta. Sovellus korvaa valmistajan alkuperäisen sovelluksen, jonka tuki on päättynyt ja joka ei enää toimi uusissa Android-versioissa.
 
 Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus näytetään sovelluksen omassa ikkunassa, ja sama viesti merkitään luetuksi puhelimen viestisovelluksessa.
 
-> Sovellus on tehty omaan käyttöön. Se ei ole Eberspächerin tuote, eikä valmistaja tue sitä.
+HeatCall on ilmainen ja avointa lähdekoodia ([MIT-lisenssi](LICENSE)).
+
+> HeatCall ei ole Eberspächerin tuote, eikä valmistaja tue sitä.
 
 <table>
 <tr>
@@ -50,6 +73,7 @@ Sovellus lähettää komennot tekstiviesteinä taustalla. Lämmittimen vastaus n
 
 | Dokumentti | Sisältö |
 |---|---|
+| [User guide (English)](docs/en/USER-GUIDE.md) | Englanninkielinen käyttö- ja asennusohje |
 | [Esittely](docs/ESITTELY.md) | Kaikki ominaisuudet kuvakaappauksin |
 | [Käyttöohje](docs/KAYTTOOHJE.md) | Sovelluksen käyttö, widget, ajastimet ja vianetsintä |
 | [Asennus](docs/ASENNUS.md) | APK:n asennus kaapelilla tai ilman, käyttöoikeudet ja päivitykset |

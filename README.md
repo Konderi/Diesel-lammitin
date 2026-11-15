@@ -35,6 +35,8 @@ Every document is available in English and Finnish.
 
 Requires Android Studio, which includes the JDK and Android SDK: `./gradlew testDebugUnitTest assembleRelease`. See [DEVELOPMENT.md](docs/en/DEVELOPMENT.md).
 
+**Compatible heaters:** Hydronic II, Hydronic M II, Hydronic S3 CL Economy and 1st-generation Airtronic / Airtronic M, in cars, vans, motorhomes, trucks, machinery and boats. **Note:** EasyStart Call uses the 2G network only. In Finland 2G is guaranteed until the end of 2029. [Details →](docs/en/USER-GUIDE.md#compatible-heaters)
+
 > HeatCall is an independent app. It is not a product of Eberspächer Climate Control Systems GmbH and is not endorsed by it.
 
 ---
@@ -80,6 +82,8 @@ HeatCall on ilmainen ja avointa lähdekoodia ([MIT-lisenssi](LICENSE)).
 - **Viestihistoria:** lähetetyt komennot ja vastaukset. PIN-koodi peitetään historiassa.
 - **Lupaopastus:** sovellus tunnistaa estetyt luvat ja ohjaa sallimaan rajoitetut asetukset (Android 13+ ja ColorOS).
 - **Kieli:** suomi tai englanti. Kieli valitaan ensimmäisellä käynnistyskerralla tai myöhemmin asetuksista, ja virhekoodit (ErD, ErH, ErC, ErR, ErL) selitetään valitulla kielellä.
+
+**Yhteensopivat lämmittimet:** Hydronic II, Hydronic M II, Hydronic S3 CL Economy sekä 1. sukupolven Airtronic / Airtronic M, niin henkilö- ja pakettiautoissa, asuntoautoissa, kuorma-autoissa, työkoneissa kuin veneissä. **Huom.:** EasyStart Call käyttää vain 2G-verkkoa, jonka ylläpito on Suomessa taattu vuoden 2029 loppuun. [Lisätietoja →](docs/KAYTTOOHJE.md#vaatimukset-ja-yhteensopivuus)
 
 ## Pika-aloitus
 

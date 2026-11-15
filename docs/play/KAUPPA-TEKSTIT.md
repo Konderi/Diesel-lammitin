@@ -57,7 +57,8 @@ LANGUAGES
 English and Finnish – choose on first start or later in settings.
 
 REQUIREMENTS
-• An Eberspächer heater with an EasyStart Call unit and an active SIM card.
+• An Eberspächer heater with an EasyStart Call unit and an active SIM card. EasyStart Call supports Hydronic II, Hydronic M II, Hydronic S3 CL Economy and 1st-generation Airtronic heaters.
+• EasyStart Call uses the 2G (GSM) network only. It stops working if your operator shuts down 2G.
 • Every command is a text message; your operator may charge for it.
 • For start/stop confirmations, the unit's confirmation messages must be enabled (your installer can do this). Status queries are always answered.
 
@@ -101,7 +102,8 @@ KIELET
 Suomi ja englanti – valitse ensimmäisellä käynnistyskerralla tai myöhemmin asetuksista.
 
 VAATIMUKSET
-• Eberspächer-lämmitin, jossa on EasyStart Call -yksikkö ja voimassa oleva SIM-kortti.
+• Eberspächer-lämmitin, jossa on EasyStart Call -yksikkö ja voimassa oleva SIM-kortti. EasyStart Call tukee Hydronic II-, Hydronic M II-, Hydronic S3 CL Economy- ja 1. sukupolven Airtronic-lämmittimiä.
+• EasyStart Call käyttää vain 2G-verkkoa (GSM). Se lakkaa toimimasta, jos operaattori sulkee 2G-verkon.
 • Jokainen komento on tekstiviesti, josta liittymäsi voi veloittaa.
 • Käynnistyksen ja sammutuksen kuittaukset vaativat, että yksikön kuittausilmoitus on päällä (asennusliike voi kytkeä sen). Tilakyselyyn laite vastaa aina.
 

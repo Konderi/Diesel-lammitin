@@ -8,16 +8,52 @@ HeatCall is **free and open source**. It has no ads, no analytics and no interne
 
 > HeatCall is an independent app. It is not a product of Eberspächer Climate Control Systems GmbH and is not endorsed by it. Eberspächer and EasyStart are trademarks of their respective owners.
 
-**Contents:** [Requirements](#requirements) · [Installation](#installation) · [First start](#1-first-start) · [Main screen](#2-main-screen) · [Replies](#3-reply-window-and-mark-as-read) · [Widget](#4-home-screen-widget) · [Timers](#5-timers) · [Device clock](#6-device-clock) · [Settings](#7-info-and-settings) · [Error codes](#8-error-codes) · [Troubleshooting](#9-troubleshooting)
+**Contents:** [Requirements](#requirements) · [Compatible heaters](#compatible-heaters) · [2G network](#mobile-network-2g-only) · [Installation](#installation) · [First start](#1-first-start) · [Main screen](#2-main-screen) · [Replies](#3-reply-window-and-mark-as-read) · [Widget](#4-home-screen-widget) · [Timers](#5-timers) · [Device clock](#6-device-clock) · [Settings](#7-info-and-settings) · [Error codes](#8-error-codes) · [Troubleshooting](#9-troubleshooting)
 
 ## Requirements
 
-- An Eberspächer heater (Hydronic or Airtronic) with an **EasyStart Call** unit
-- An active SIM card in the EasyStart Call unit
+- An Eberspächer heater with an **EasyStart Call** unit (see [Compatible heaters](#compatible-heaters))
+- An active SIM card in the EasyStart Call unit, on an operator that still runs a **2G network** (see [Mobile network](#mobile-network-2g-only))
 - An Android phone, Android 10 or newer
 - For start and stop confirmations, the unit's **confirmation messages** must be enabled (factory default is off, your installer can enable it). Status queries are always answered.
 
 Tested on Google Pixel and OPPO (ColorOS). The app includes background-activity guidance for Samsung and Xiaomi too.
+
+### Compatible heaters
+
+HeatCall works with any heater that EasyStart Call can control. EasyStart Call connects to the heater over the LIN bus, so it supports these heater generations according to Eberspächer's documentation ([Installation Instructions PLUS – EasyStart, 04/2022](https://cdn.shopify.com/s/files/1/0530/5362/0413/files/13-01_Easy_Start_22.1000.95.2654_EN_0422.pdf), table 2.1):
+
+| Heater | Type | EasyStart Call |
+|---|---|---|
+| Hydronic II (Economy, Comfort, E-Mobility) | Coolant heater | ✅ |
+| Hydronic M II | Coolant heater, higher output | ✅ |
+| Hydronic S3 CL Economy | Coolant heater | ✅ |
+| Airtronic, 1st generation (D2, D4, D4 Plus, B4) and Airtronic M (D3, D4) | Air heater | ✅ |
+| Airtronic 2 / 3, Airtronic L, D8LC | Air heater | ❌ (use EasyStart Web or Pro) |
+| Hydronic S3 CS, Hydronic I, Hydronic L II, Hydronic auxiliary heater | Coolant heater | ❌ |
+
+EasyStart Call works on 12 V and 24 V systems (9–32 V). The heater model is on its nameplate. If you are unsure, ask the workshop that installed the heater.
+
+**Where these heaters are used:** according to Eberspächer, the heaters above are installed in:
+- cars, vans and minibuses
+- motorhomes and camper vans
+- truck cabs with sleeping cabins
+- buses and emergency vehicles
+- construction and agricultural machinery
+- boats and yachts (diesel models with a marine installation kit)
+
+HeatCall works the same way in all of them: choose *Coolant heater* (Hydronic) or *Air heater* (Airtronic) when you add the device.
+
+### Mobile network: 2G only
+
+EasyStart Call has a **2G (GSM) modem only** (Quad Band 850/900/1800/1900 MHz, no 4G). It stops working when 2G networks are shut down, whatever app is used to control it.
+
+- **Finland:** the operators' obligation to keep 2G running ends at the **end of 2029** (Finnish Government, licence terms). Elisa says its 2G network will serve customers at least until then. After that, 2G may be switched off at any time.
+- **Other countries:** many European operators have already shut down 2G or will do so earlier. Check your operator's plans, and remember that roaming abroad may not have a 2G network.
+
+If you are buying an EasyStart Call unit now, keep this in mind. HeatCall cannot work around it, because the limitation is in the unit's modem.
+
+Sources: [Finnish Government: 2G obligation until end of 2029 (in Finnish)](https://valtioneuvosto.fi/-/1410829/teleyritysten-toimilupien-ehdot-muuttuvat-velvoite-yllapitaa-2g-teknologiaa-jatkuu-vuoden-2029-loppuun) · [Elisa: 2G (in Finnish)](https://elisa.fi/2g/) · [2G network closures by country (Wireless Logic)](https://wirelesslogic.com/sunset)
 
 ## Installation
 

@@ -4,6 +4,51 @@
 
 HeatCall ohjaa Eberspächer-seisontalämmitintä tekstiviesteillä EasyStart Call -yksikön kautta. Jokainen komento on tekstiviesti, josta liittymäsi voi veloittaa.
 
+## Vaatimukset ja yhteensopivuus
+
+- Eberspächer-lämmitin, jossa on **EasyStart Call** -yksikkö (ks. [Yhteensopivat lämmittimet](#yhteensopivat-lämmittimet))
+- EasyStart Calliin voimassa oleva SIM-kortti operaattorilta, jolla on vielä **2G-verkko** (ks. [Matkapuhelinverkko](#matkapuhelinverkko-vain-2g))
+- Android-puhelin, Android 10 tai uudempi
+- Käynnistyksen ja sammutuksen kuittaukset vaativat, että yksikön **kuittausilmoitus** on päällä (tehdasasetus on pois, asennusliike voi kytkeä sen). Tilakyselyyn lämmitin vastaa aina.
+
+Testattu Google Pixelillä ja OPPOlla (ColorOS). Sovelluksessa on taustatoiminnan ohjeet myös Samsungille ja Xiaomille.
+
+### Yhteensopivat lämmittimet
+
+HeatCall toimii kaikkien lämmittimien kanssa, joita EasyStart Call osaa ohjata. EasyStart Call liitetään lämmittimeen LIN-väylällä, joten se tukee Eberspächerin dokumentaation ([Installation Instructions PLUS – EasyStart, 04/2022](https://cdn.shopify.com/s/files/1/0530/5362/0413/files/13-01_Easy_Start_22.1000.95.2654_EN_0422.pdf), taulukko 2.1) mukaan näitä lämmitinsukupolvia:
+
+| Lämmitin | Tyyppi | EasyStart Call |
+|---|---|---|
+| Hydronic II (Economy, Comfort, E-Mobility) | Vesilämmitin | ✅ |
+| Hydronic M II | Vesilämmitin, suurempi teho | ✅ |
+| Hydronic S3 CL Economy | Vesilämmitin | ✅ |
+| Airtronic, 1. sukupolvi (D2, D4, D4 Plus, B4) ja Airtronic M (D3, D4) | Ilmalämmitin | ✅ |
+| Airtronic 2 / 3, Airtronic L, D8LC | Ilmalämmitin | ❌ (ohjaus EasyStart Webillä tai Prolla) |
+| Hydronic S3 CS, Hydronic I, Hydronic L II, Hydronic-lisälämmitin | Vesilämmitin | ❌ |
+
+EasyStart Call toimii 12 V ja 24 V järjestelmissä (9–32 V). Lämmittimen malli lukee sen tyyppikilvessä. Jos et ole varma, kysy lämmittimen asentaneelta liikkeeltä.
+
+**Käyttökohteet:** Eberspächerin mukaan yllä olevia lämmittimiä asennetaan:
+- henkilöautoihin, pakettiautoihin ja pikkubusseihin
+- asuntoautoihin ja retkeilyautoihin
+- kuorma-autojen makuuhytteihin
+- linja-autoihin ja hälytysajoneuvoihin
+- työ- ja maatalouskoneisiin
+- veneisiin ja purjeveneisiin (dieselmallit veneasennussarjalla)
+
+HeatCall toimii kaikissa samalla tavalla: valitse laitetta lisätessä *Vesilämmitin* (Hydronic) tai *Ilmalämmitin* (Airtronic).
+
+### Matkapuhelinverkko: vain 2G
+
+EasyStart Callissa on **pelkkä 2G-modeemi** (GSM Quad Band 850/900/1800/1900 MHz, ei 4G:tä). Yksikkö lakkaa toimimaan, kun 2G-verkot suljetaan, ohjattiinpa sitä millä sovelluksella tahansa.
+
+- **Suomi:** operaattoreiden velvoite ylläpitää 2G-verkkoa päättyy **vuoden 2029 lopussa** (valtioneuvosto, toimilupien ehdot). Elisan mukaan sen 2G-verkko palvelee ainakin siihen asti. Sen jälkeen 2G voidaan sulkea milloin tahansa.
+- **Muut maat:** moni eurooppalainen operaattori on jo sulkenut 2G-verkkonsa tai sulkee sen aiemmin. Tarkista oman operaattorisi suunnitelmat, ja huomaa, että ulkomailla verkkovierailussa 2G-verkkoa ei välttämättä ole.
+
+Jos olet hankkimassa EasyStart Call -yksikköä nyt, ota tämä huomioon. HeatCall ei voi kiertää rajoitusta, koska se on yksikön modeemissa.
+
+Lähteet: [valtioneuvosto: 2G-velvoite vuoden 2029 loppuun](https://valtioneuvosto.fi/-/1410829/teleyritysten-toimilupien-ehdot-muuttuvat-velvoite-yllapitaa-2g-teknologiaa-jatkuu-vuoden-2029-loppuun) · [Elisa: 2G](https://elisa.fi/2g/) · [2G-verkkojen sulkemiset maittain (Wireless Logic)](https://wirelesslogic.com/sunset)
+
 ## 1. Ensimmäinen käynnistys
 
 <img src="images/01-tervetuloa.png" width="240" align="right" alt="Tervetuloa-näkymä">

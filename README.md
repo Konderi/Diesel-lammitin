@@ -83,7 +83,7 @@ HeatCall on ilmainen ja avointa lähdekoodia ([MIT-lisenssi](LICENSE)).
 
 ## Pika-aloitus
 
-1. Asenna `HeatCall-1.2.apk` puhelimeen, ks. [Asennus](docs/ASENNUS.md).
+1. Lataa uusin APK [Releases](https://github.com/Konderi/Diesel-lammitin/releases)-sivulta ja asenna se, ks. [Asennus](docs/ASENNUS.md).
 2. Valitse kieli (Suomi / English) ja anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
 3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.

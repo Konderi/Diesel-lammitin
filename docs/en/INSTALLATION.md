@@ -13,7 +13,7 @@ When you build it yourself, the APK is in two places:
 | Path | Description |
 |---|---|
 | `app/build/outputs/apk/release/app-release.apk` | Release APK produced by Gradle |
-| `dist/HeatCall-1.2.apk` | The same file named for sharing (not in version control) |
+| `dist/HeatCall-<version>.apk` | The same file named for sharing, e.g. `HeatCall-1.1.apk` (not in version control) |
 
 For building, see [DEVELOPMENT.md](DEVELOPMENT.md#building).
 
@@ -25,7 +25,7 @@ For building, see [DEVELOPMENT.md](DEVELOPMENT.md#building).
 4. Either open the project in Android Studio, select the phone and press ▶ **Run**, or on the command line:
 
 ```bash
-~/Library/Android/sdk/platform-tools/adb install -r dist/HeatCall-1.2.apk
+~/Library/Android/sdk/platform-tools/adb install -r dist/HeatCall-1.1.apk
 ```
 
 When installed with a cable, Android does not treat the app as coming from an "unknown source", so [restricted settings](#restricted-settings-android-13) do not apply.

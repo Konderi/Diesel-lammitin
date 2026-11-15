@@ -2,16 +2,18 @@
 
 **Suomi** · [English](en/INSTALLATION.md)
 
-HeatCall ei ole Google Play -kaupassa, joten se asennetaan APK-tiedostosta (niin sanottu sivulataus). Sovellus toimii Android 10:ssä ja uudemmissa.
+HeatCall on tulossa Google Play -kauppaan. Siihen asti se asennetaan APK-tiedostosta (niin sanottu sivulataus). Sovellus toimii Android 10:ssä ja uudemmissa.
 
 ## APK-tiedosto
 
-Buildin jälkeen APK löytyy kahdesta paikasta:
+Lataa uusin APK [Releases](https://github.com/Konderi/Diesel-lammitin/releases)-sivulta.
+
+Kun buildaat itse, APK löytyy kahdesta paikasta:
 
 | Polku | Kuvaus |
 |---|---|
 | `app/build/outputs/apk/release/app-release.apk` | Gradlen tuottama release-APK |
-| `dist/HeatCall-1.2.apk` | Sama tiedosto jakoa varten nimettynä (ei versionhallinnassa) |
+| `dist/HeatCall-<versio>.apk` | Sama tiedosto jakoa varten nimettynä, esim. `HeatCall-1.1.apk` (ei versionhallinnassa) |
 
 Buildaus, ks. [KEHITYS.md](KEHITYS.md#buildaus).
 
@@ -23,7 +25,7 @@ Buildaus, ks. [KEHITYS.md](KEHITYS.md#buildaus).
 4. Joko Android Studiossa: avaa projekti, valitse puhelin ja paina ▶ **Run**, tai komentorivillä:
 
 ```bash
-~/Library/Android/sdk/platform-tools/adb install -r dist/HeatCall-1.2.apk
+~/Library/Android/sdk/platform-tools/adb install -r dist/HeatCall-1.1.apk
 ```
 
 Kaapeliasennuksessa Android ei käsittele sovellusta "tuntemattomasta lähteestä" tulevana, joten [rajoitetut asetukset](#rajoitetut-asetukset) eivät koske sitä.
@@ -41,13 +43,13 @@ APK:n voi siirtää puhelimeen myös ilman kaapelia.
 | Tapa | Ohje |
 |---|---|
 | **Google Drive / iCloud Drive / OneDrive** | Lataa APK pilveen Macilta ja avaa se puhelimessa pilvipalvelun sovelluksesta tai selaimesta. |
-| **GitHub Release** | Liitä APK repositorion Releaseen. Avaa julkaisu puhelimen selaimessa ja lataa APK. |
+| **GitHub Release** | Avaa [Releases](https://github.com/Konderi/Diesel-lammitin/releases) puhelimen selaimessa ja lataa APK. |
 | **Quick Share / Lähijako** | Jaa tiedosto suoraan toisesta Android-laitteesta tai Windows-koneesta. |
 | **Langaton virheenkorjaus** | Android 11+: Kehittäjäasetukset → Langaton virheenkorjaus → Muodosta pari koodilla. Sen jälkeen `adb pair` ja `adb connect`, minkä jälkeen asennus toimii kuten kaapelilla. |
 
 ### Asennus puhelimessa
 
-1. Avaa ladattu `HeatCall-1.2.apk` (esim. Tiedostot → Lataukset).
+1. Avaa ladattu APK, esim. `HeatCall-1.1.apk` (Tiedostot → Lataukset).
 2. Android kysyy luvan asentaa tuntemattomia sovelluksia siitä sovelluksesta, josta tiedosto avattiin (selain, Drive, Tiedostot). Salli lupa.
 3. **Play Protect** voi varoittaa tuntemattomasta kehittäjästä. Valitse **Lisätietoja → Asenna silti**. Varoitus johtuu siitä, että sovellusta ei ole julkaistu Play-kaupassa.
 4. Avaa HeatCall ja tee [ensimmäisen käynnistyksen](KAYTTOOHJE.md#1-ensimmäinen-käynnistys) asetukset.

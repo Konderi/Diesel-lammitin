@@ -7,7 +7,7 @@
 | Työkalu | Versio |
 |---|---|
 | Android Studio | Rabbit 2 (2026.2.2) tai uudempi |
-| JDK | Android Studion mukana tuleva JBR (`/Applications/Android Studio.app/Contents/jbr/Contents/Home`) |
+| JDK | Android Studion mukana tuleva JBR: macOS `/Applications/Android Studio.app/Contents/jbr/Contents/Home`, Windows `C:\Program Files\Android\Android Studio\jbr` |
 | Gradle | 9.6.0 (wrapper) |
 | Android Gradle Plugin | 9.5.1 (sisäänrakennettu Kotlin) |
 | Kotlin / Compose-kääntäjä | 2.4.21 |
@@ -19,7 +19,8 @@ Versiot ovat tiedostossa [`gradle/libs.versions.toml`](../gradle/libs.versions.t
 ## Buildaus
 
 ```bash
-export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"   # macOS
+# export JAVA_HOME="/c/Program Files/Android/Android Studio/jbr"                  # Windows (Git Bash)
 
 ./gradlew testDebugUnitTest     # yksikkötestit
 ./gradlew assembleDebug         # app/build/outputs/apk/debug/app-debug.apk
@@ -31,16 +32,16 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 
 ### Allekirjoitus
 
-Release-build allekirjoitetaan tällä hetkellä **debug-avaimella** (`app/build.gradle.kts` → `signingConfig = signingConfigs.getByName("debug")`), jotta APK on suoraan asennettavissa omaan käyttöön.
+Buildeja on kaksi, ja ne allekirjoitetaan eri avaimilla (`app/build.gradle.kts`):
 
-Oma release-avain otetaan käyttöön näin:
+| Build | Käyttö | Avain |
+|---|---|---|
+| `release` (`assembleRelease`) | Sivuladattava APK, GitHub-julkaisut | **Debug-avain** (`~/.android/debug.keystore`). Tarkoituksellinen: päivitykset asentuvat aiemmin jaettujen versioiden päälle. |
+| `play` (`bundlePlay`) | Google Play (AAB) | **Upload-avain** (`signingConfigs.upload`), R8-minifiointi ja resurssien karsinta |
 
-```bash
-keytool -genkeypair -v -keystore ~/heatcall-release.jks -alias heatcall \
-  -keyalg RSA -keysize 4096 -validity 10000
-```
+Upload-avaimen tiedot luetaan projektin juuren `keystore.properties`-tiedostosta (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`). Tiedosto ja avaimet (`*.jks`, `*.keystore`) ovat `.gitignore`ssa, eikä niitä viedä repoon. Jos `keystore.properties` puuttuu, `play`-build jää allekirjoittamatta. Avaimen luonti ja varmuuskopiointi: [play/JULKAISU.md](play/JULKAISU.md#1-upload-avain).
 
-Luo sen jälkeen `signingConfigs { create("release") { … } }` ja lue salasanat esimerkiksi `keystore.properties`-tiedostosta, jota **ei** viedä repoon (`*.jks` ja `*.keystore` ovat jo `.gitignore`ssa). Huomaa, että avaimen vaihto estää päivitysasennuksen vanhan version päälle.
+Sivuladattu versio ja Play-versio ovat eri allekirjoituksella, joten käyttäjän pitää poistaa sivuladattu versio ennen Play-version asentamista. Jos debug-avain vaihtuu (esim. uusi buildikone), GitHub-APK:n päivitys ei asennu vanhan päälle, joten `debug.keystore` kannattaa varmuuskopioida.
 
 ## Rakenne
 
@@ -50,21 +51,32 @@ app/src/main/java/fi/heatcall/
 ├── MainActivity.kt             Compose-juuri, navigointi, luvat, lähetys, vastausikkuna
 ├── data/
 │   └── DeviceRepository.kt     DataStore: laitteet (JSON), valittu laite, asetukset, viestiloki
+├── i18n/
+│   └── I18n.kt                 Kielivalinta ja tr("suomi", "englanti")
+├── platform/
+│   └── DeviceVendor.kt         Valmistajan tunnistus ja taustatoiminnan asetusnäkymät
 ├── sms/
 │   ├── Commands.kt             SMS-komentojen muodostus ja validointi
-│   ├── ReplyParser.kt          Vastausten tulkinta suomeksi
+│   ├── ReplyParser.kt          Vastausten tulkinta sovelluksen kielellä
 │   ├── DeviceClock.kt          Laitteen kello: asetus puhelimen ajasta, poikkeama, kesä-/talviaikamuistutus
 │   ├── SmsSender.kt            Lähetys SmsManagerilla + SentReceiver (lähetyksen tila)
 │   ├── SmsReceiver.kt          SMS_RECEIVED: suodatus numeron mukaan, loki, ilmoitus, vastausikkuna
 │   ├── MarkReadListener.kt     NotificationListenerService: "Merkitse luetuksi" -toiminto
+│   ├── MarkReadDiagnostics.kt  Luetuksi merkinnän vianmääritysloki
 │   └── ReplyBus.kt             Sovelluksen sisäinen tila (lähetys, näytettävä vastaus)
 ├── widget/
 │   └── StatusWidget.kt         Kotinäytön widget (RemoteViews)
 └── ui/
-    ├── components/             Tausta, kromipainike, rullavalitsin, alinäkymän runko
-    ├── screens/                Päänäkymä, laitteen muokkaus, ajastimet, info, ohjeet, vastausikkuna,
-    │                           PermissionGuide (lupien tila ja rajoitettujen asetusten ohje)
+    ├── components/             Chrome (tausta ja painikkeet), WheelPicker (rullavalitsin),
+    │                           SubScreen (alinäkymän runko), LanguagePicker (kielivalinta)
+    ├── screens/                MainScreen, DeviceEditScreen, TimersScreen, InfoScreens, ReplyDialog,
+    │                           ClockDialog (laitteen kello), PermissionGuide (lupien tila ja
+    │                           rajoitettujen asetusten ohje), BackgroundGuide (taustatoiminta merkeittäin)
     └── theme/                  Tumma Material 3 -teema
+
+app/src/test/java/fi/heatcall/
+├── sms/ProtocolTest.kt, DeviceClockTest.kt, EnglishTest.kt
+└── platform/VendorTest.kt
 ```
 
 ## Keskeiset ratkaisut
@@ -136,14 +148,15 @@ Sovelluksella on oma kielivalinta, joka ei riipu puhelimen kielestä (`i18n/I18n
 
 ### Yksikkötestit
 
-[`ProtocolTest.kt`](../app/src/test/java/fi/heatcall/sms/ProtocolTest.kt) kattaa komentojen muodostuksen, numerovertailun ja vastausten tulkinnan. [`DeviceClockTest.kt`](../app/src/test/java/fi/heatcall/sms/DeviceClockTest.kt) kattaa kellon asetuskomennon, poikkeaman laskennan (myös viikon ympäri) ja kesä-/talviaikamuistutuksen.
+[`ProtocolTest.kt`](../app/src/test/java/fi/heatcall/sms/ProtocolTest.kt) kattaa komentojen muodostuksen, numerovertailun ja vastausten tulkinnan. [`DeviceClockTest.kt`](../app/src/test/java/fi/heatcall/sms/DeviceClockTest.kt) kattaa kellon asetuskomennon, poikkeaman laskennan (myös viikon ympäri) ja kesä-/talviaikamuistutuksen. [`EnglishTest.kt`](../app/src/test/java/fi/heatcall/sms/EnglishTest.kt) varmistaa, että komennot eivät riipu kielestä, ja testaa englanninkieliset tulkinnat. [`VendorTest.kt`](../app/src/test/java/fi/heatcall/platform/VendorTest.kt) testaa valmistajan tunnistuksen.
 
 ### Emulaattori
 
 Emulaattorille voi lähettää lämmittimen vastauksia simuloituina tekstiviesteinä:
 
 ```bash
-ADB=~/Library/Android/sdk/platform-tools/adb
+ADB=~/Library/Android/sdk/platform-tools/adb                    # macOS
+# ADB="$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe"        # Windows (Git Bash)
 $ADB install -r app/build/outputs/apk/debug/app-debug.apk
 $ADB emu sms send +358401234567 "Heater:on,mode:heater,run:30"
 $ADB emu sms send +358401234567 "ErD:HeaterCom:lost,Heater:off"

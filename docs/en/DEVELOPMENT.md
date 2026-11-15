@@ -7,7 +7,7 @@
 | Tool | Version |
 |---|---|
 | Android Studio | Rabbit 2 (2026.2.2) or newer |
-| JDK | The JBR bundled with Android Studio (`/Applications/Android Studio.app/Contents/jbr/Contents/Home`) |
+| JDK | The JBR bundled with Android Studio: macOS `/Applications/Android Studio.app/Contents/jbr/Contents/Home`, Windows `C:\Program Files\Android\Android Studio\jbr` |
 | Gradle | 9.6.0 (wrapper) |
 | Android Gradle Plugin | 9.5.1 (built-in Kotlin) |
 | Kotlin / Compose compiler | 2.4.21 |
@@ -19,7 +19,8 @@ The versions are in [`gradle/libs.versions.toml`](../../gradle/libs.versions.tom
 ## Building
 
 ```bash
-export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"   # macOS
+# export JAVA_HOME="/c/Program Files/Android/Android Studio/jbr"                  # Windows (Git Bash)
 
 ./gradlew testDebugUnitTest     # unit tests
 ./gradlew assembleDebug         # app/build/outputs/apk/debug/app-debug.apk
@@ -31,16 +32,16 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 
 ### Signing
 
-The release build is currently signed with the **debug key** (`app/build.gradle.kts` → `signingConfig = signingConfigs.getByName("debug")`), so the APK can be installed directly for personal use.
+There are two builds, signed with different keys (`app/build.gradle.kts`):
 
-To use your own release key:
+| Build | Use | Key |
+|---|---|---|
+| `release` (`assembleRelease`) | Sideloaded APK, GitHub releases | **Debug key** (`~/.android/debug.keystore`). Intentional: updates install over previously shared versions. |
+| `play` (`bundlePlay`) | Google Play (AAB) | **Upload key** (`signingConfigs.upload`), R8 minification and resource shrinking |
 
-```bash
-keytool -genkeypair -v -keystore ~/heatcall-release.jks -alias heatcall \
-  -keyalg RSA -keysize 4096 -validity 10000
-```
+The upload key details are read from `keystore.properties` in the project root (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`). The file and the keys (`*.jks`, `*.keystore`) are in `.gitignore` and never committed. If `keystore.properties` is missing, the `play` build is left unsigned. Creating and backing up the key: [play/RELEASE-STEPS.md](play/RELEASE-STEPS.md#1-upload-key).
 
-Then create `signingConfigs { create("release") { … } }` and read the passwords from, for example, a `keystore.properties` file that is **not** committed to the repo (`*.jks` and `*.keystore` are already in `.gitignore`). Note that changing the key prevents installing an update over the old version.
+The sideloaded and Play versions have different signatures, so users must uninstall the sideloaded version before installing from Play. If the debug key changes (e.g. a new build machine), a GitHub APK update will not install over the old version, so back up `debug.keystore`.
 
 ## Structure
 
@@ -50,21 +51,32 @@ app/src/main/java/fi/heatcall/
 ├── MainActivity.kt             Compose root, navigation, permissions, sending, reply dialog
 ├── data/
 │   └── DeviceRepository.kt     DataStore: devices (JSON), selected device, settings, message log
+├── i18n/
+│   └── I18n.kt                 Language choice and tr("Finnish", "English")
+├── platform/
+│   └── DeviceVendor.kt         Manufacturer detection and background activity settings screens
 ├── sms/
 │   ├── Commands.kt             Building and validating SMS commands
-│   ├── ReplyParser.kt          Interpreting replies in Finnish
+│   ├── ReplyParser.kt          Interpreting replies in the app language
 │   ├── DeviceClock.kt          Device clock: setting from phone time, offset, DST reminder
 │   ├── SmsSender.kt            Sending with SmsManager + SentReceiver (send status)
 │   ├── SmsReceiver.kt          SMS_RECEIVED: filtering by number, log, notification, reply dialog
 │   ├── MarkReadListener.kt     NotificationListenerService: "Mark as read" action
+│   ├── MarkReadDiagnostics.kt  Mark-as-read troubleshooting log
 │   └── ReplyBus.kt             In-app state (sending, reply to show)
 ├── widget/
 │   └── StatusWidget.kt         Home screen widget (RemoteViews)
 └── ui/
-    ├── components/             Background, chrome button, wheel picker, sub-screen scaffold
-    ├── screens/                Main screen, device editing, timers, info, help, reply dialog,
-    │                           PermissionGuide (permission status and restricted settings guide)
+    ├── components/             Chrome (background and buttons), WheelPicker, SubScreen (sub-screen
+    │                           scaffold), LanguagePicker
+    ├── screens/                MainScreen, DeviceEditScreen, TimersScreen, InfoScreens, ReplyDialog,
+    │                           ClockDialog (device clock), PermissionGuide (permission status and
+    │                           restricted settings guide), BackgroundGuide (background activity by brand)
     └── theme/                  Dark Material 3 theme
+
+app/src/test/java/fi/heatcall/
+├── sms/ProtocolTest.kt, DeviceClockTest.kt, EnglishTest.kt
+└── platform/VendorTest.kt
 ```
 
 ## Key design decisions
@@ -136,14 +148,15 @@ The app has its own language setting that does not depend on the phone language 
 
 ### Unit tests
 
-[`ProtocolTest.kt`](../../app/src/test/java/fi/heatcall/sms/ProtocolTest.kt) covers building commands, number comparison and interpreting replies. [`DeviceClockTest.kt`](../../app/src/test/java/fi/heatcall/sms/DeviceClockTest.kt) covers the clock set command, offset calculation (including wrapping around the week) and the DST reminder.
+[`ProtocolTest.kt`](../../app/src/test/java/fi/heatcall/sms/ProtocolTest.kt) covers building commands, number comparison and interpreting replies. [`DeviceClockTest.kt`](../../app/src/test/java/fi/heatcall/sms/DeviceClockTest.kt) covers the clock set command, offset calculation (including wrapping around the week) and the DST reminder. [`EnglishTest.kt`](../../app/src/test/java/fi/heatcall/sms/EnglishTest.kt) checks that commands do not depend on the language and tests the English interpretations. [`VendorTest.kt`](../../app/src/test/java/fi/heatcall/platform/VendorTest.kt) tests manufacturer detection.
 
 ### Emulator
 
 You can send heater replies to the emulator as simulated text messages:
 
 ```bash
-ADB=~/Library/Android/sdk/platform-tools/adb
+ADB=~/Library/Android/sdk/platform-tools/adb                    # macOS
+# ADB="$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe"        # Windows (Git Bash)
 $ADB install -r app/build/outputs/apk/debug/app-debug.apk
 $ADB emu sms send +358401234567 "Heater:on,mode:heater,run:30"
 $ADB emu sms send +358401234567 "ErD:HeaterCom:lost,Heater:off"

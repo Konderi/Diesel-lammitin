@@ -2,11 +2,11 @@
 
 **Suomi** · [English](en/PLAY-RELEASE.md)
 
-Tämä on muistio siitä, mitä Play-julkaisu vaatisi. HeatCall toimii sivuladattuna (ks. [ASENNUS.md](ASENNUS.md)), joten julkaisu ei ole välttämätön.
+Tämä muistio kokoaa Play-julkaisun vaatimukset ja niiden tilan. Julkaisu on käynnissä: kehittäjätili on vahvistettu, ja suljettuun testaukseen haetaan testaajia. Käytännön vaiheet ovat tiedostossa [play/JULKAISU.md](play/JULKAISU.md). Sivuladattava APK GitHubista (ks. [ASENNUS.md](ASENNUS.md)) toimii edelleen Play-version rinnalla.
 
 ## Päätelmä
 
-Teknisesti julkaisu on pieni työ. Ratkaiseva kysymys on **Googlen tekstiviestilupia koskeva käytäntö**: `SEND_SMS` ja `RECEIVE_SMS` sallitaan vain oletusviestisovellukselle tai hyväksytylle poikkeukselle, ja Google tarkistaa poikkeukset käsin. Jos poikkeusta ei myönnetä, sovellus pitäisi muuttaa niin, ettei se lähetä tai vastaanota viestejä taustalla.
+Tekninen valmistelu on tehty. Ratkaiseva kysymys on **Googlen tekstiviestilupia koskeva käytäntö**: `SEND_SMS` ja `RECEIVE_SMS` sallitaan vain oletusviestisovellukselle tai hyväksytylle poikkeukselle, ja Google tarkistaa poikkeukset käsin. Jos poikkeusta ei myönnetä, sovellus pitäisi muuttaa niin, ettei se lähetä tai vastaanota viestejä taustalla.
 
 ## 1. Perusvaatimukset
 
@@ -14,14 +14,14 @@ Teknisesti julkaisu on pieni työ. Ratkaiseva kysymys on **Googlen tekstiviestil
 |---|---|
 | Play Console -kehittäjätili ja henkilöllisyyden varmennus | Kunnossa |
 | Hinta | Ilmainen ja avointa lähdekoodia, ei maksuprofiilia (ks. [play/JULKAISU.md](play/JULKAISU.md#hinnoittelu-ilmainen)) |
-| Suljettu testaus: uusilla henkilökohtaisilla tileillä vähintään 12 testaajaa 14 päivän ajan | Tarvitaan, jos tili on henkilökohtainen ja luotu marraskuun 2023 jälkeen |
-| **Android App Bundle (AAB)** Play ottaa vastaan vain AAB:n, ei APK:ta. | `./gradlew bundleRelease` |
-| **Upload-avain** + Play App Signing | Nykyinen debug-allekirjoitus ei käy, joten luodaan oma avain (ks. [KEHITYS.md](KEHITYS.md#allekirjoitus)) |
+| Suljettu testaus: uusilla henkilökohtaisilla tileillä vähintään 12 testaajaa 14 päivän ajan | Tarvitaan: tili on henkilökohtainen ja luotu 11/2026. Ks. [play/TESTAAJAT.md](play/TESTAAJAT.md). |
+| **Android App Bundle (AAB)** Play ottaa vastaan vain AAB:n, ei APK:ta. | Valmis: `./gradlew bundlePlay` → `app-play.aab` |
+| **Upload-avain** + Play App Signing | Valmis: `play`-build allekirjoitetaan upload-avaimella (ks. [KEHITYS.md](KEHITYS.md#allekirjoitus)) |
 | `applicationId` | `fi.heatcall`. Tunnusta ei voi vaihtaa julkaisun jälkeen. |
 | targetSdk | 36 täyttää nykyiset vaatimukset |
 | Tietosuojaseloste (julkinen URL) | Julkaistu: https://konderi.github.io/privacy/heatcall/ |
 | Tietoturvalomake (Data safety) | Tekstiviestit ja puhelinnumero käsitellään vain laitteella, eikä niitä lähetetä minnekään |
-| Ikäluokitus, kaupan kuvaus, kuvake 512 px, mainoskuva 1024×500 px, kuvakaappaukset | Kuvakaappaukset löytyvät hakemistosta `docs/images` |
+| Ikäluokitus, kaupan kuvaus, kuvake 512 px, mainoskuva 1024×500 px, kuvakaappaukset | Valmis: kuvake, esittelykuvat ja kuvakaappaukset (en, fi) hakemistossa `docs/play/assets/`, tekstit tiedostossa [play/KAUPPA-TEKSTIT.md](play/KAUPPA-TEKSTIT.md) |
 | Tavaramerkit | "Yhteensopiva Eberspächer EasyStart Callin kanssa" on sallittu. Eberspächerin logoa ei saa käyttää, eikä sovellus saa näyttää valmistajan viralliselta sovellukselta. |
 
 ## 2. Tekstiviestiluvat: Permissions Declaration Form
@@ -40,7 +40,7 @@ Lomakkeeseen tarvitaan:
 - perustelu, miksi vaihtoehtoista tapaa ei ole: laitteessa ei ole internet-yhteyttä, vain GSM ja SMS
 - video, jossa näkyy komennon lähetys ja vastauksen vastaanotto
 
-Kannattaa hakea ensin suljetussa testissä, ennen kuin muuhun käytetään aikaa.
+Ilmoitus lähetetään ensimmäisen SMS-lupia käyttävän julkaisun yhteydessä (ks. [play/JULKAISU.md](play/JULKAISU.md#3-play-console), vaihe 5). Valmiit vastaukset: [play/LOMAKKEET.md](play/LOMAKKEET.md).
 
 ## 3. Varasuunnitelma, jos poikkeusta ei myönnetä
 
@@ -56,11 +56,11 @@ Kannattaa hakea ensin suljetussa testissä, ennen kuin muuhun käytetään aikaa
 - **Ilmoitusten käyttöoikeus** (`BIND_NOTIFICATION_LISTENER_SERVICE`): sallittu, mutta sovelluksessa pitää olla selkeä ilmoitus siitä, mihin oikeutta käytetään. Info ja asetukset -näkymän selitys on hyvä pohja.
 - **POST_NOTIFICATIONS**, widget ja AlarmManager: ei rajoituksia.
 
-## 5. Tarvittavat muutokset koodiin
+## 5. Muutokset koodiin
 
-1. `signingConfigs.release` omalla upload-avaimella. Salasanat luetaan `keystore.properties`-tiedostosta, joka ei ole versionhallinnassa.
-2. `bundleRelease` ja tarvittaessa R8-minifiointi (`isMinifyEnabled = true`) sekä ProGuard-säännöt.
-3. Selitysnäyttö ennen ilmoitusten käyttöoikeuden pyytämistä (prominent disclosure).
-4. Tietosuojaselosteen linkki sovellukseen (Info ja asetukset → Tietoja).
+- [x] Upload-avain: `signingConfigs.upload`, tiedot `keystore.properties`-tiedostosta, joka ei ole versionhallinnassa
+- [x] `play`-build: `bundlePlay`, R8-minifiointi (`isMinifyEnabled = true`), resurssien karsinta ja ProGuard-säännöt
+- [ ] Selitysnäyttö ennen ilmoitusten käyttöoikeuden pyytämistä (prominent disclosure). Info ja asetukset -näkymässä on selitys, mutta erillistä näyttöä ennen asetussivun avaamista ei vielä ole.
+- [ ] Tietosuojaselosteen linkki sovellukseen (Info ja asetukset → Tietoja). Linkkiä ei vielä ole.
 
 Lähde: [Google Play – SMS- ja puhelulokilupien käyttö](https://support.google.com/googleplay/android-developer/answer/10208820)

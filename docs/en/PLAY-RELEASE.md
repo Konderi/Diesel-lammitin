@@ -60,7 +60,7 @@ The declaration is submitted with the first release that uses SMS permissions (s
 
 - [x] Upload key: `signingConfigs.upload`, details from `keystore.properties`, which is not under version control
 - [x] `play` build: `bundlePlay`, R8 minification (`isMinifyEnabled = true`), resource shrinking and ProGuard rules
-- [ ] An explanation screen before requesting notification access (prominent disclosure). The Info and settings screen has an explanation, but there is no separate screen before the settings page opens yet.
-- [ ] A link to the privacy policy in the app (Info and settings → About). Not added yet.
+- [x] An explanation screen before requesting notification access (prominent disclosure): *Grant access* first opens a dialog that explains what the permission is used for and what it is not used for. Android's settings open only from *Continue to settings*.
+- [x] A link to the privacy policy in the app: Info and settings → About → *Privacy policy* (plus a *Source code* link)
 
 Source: [Google Play – Use of SMS or Call Log permission groups](https://support.google.com/googleplay/android-developer/answer/10208820)

@@ -53,4 +53,4 @@ Justification under Google's definition: data processed on the device that is no
 
 ## 4. Notification access (NotificationListenerService)
 
-Play has no separate form for this, but the use must be clearly disclosed. This has been done in the app: *Info and settings → Reply messages* explains, before the *Grant access* button, that the permission is used only to mark heater replies as read. The same is stated in the privacy policy and in the store description.
+Play has no separate form for this, but the use must be clearly disclosed. This has been done in the app: *Info and settings → Reply messages → Grant access* first opens an explanation dialog. It states that the permission is used only to mark heater replies as read, that notifications from other apps are ignored and message contents are not stored, and that the permission can be revoked. Android's settings open only from *Continue to settings*. The same is stated in the privacy policy and in the store description.

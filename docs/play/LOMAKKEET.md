@@ -53,4 +53,4 @@ Perustelu Googlen määritelmän mukaan: laitteella käsiteltävät tiedot, joit
 
 ## 4. Ilmoitusten käyttöoikeus (NotificationListenerService)
 
-Playssa erillistä lomaketta ei ole, mutta käyttö pitää kertoa selvästi. Sovelluksessa tämä on tehty: *Info ja asetukset → Vastausviestit* selittää ennen *Anna käyttöoikeus* -painiketta, että oikeutta käytetään vain lämmittimen vastausten merkitsemiseen luetuiksi. Sama asia mainitaan tietosuojaselosteessa ja kaupan kuvauksessa.
+Playssa erillistä lomaketta ei ole, mutta käyttö pitää kertoa selvästi. Sovelluksessa tämä on tehty: *Info ja asetukset → Vastausviestit → Anna käyttöoikeus* avaa ensin selitysdialogin. Se kertoo, että oikeutta käytetään vain lämmittimen vastausten merkitsemiseen luetuiksi, että muiden sovellusten ilmoituksia ei käsitellä eikä viestien sisältöä tallenneta, ja että oikeuden voi perua. Androidin asetus avautuu vasta *Jatka asetuksiin* -painikkeesta. Sama asia mainitaan tietosuojaselosteessa ja kaupan kuvauksessa.

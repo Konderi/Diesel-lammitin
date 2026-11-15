@@ -60,7 +60,7 @@ Ilmoitus lähetetään ensimmäisen SMS-lupia käyttävän julkaisun yhteydessä
 
 - [x] Upload-avain: `signingConfigs.upload`, tiedot `keystore.properties`-tiedostosta, joka ei ole versionhallinnassa
 - [x] `play`-build: `bundlePlay`, R8-minifiointi (`isMinifyEnabled = true`), resurssien karsinta ja ProGuard-säännöt
-- [ ] Selitysnäyttö ennen ilmoitusten käyttöoikeuden pyytämistä (prominent disclosure). Info ja asetukset -näkymässä on selitys, mutta erillistä näyttöä ennen asetussivun avaamista ei vielä ole.
-- [ ] Tietosuojaselosteen linkki sovellukseen (Info ja asetukset → Tietoja). Linkkiä ei vielä ole.
+- [x] Selitysnäyttö ennen ilmoitusten käyttöoikeuden pyytämistä (prominent disclosure): *Anna käyttöoikeus* avaa ensin dialogin, joka kertoo mihin oikeutta käytetään ja mitä sillä ei tehdä. Androidin asetus avautuu vasta *Jatka asetuksiin* -painikkeesta.
+- [x] Tietosuojaselosteen linkki sovellukseen: Info ja asetukset → Tietoja → *Tietosuojaseloste* (myös *Lähdekoodi*-linkki)
 
 Lähde: [Google Play – SMS- ja puhelulokilupien käyttö](https://support.google.com/googleplay/android-developer/answer/10208820)

@@ -59,7 +59,7 @@ Kun lämmitin vastaa, vastaus avautuu omaan ikkunaansa selkokielellä tulkittuna
 - Jos sovellus on taustalla, saat HeatCall-ilmoituksen, josta ikkuna aukeaa.
 - Sama viesti merkitään automaattisesti **luetuksi** puhelimen viestisovelluksessa, joten se ei jää lukemattomaksi.
 
-Luetuksi merkintä vaatii **ilmoitusten käyttöoikeuden**: **Info ja asetukset → Vastausviestit → Anna käyttöoikeus**. Asetuksista näet myös, mikä viestisovellus on puhelimen oletus ja onko käyttöoikeus annettu. Toiminnon voi kytkeä pois samasta kohdasta.
+Luetuksi merkintä vaatii **ilmoitusten käyttöoikeuden**: **Info ja asetukset → Vastausviestit → Anna käyttöoikeus**. HeatCall kertoo ensin, mihin oikeutta käytetään, ja avaa Androidin asetuksen *Jatka asetuksiin* -painikkeesta. Asetuksista näet myös, mikä viestisovellus on puhelimen oletus ja onko käyttöoikeus annettu. Toiminnon voi kytkeä pois samasta kohdasta.
 
 > **Huom!** Lämmitin vastaa käynnistykseen ja sammutukseen vain, jos EasyStart Callin **kuittausilmoitus** on päällä (tehdasasetus on pois). Asennusliike voi kytkeä sen päälle. Tilakyselyyn lämmitin vastaa aina.
 
@@ -150,6 +150,7 @@ Kun kello asetetaan HeatCallista, aika tallentuu ja kesä-/talviaikamuistutus po
 | Vastausviestit | Luetuksi merkintä päälle tai pois, oletusviestisovellus ja ilmoitusten käyttöoikeus |
 | Laitetoiminnot | Aseta laitteen kello puhelimen ajasta, Kysy laitteen kello, Valtuuta tämä puhelin, Kysy valtuutettu numero |
 | Kotinäytön widget | Widgetin lisäys |
+| Tietoja | Versio, tietosuojaseloste ja lähdekoodi |
 
 **Valtuuta tämä puhelin** (`mainphone:set,number:mine`) tallentaa puhelimesi numeron EasyStart Calliin valtuutetuksi numeroksi. Valtuutettuun numeroon lähetetään virheilmoitukset, eikä tästä numerosta soitettaessa kysytä PIN-koodia.
 

@@ -4,6 +4,7 @@ import fi.heatcall.i18n.tr
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.provider.Telephony
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,9 +13,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -104,6 +107,16 @@ fun SettingsScreen(
     val permissions = rememberPermissionStatus()
     var showBackground by remember { mutableStateOf(false) }
     if (showBackground) BackgroundGuideDialog(onDismiss = { showBackground = false })
+    var showListenerDisclosure by remember { mutableStateOf(false) }
+    if (showListenerDisclosure) {
+        NotificationAccessDisclosure(
+            onContinue = {
+                showListenerDisclosure = false
+                openListenerSettings(context)
+            },
+            onDismiss = { showListenerDisclosure = false },
+        )
+    }
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     var accessGranted by remember { mutableStateOf(MarkReadListener.isAccessGranted(context)) }
 
@@ -161,7 +174,7 @@ fun SettingsScreen(
                         tr("\"rajoitettu asetus\", avaa Sovellustiedot → ⋮ → Salli rajoitetut asetukset.", "\"restricted setting\", open App info → ⋮ → Allow restricted settings."),
                 )
                 Spacer(Modifier.height(6.dp))
-                PrimaryButton(tr("Anna käyttöoikeus", "Grant access"), onClick = { openListenerSettings(context) })
+                PrimaryButton(tr("Anna käyttöoikeus", "Grant access"), onClick = { showListenerDisclosure = true })
             }
         }
 
@@ -240,8 +253,14 @@ fun SettingsScreen(
             val version = remember {
                 runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: ""
             }
-            BodyText(tr("HeatCall $version – Eberspächer EasyStart Call -yksikön tekstiviestiohjaus omaan käyttöön.", "HeatCall $version – text message control for the Eberspächer EasyStart Call unit."))
+            BodyText(tr("HeatCall $version – Eberspächer EasyStart Call -yksikön tekstiviestiohjaus.", "HeatCall $version – text message control for the Eberspächer EasyStart Call unit."))
             BodyText(tr("Jokainen komento on tekstiviesti, josta liittymäsi voi veloittaa.", "Every command is a text message that your operator may charge for."))
+            BodyText(tr("Sovellus ei kerää eikä lähetä tietoja minnekään. Ilmainen ja avointa lähdekoodia (MIT-lisenssi).", "The app does not collect or send any data. Free and open source (MIT License)."))
+            Spacer(Modifier.height(8.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                SecondaryButton(tr("Tietosuojaseloste", "Privacy policy"), onClick = { openUrl(context, PRIVACY_URL) })
+                SecondaryButton(tr("Lähdekoodi", "Source code"), onClick = { openUrl(context, SOURCE_URL) })
+            }
         }
         Spacer(Modifier.height(24.dp))
     }
@@ -258,6 +277,41 @@ private fun defaultSmsAppName(context: Context): String {
         val pm = context.packageManager
         pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()
     }.getOrDefault(pkg)
+}
+
+private const val PRIVACY_URL = "https://konderi.github.io/privacy/heatcall/"
+private const val SOURCE_URL = "https://github.com/Konderi/Diesel-lammitin"
+
+private fun openUrl(context: Context, url: String) {
+    try {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    } catch (_: ActivityNotFoundException) {
+        android.widget.Toast.makeText(context, url, android.widget.Toast.LENGTH_LONG).show()
+    }
+}
+
+/**
+ * Selitys ennen ilmoitusten käyttöoikeuden pyytämistä (Google Playn "prominent disclosure"):
+ * mihin oikeutta käytetään ja mitä sillä ei tehdä.
+ */
+@Composable
+private fun NotificationAccessDisclosure(onContinue: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(tr("Ilmoitusten käyttöoikeus", "Notification access")) },
+        text = {
+            Text(
+                tr("HeatCall käyttää ilmoitusten käyttöoikeutta vain yhteen asiaan: kun lämmitin vastaa, ", "HeatCall uses notification access for one thing only: when the heater replies, ") +
+                    tr("HeatCall etsii vastauksen ilmoituksen viestisovelluksestasi ja painaa sen Merkitse luetuksi -toimintoa, ", "HeatCall finds the reply's notification from your messaging app and presses its Mark as read action, ") +
+                    tr("jotta viesti ei jää lukemattomaksi.\n\n", "so the message is not left unread.\n\n") +
+                    tr("Muiden sovellusten ilmoituksia ei käsitellä. Viestien sisältöä ei tallenneta eikä mitään lähetetä puhelimesta. ", "Notifications from other apps are ignored. Message contents are not stored, and nothing is sent from your phone. ") +
+                    tr("Vianmäärityslokiin tallennetaan puhelimeen vain lähettäjä ja ilmoituksen toimintojen nimet.\n\n", "The troubleshooting log stores only the sender and the names of notification actions, on your phone.\n\n") +
+                    tr("Oikeus on vapaaehtoinen, ja sen voi perua milloin tahansa. Seuraavaksi avautuu Androidin asetus, jossa sallit HeatCallin.", "This permission is optional, and you can revoke it at any time. Next, Android's settings open, where you can allow HeatCall."),
+            )
+        },
+        confirmButton = { TextButton(onClick = onContinue) { Text(tr("Jatka asetuksiin", "Continue to settings")) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(tr("Peruuta", "Cancel")) } },
+    )
 }
 
 private fun openListenerSettings(context: Context) {

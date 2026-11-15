@@ -70,7 +70,7 @@ The heater's reply opens in its own window in plain language. The original messa
 - If the app is in the background, you get a HeatCall notification that opens the window.
 - The same message is automatically **marked as read** in your messaging app.
 
-Mark as read needs **notification access**: **Info and settings → Reply messages → Grant access**. You can turn the feature off in the same place.
+Mark as read needs **notification access**: **Info and settings → Reply messages → Grant access**. HeatCall first explains what the permission is used for and opens Android's settings from *Continue to settings*. You can turn the feature off in the same place.
 
 A status query normally gets a reply within seconds or a minute, depending on the network. If there is no reply within 3 minutes, HeatCall tells you. Check that the car has mobile coverage (an underground car park often does not).
 
@@ -128,6 +128,7 @@ Open **gear menu → Device clock**, or tap the card's reminder.
 | Reply messages | Mark as read on/off, default messaging app and notification access |
 | Device functions | Set device clock from phone time, Query device clock, **Authorise this phone**, Query authorised number |
 | Home screen widget | Add the widget |
+| About | Version, privacy policy and source code |
 
 **Authorise this phone** stores your number in EasyStart Call as the authorised number. Error messages are sent to that number, and calls from it are not asked for a PIN. The unit has only one authorised number at a time.
 

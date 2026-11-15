@@ -280,7 +280,7 @@ private fun defaultSmsAppName(context: Context): String {
 }
 
 private const val PRIVACY_URL = "https://konderi.github.io/privacy/heatcall/"
-private const val SOURCE_URL = "https://github.com/Konderi/Diesel-lammitin"
+private const val SOURCE_URL = "https://github.com/Konderi/HeatCall"
 
 private fun openUrl(context: Context, url: String) {
     try {

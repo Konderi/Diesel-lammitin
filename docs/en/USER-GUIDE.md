@@ -22,7 +22,7 @@ Tested on Google Pixel and OPPO (ColorOS). The app includes background-activity 
 ## Installation
 
 - **Google Play:** HeatCall is coming to Google Play. The closed test is running now. To join, email **heatcall@konderi.fi** with the address of your Google account (the one you use for Play Store).
-- **APK:** download the latest `.apk` from [Releases](https://github.com/Konderi/Diesel-lammitin/releases) on your phone, open it and allow installing from an unknown source. If Play Protect warns you, choose **More details → Install anyway**.
+- **APK:** download the latest `.apk` from [Releases](https://github.com/Konderi/HeatCall/releases) on your phone, open it and allow installing from an unknown source. If Play Protect warns you, choose **More details → Install anyway**.
 
 If Android blocks the SMS permission (*"App permission denied"* or **Allow** greyed out), see [Installation → Restricted settings](INSTALLATION.md#restricted-settings-android-13). Full instructions, including installing with a USB cable, background activity settings by phone brand and updating, are in [INSTALLATION.md](INSTALLATION.md). Building from source: [DEVELOPMENT.md](DEVELOPMENT.md).
 

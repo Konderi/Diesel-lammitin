@@ -6,7 +6,7 @@ HeatCall on tulossa Google Play -kauppaan. Siihen asti se asennetaan APK-tiedost
 
 ## APK-tiedosto
 
-Lataa uusin APK [Releases](https://github.com/Konderi/Diesel-lammitin/releases)-sivulta.
+Lataa uusin APK [Releases](https://github.com/Konderi/HeatCall/releases)-sivulta.
 
 Kun buildaat itse, APK löytyy kahdesta paikasta:
 
@@ -43,7 +43,7 @@ APK:n voi siirtää puhelimeen myös ilman kaapelia.
 | Tapa | Ohje |
 |---|---|
 | **Google Drive / iCloud Drive / OneDrive** | Lataa APK pilveen Macilta ja avaa se puhelimessa pilvipalvelun sovelluksesta tai selaimesta. |
-| **GitHub Release** | Avaa [Releases](https://github.com/Konderi/Diesel-lammitin/releases) puhelimen selaimessa ja lataa APK. |
+| **GitHub Release** | Avaa [Releases](https://github.com/Konderi/HeatCall/releases) puhelimen selaimessa ja lataa APK. |
 | **Quick Share / Lähijako** | Jaa tiedosto suoraan toisesta Android-laitteesta tai Windows-koneesta. |
 | **Langaton virheenkorjaus** | Android 11+: Kehittäjäasetukset → Langaton virheenkorjaus → Muodosta pari koodilla. Sen jälkeen `adb pair` ja `adb connect`, minkä jälkeen asennus toimii kuten kaapelilla. |
 

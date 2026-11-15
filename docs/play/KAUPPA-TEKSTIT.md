@@ -15,7 +15,7 @@ Kopioi Play Consoleen kohtaan **Kasvu → Kaupan sivu → Pääkaupan sivu**. Ol
 - **Yhteystiedot / Contact details:** sähköposti / email heatcall@konderi.fi
 - **Tietosuojakäytäntö / Privacy policy:** https://konderi.github.io/privacy/heatcall/
 - **Hinta / Price:** ilmainen, ei mainoksia eikä sovelluksen sisäisiä ostoja / free, no ads and no in-app purchases (ks. / see [JULKAISU.md](JULKAISU.md#hinnoittelu-ilmainen), [RELEASE-STEPS.md](../en/play/RELEASE-STEPS.md#pricing-free))
-- **Lähdekoodi / Source code:** https://github.com/Konderi/Diesel-lammitin
+- **Lähdekoodi / Source code:** https://github.com/Konderi/HeatCall
 - **Luokka / Category:** Autot ja ajoneuvot (Auto & Vehicles)
 - **Tunnisteet / Tags:** Autot, Etäohjaus (Cars, Remote control)
 
@@ -51,7 +51,7 @@ TIMERS AND CLOCK
 PRIVATE BY DESIGN
 • No internet permission, no ads, no analytics. All data stays on your phone.
 • Commands are sent only to the heater number you enter.
-• Free and open source: github.com/Konderi/Diesel-lammitin
+• Free and open source: github.com/Konderi/HeatCall
 
 LANGUAGES
 English and Finnish – choose on first start or later in settings.
@@ -95,7 +95,7 @@ AJASTIMET JA KELLO
 YKSITYISYYS
 • Ei internet-oikeutta, ei mainoksia eikä analytiikkaa. Kaikki tiedot pysyvät puhelimessa.
 • Komennot lähetetään vain antamaasi lämmittimen numeroon.
-• Ilmainen ja avointa lähdekoodia: github.com/Konderi/Diesel-lammitin
+• Ilmainen ja avointa lähdekoodia: github.com/Konderi/HeatCall
 
 KIELET
 Suomi ja englanti – valitse ensimmäisellä käynnistyskerralla tai myöhemmin asetuksista.

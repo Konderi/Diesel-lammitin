@@ -48,7 +48,7 @@ For each new Play release, increase `versionCode` (and `versionName`) in `app/bu
 
 ## Pricing: free
 
-HeatCall is free and open source (https://github.com/Konderi/Diesel-lammitin). It has no ads and no in-app purchases.
+HeatCall is free and open source (https://github.com/Konderi/HeatCall). It has no ads and no in-app purchases.
 
 - **No payments profile:** publishing a free app requires no merchant account and no bank details.
 - **No promo codes:** testers install the app directly through the opt-in link.
@@ -60,7 +60,7 @@ The store description mentions the requirements (EasyStart Call unit and SIM car
 ## 4. Checklist before submitting
 
 - [ ] App created as free
-- [ ] Source code repo public: https://github.com/Konderi/Diesel-lammitin
+- [ ] Source code repo public: https://github.com/Konderi/HeatCall
 - [x] Privacy policy published: https://konderi.github.io/privacy/heatcall/ (contact address heatcall@konderi.fi)
 - [ ] Alias heatcall@konderi.fi works (send a test message)
 - [ ] Upload key and `keystore.properties` backed up

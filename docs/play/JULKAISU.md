@@ -48,7 +48,7 @@ Jokaista uutta Play-julkaisua varten nosta `versionCode` (ja `versionName`) tied
 
 ## Hinnoittelu: ilmainen
 
-HeatCall on ilmainen ja avointa lähdekoodia (https://github.com/Konderi/Diesel-lammitin). Siinä ei ole mainoksia eikä sovelluksen sisäisiä ostoja.
+HeatCall on ilmainen ja avointa lähdekoodia (https://github.com/Konderi/HeatCall). Siinä ei ole mainoksia eikä sovelluksen sisäisiä ostoja.
 
 - **Ei maksuprofiilia:** ilmaisen sovelluksen julkaisu ei vaadi kauppiastiliä eikä pankkitietoja.
 - **Ei promokoodeja:** testaajat asentavat sovelluksen suoraan liittymislinkin kautta.
@@ -60,7 +60,7 @@ Kaupan kuvauksessa mainitaan vaatimukset (EasyStart Call -yksikkö ja SIM-kortti
 ## 4. Tarkistuslista ennen lähetystä
 
 - [ ] Sovellus luotu ilmaisena
-- [ ] Lähdekoodirepo julkinen: https://github.com/Konderi/Diesel-lammitin
+- [ ] Lähdekoodirepo julkinen: https://github.com/Konderi/HeatCall
 - [x] Tietosuojaseloste julkaistu: https://konderi.github.io/privacy/heatcall/ (yhteysosoite heatcall@konderi.fi)
 - [ ] Alias heatcall@konderi.fi toimii (lähetä testiviesti)
 - [ ] Upload-avain ja `keystore.properties` varmuuskopioitu

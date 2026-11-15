@@ -6,7 +6,7 @@ HeatCall is coming to Google Play. Until then it is installed from an APK file (
 
 ## APK file
 
-Download the latest APK from [Releases](https://github.com/Konderi/Diesel-lammitin/releases).
+Download the latest APK from [Releases](https://github.com/Konderi/HeatCall/releases).
 
 When you build it yourself, the APK is in two places:
 
@@ -40,7 +40,7 @@ When installed with a cable, Android does not treat the app as coming from an "u
 
 | Option | How |
 |---|---|
-| **GitHub Release** | Open [Releases](https://github.com/Konderi/Diesel-lammitin/releases) in the phone's browser and download the APK. |
+| **GitHub Release** | Open [Releases](https://github.com/Konderi/HeatCall/releases) in the phone's browser and download the APK. |
 | **Google Drive / iCloud Drive / OneDrive** | Upload the APK from the computer and open it on the phone in the cloud app or browser. |
 | **Quick Share / Nearby Share** | Share the file directly from another Android device or a Windows PC. |
 | **Wireless debugging** | Android 11+: Developer options → Wireless debugging → Pair device with pairing code. Then `adb pair` and `adb connect`, after which installation works as with a cable. |

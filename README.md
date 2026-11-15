@@ -13,7 +13,7 @@ Commands are sent as text messages in the background. The heater's reply opens i
 - Several cars, message history, and error codes explained
 - English and Finnish
 
-**[User guide in English → docs/en/USER-GUIDE.md](docs/en/USER-GUIDE.md)** · [Download APK](https://github.com/Konderi/Diesel-lammitin/releases) · Requires Android 10+
+**[User guide in English → docs/en/USER-GUIDE.md](docs/en/USER-GUIDE.md)** · [Download APK](https://github.com/Konderi/HeatCall/releases) · Requires Android 10+
 
 ### Documentation
 
@@ -83,7 +83,7 @@ HeatCall on ilmainen ja avointa lähdekoodia ([MIT-lisenssi](LICENSE)).
 
 ## Pika-aloitus
 
-1. Lataa uusin APK [Releases](https://github.com/Konderi/Diesel-lammitin/releases)-sivulta ja asenna se, ks. [Asennus](docs/ASENNUS.md).
+1. Lataa uusin APK [Releases](https://github.com/Konderi/HeatCall/releases)-sivulta ja asenna se, ks. [Asennus](docs/ASENNUS.md).
 2. Valitse kieli (Suomi / English) ja anna lämmittimen SIM-kortin **puhelinnumero** ja **PIN-koodi** (tehdasasetus 1234).
 3. Salli tekstiviestit ja ilmoitukset. Jos Android ilmoittaa *"Sovelluksen lupa kielletty"* tai Salli on harmaana, HeatCall näyttää korjausohjeen. Ohje on myös tiedostossa [Asennus → Rajoitetut asetukset](docs/ASENNUS.md#rajoitetut-asetukset).
 4. Anna kohdassa *Info ja asetukset* ilmoitusten käyttöoikeus, jotta vastaukset merkitään luetuiksi.
